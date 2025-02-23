@@ -18,6 +18,7 @@ require "action_view/railtie"
 Bundler.require(*Rails.groups)
 
 module Eduforge
+  # Eduforge application class.
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
