@@ -38,5 +38,8 @@ module Eduforge
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use SQL instead of ActiveRecord's schema dumper when creating the database.
+    config.active_record.schema_format = :sql
   end
 end
