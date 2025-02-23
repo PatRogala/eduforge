@@ -36,6 +36,9 @@ gem "thruster", require: false
 # Tailwindcss for styling
 gem "tailwindcss-rails"
 
+# Pghero dashboard for Postgres related information
+gem "pghero"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
@@ -55,6 +58,9 @@ group :development, :test do
 
   # Compares DB constraints with model validations
   gem "database_consistency"
+
+  # Rails best practices guidelines
+  gem "rails_best_practices"
 end
 
 group :development do
