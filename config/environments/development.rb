@@ -57,4 +57,12 @@ Rails.application.configure do
 
   # Enable/disable asset pipeline. By default assets are disabled.
   config.assets.debug = true
+
+  # Log N+1 Queries
+  config.after_initialize do
+    Prosopite.rails_logger = true
+  end
+
+  # Force strict loading by default, raise on lazy loading.
+  config.active_record.strict_loading_by_default = true
 end
