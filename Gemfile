@@ -46,6 +46,9 @@ group :development, :test do
   # Rubocop for static code analysis
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+
+  # Annotaterb for annotating models with database information
+  gem "annotaterb"
 end
 
 group :development do
