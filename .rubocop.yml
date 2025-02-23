@@ -13,3 +13,7 @@ Style/StringLiterals:
 # We always treat strings as frozen
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
+
+# We treat some blocks as one line
+Metrics/BlockLength:
+  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']

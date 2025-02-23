@@ -49,6 +49,12 @@ group :development, :test do
 
   # Annotaterb for annotating models with database information
   gem "annotaterb"
+
+  # Finds missing foreign keys/indexes
+  gem "active_record_doctor"
+
+  # Compares DB constraints with model validations
+  gem "database_consistency"
 end
 
 group :development do
