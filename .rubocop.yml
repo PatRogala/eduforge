@@ -17,3 +17,7 @@ Style/FrozenStringLiteralComment:
 # We treat some blocks as one line
 Metrics/BlockLength:
   CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
+
+# We don't need to use underscores in numbers
+Style/NumericLiterals:
+  Enabled: false
