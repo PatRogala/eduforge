@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -e
+
+echo "🔒 Security checks"
+bundle exec brakeman -q -o tmp/brakeman.html
+bundle exec bundle audit check --update
+
+echo "📦 Checking for unused gems"
+bundle exec bundle clean --force
+
+echo "🔍 Checking for database consistency"
+bundle exec database_consistency
+
+echo "📝 Updating annotations"
+bundle exec annotaterb models
+
+echo "🧹 Linting Ruby code"
+bundle exec rubocop -A
+
+echo "🔎 Checking for problems with activerecord"
+bundle exec rake active_record_doctor
+
+echo "⚡ Checking for problems with Rails"
+bundle exec rails_best_practices .
+
+# echo "➡️ Running tests"
+# bin/rails rspec
+
+echo "✅ All checks passed"

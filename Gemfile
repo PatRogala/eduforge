@@ -71,6 +71,9 @@ group :development, :test do
 
   # Rails best practices guidelines
   gem "rails_best_practices"
+
+  # Patch-level verification for bundler
+  gem "bundler-audit"
 end
 
 group :development do
