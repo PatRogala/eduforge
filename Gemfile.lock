@@ -111,6 +111,21 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.29.3)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.0)
@@ -184,6 +199,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    pg_query (6.0.0)
+      google-protobuf (>= 3.25.3)
     pghero (3.6.1)
       activerecord (>= 6.1)
     pp (0.6.2)
@@ -194,6 +211,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
+    prosopite (2.0.0)
     psych (5.2.3)
       date
       stringio
@@ -360,8 +378,10 @@ DEPENDENCIES
   jsbundling-rails
   kamal
   pg (~> 1.1)
+  pg_query
   pghero
   propshaft
+  prosopite
   puma (>= 5.0)
   rails (~> 8.0.1)
   rails_best_practices
