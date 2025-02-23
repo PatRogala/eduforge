@@ -44,6 +44,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_record_doctor (1.15.0)
+      activerecord (>= 4.2.0)
     activejob (8.0.1)
       activesupport (= 8.0.1)
       globalid (>= 0.3.6)
@@ -89,6 +91,8 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
+    database_consistency (2.0.4)
+      activerecord (>= 3.2)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -329,10 +333,12 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_record_doctor
   annotaterb
   bootsnap
   brakeman
   cssbundling-rails
+  database_consistency
   debug
   jsbundling-rails
   kamal
