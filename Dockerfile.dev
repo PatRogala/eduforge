@@ -1,0 +1,56 @@
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.4.2
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+
+# Rails app lives here
+RUN mkdir -p /app
+WORKDIR /app
+
+# Install base packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Set dev environment
+ENV LANG=C.UTF-8 \
+    BUNDLE_JOBS=4 \
+    BUNDLE_RETRY=3 \
+    RAILS_ENV=development
+
+# Store Bundler settings in the project's root
+ENV BUNDLE_APP_CONFIG=.bundle
+
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config unzip libyaml-dev watchman && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+ENV BUN_INSTALL=/usr/local/bun
+ENV PATH=/usr/local/bun/bin:$PATH
+ARG BUN_VERSION=1.2.3
+RUN curl -fsSL https://bun.sh/install | bash -s -- "bun-v${BUN_VERSION}"
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle update --bundler
+RUN bundle install
+
+# Install node modules
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+# Copy application code
+COPY . .
+
+# Set Polish Timezone and Locale
+RUN echo 'Poland' | tee -a /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+RUN export LANG=pl_PL
+RUN ln -fs /usr/share/zoneinfo/Poland /etc/localtime
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/app/bin/docker-entrypoint"]
+
+# Start server
+EXPOSE 3000
+CMD ["bin/dev"]

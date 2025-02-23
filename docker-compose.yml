@@ -1,0 +1,36 @@
+services:
+  eduforge:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: eduforge-backend
+    command: bin/dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgresql:
+        condition: service_started
+    volumes:
+      - .:/app
+      - bundler_cache:/usr/local/bundle
+    environment:
+      FOREMAN_PROCFILE: Procfile.dev
+      RAILS_ENV: development
+      FORCE_COLOR: 1
+    init: true
+  postgresql:
+    container_name: eduforge-database
+    image: postgres:17
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: pg_isready -U postgres -h postgresql
+      interval: 5s
+volumes:
+  postgres:
+  bundler_cache:

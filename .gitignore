@@ -37,3 +37,6 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# DS_Store files are created by your OS X environment.
+.DS_Store
