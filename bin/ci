@@ -23,7 +23,7 @@ bundle exec rake active_record_doctor
 echo "⚡ Checking for problems with Rails"
 bundle exec rails_best_practices .
 
-# echo "➡️ Running tests"
-# bin/rails rspec
+echo "➡️ Running tests"
+bin/rails rspec
 
 echo "✅ All checks passed"
