@@ -59,6 +59,8 @@ group :development, :test do
   # Rubocop for static code analysis
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 
   # Annotaterb for annotating models with database information
   gem "annotaterb"
@@ -71,6 +73,9 @@ group :development, :test do
 
   # Rails best practices guidelines
   gem "rails_best_practices"
+
+  # RSpec as testing framework
+  gem "rspec-rails"
 end
 
 group :development do
