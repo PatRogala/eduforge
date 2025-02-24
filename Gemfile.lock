@@ -130,6 +130,7 @@ GEM
     google-protobuf (4.29.3-x86_64-linux)
       bigdecimal
       rake (>= 13)
+    high_voltage (4.0.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.0)
@@ -408,6 +409,7 @@ DEPENDENCIES
   cssbundling-rails
   database_consistency
   debug
+  high_voltage
   jsbundling-rails
   kamal
   pg (~> 1.1)
