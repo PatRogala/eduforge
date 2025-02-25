@@ -9,6 +9,17 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.4
   SuggestExtensions: true
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/factories/**/*'
 
 # Double quotes are preffered for string literals
 Style/StringLiterals:
