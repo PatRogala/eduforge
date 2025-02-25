@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   mount PgHero::Engine, at: "pghero"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
