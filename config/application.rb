@@ -41,5 +41,9 @@ module Eduforge
 
     # Use SQL instead of ActiveRecord's schema dumper when creating the database.
     config.active_record.schema_format = :sql
+
+    # Polish is the default locale for the application.
+    config.i18n.default_locale = :pl
+    config.i18n.available_locales = [:pl, :en]
   end
 end
