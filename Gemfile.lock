@@ -422,7 +422,7 @@ DEPENDENCIES
   cssbundling-rails
   database_consistency
   debug
-  devise (~> 4.9)
+  devise
   high_voltage
   jsbundling-rails
   kamal
