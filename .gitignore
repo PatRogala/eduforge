@@ -40,3 +40,6 @@
 
 # DS_Store files are created by your OS X environment.
 .DS_Store
+
+# Rspec examples
+examples.txt

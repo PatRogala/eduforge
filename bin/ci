@@ -24,6 +24,6 @@ echo "⚡ Checking for problems with Rails"
 bundle exec rails_best_practices .
 
 echo "➡️ Running tests"
-bin/rails rspec
+bundle exec rspec
 
 echo "✅ All checks passed"
