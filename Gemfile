@@ -66,6 +66,7 @@ group :development, :test do
 
   # Rubocop for static code analysis
   gem "rubocop", require: false
+  gem "rubocop-factory_bot", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
@@ -87,6 +88,9 @@ group :development, :test do
 
   # RSpec as testing framework
   gem "rspec-rails"
+
+  # Fixtures replacement with a straightforward definition syntax
+  gem "factory_bot_rails"
 end
 
 group :development do
