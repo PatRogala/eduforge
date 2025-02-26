@@ -18,4 +18,6 @@
   %body
     %p.notice= notice
     %p.alert= alert
-    = yield
+    = render 'shared/sidebar'
+    %div{class: "ml-[60px]"}
+      = yield
