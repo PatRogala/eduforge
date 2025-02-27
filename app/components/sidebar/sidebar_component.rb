@@ -9,7 +9,11 @@ module Sidebar
     end
 
     def navigation_links
-      [
+      @public_links
+    end
+
+    def before_render
+      @public_links = [
         {
           title: "Dashboard",
           path: root_path,
