@@ -1,0 +1,15 @@
+.h-svh.absolute.top-0.left-0.px-4.py-4.hidden.md:flex.md:flex-col.bg-neutral-100.dark:bg-blue-600.flex-shrink-0.justify-between.gap-10#sidebar-component{style: "width: 60px;"}
+  .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
+    %a.font-normal.flex.space-x-2.items-center.text-sm.py-1.relative.z-20{href: "#"}
+      .h-5.w-6.bg-black.dark:bg-white.rounded-br-lg.rounded-tr-sm.rounded-tl-lg.rounded-bl-sm.flex-shrink-0
+      %span.text-sm.font-bold.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"} Szkoleo
+    .mt-8.flex.flex-col.gap-2
+      - default_links.each do |link|
+        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", data: { turbo_frame: "main_content" } do
+          = lucide_icon(link[:icon])
+          %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"}= link[:title]
+  %div
+    .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
+      %a.flex.items-center.text-white.justify-start.gap-2.py-2{class: "group/sidebar", href: "#"}
+        %img.h-7.w-7.flex-shrink-0.rounded-full{alt: "Avatar", height: "50", src: "https://assets.aceternity.com/manu.png", width: "50"}/
+        %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"} Manu Arora

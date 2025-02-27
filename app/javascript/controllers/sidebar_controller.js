@@ -2,27 +2,62 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["sidebar"]
-
+  
   connect() {
-    this.sidebarTarget.addEventListener('mouseover', () => {
-      this.sidebarTarget.classList.add('expanded')
-      localStorage.setItem('sidebarExpanded', 'true')
+    this.handleInitialState()
+    this.setupEventListeners()
+  }
+
+  setupEventListeners() {
+    let hoverTimeout
+
+    this.sidebarTarget.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout)
+      this.expandSidebar()
     })
 
-    this.sidebarTarget.addEventListener('mouseout', () => {
-      this.sidebarTarget.classList.remove('expanded')
-      localStorage.setItem('sidebarExpanded', 'false')
+    this.sidebarTarget.addEventListener('mouseleave', () => {
+      if (!this.isNavigating) {
+        hoverTimeout = setTimeout(() => {
+          this.collapseSidebar()
+        }, 100) // Small delay to prevent flickering
+      }
     })
 
-    // Check if sidebar was expanded before page reload
+    document.addEventListener('turbo:before-visit', () => {
+      this.isNavigating = true
+      if (this.sidebarTarget.matches(':hover')) {
+        this.expandSidebar()
+      }
+    })
+
+    document.addEventListener('turbo:load', () => {
+      this.isNavigating = false
+      this.handleInitialState()
+    })
+  }
+
+  handleInitialState() {
     if (localStorage.getItem('sidebarExpanded') === 'true') {
-      this.sidebarTarget.classList.add('expanded')
+      requestAnimationFrame(() => {
+        this.expandSidebar()
+      })
     }
   }
 
-  // Prevent sidebar collapse during navigation
+  expandSidebar() {
+    this.sidebarTarget.classList.add('expanded')
+    localStorage.setItem('sidebarExpanded', 'true')
+  }
+
+  collapseSidebar() {
+    this.sidebarTarget.classList.remove('expanded')
+    localStorage.setItem('sidebarExpanded', 'false')
+  }
+
   preventCollapse(event) {
-    if (this.sidebarTarget.classList.contains('expanded')) {
+    // Don't prevent the default behavior, just maintain the state
+    if (this.sidebarTarget.matches(':hover')) {
       localStorage.setItem('sidebarExpanded', 'true')
     }
   }

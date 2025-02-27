@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+/* Sidebar transition and smooth hover effect */
+#sidebar-component {
+    transition: width 0.4s ease-out;
+}
+
+#sidebar-component:hover {
+    width: 200px !important;
+}
+
+#sidebar-component svg {
+    min-width: 24px;
+}
+
+#sidebar-component span {
+    transition: opacity 0.4s ease-out;
+}
+
+#sidebar-component:hover span {
+    display: inline-block !important;
+    opacity: 1 !important;
+}

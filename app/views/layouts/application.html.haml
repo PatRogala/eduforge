@@ -6,6 +6,7 @@
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
     %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    %meta{content: "morph", name: "turbo-refresh-method"}/
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
@@ -18,6 +19,8 @@
   %body
     %p.notice= notice
     %p.alert= alert
-    = render 'shared/sidebar'
+    #sidebar{data: {turbo_permanent: true }}
+      = render Sidebar::SidebarComponent.new(current_user: current_user)
     %div.container.mx-auto.p-8{class: "ml-[60px]"}
-      = yield
+      = turbo_frame_tag "main_content" do
+        = yield
