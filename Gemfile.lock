@@ -186,6 +186,8 @@ GEM
     loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    lucide-rails (0.5.1)
+      railties (>= 4.1.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -461,6 +463,7 @@ DEPENDENCIES
   html2haml
   jsbundling-rails
   kamal
+  lucide-rails
   pg
   pg_query
   pghero
