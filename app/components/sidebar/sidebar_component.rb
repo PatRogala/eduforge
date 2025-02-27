@@ -8,7 +8,7 @@ module Sidebar
       @current_user = current_user
     end
 
-    def default_links
+    def navigation_links
       [
         {
           title: "Dashboard",

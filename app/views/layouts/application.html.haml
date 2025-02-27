@@ -19,8 +19,7 @@
   %body
     %p.notice= notice
     %p.alert= alert
-    #sidebar{data: {turbo_permanent: true }}
-      = render Sidebar::SidebarComponent.new(current_user: current_user)
+    = render Sidebar::SidebarComponent.new(current_user: current_user)
     %div.container.mx-auto.p-8{class: "ml-[60px]"}
       = turbo_frame_tag "main_content" do
         = yield
