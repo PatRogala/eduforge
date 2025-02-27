@@ -5,9 +5,9 @@
       %span.text-sm.font-bold.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"} Szkoleo
     .mt-8.flex.flex-col.gap-2
       - navigation_links.each do |link|
-        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", data: { turbo_frame: "main_content" } do
+        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", data: { turbo_frame: "main_content" }, aria: { label: link[:title] } do
           = lucide_icon(link[:icon])
-          %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"}= link[:title]
+          %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;", "aria-hidden": "false"}= link[:title]
   %div
     .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
       %a.flex.items-center.text-white.justify-start.gap-2.py-2{class: "group/sidebar", href: "#"}
