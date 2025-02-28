@@ -12,12 +12,24 @@ module Sidebar
       @public_links
     end
 
+    def bottom_links
+      @non_logged_in_links
+    end
+
     def before_render
       @public_links = [
         {
           title: ".dashboard",
           path: root_path,
           icon: "layout-dashboard"
+        }
+      ]
+
+      @non_logged_in_links = [
+        {
+          title: ".sign_in",
+          path: new_user_session_path,
+          icon: "log-in"
         }
       ]
     end
