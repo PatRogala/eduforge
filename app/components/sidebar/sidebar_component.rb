@@ -15,7 +15,7 @@ module Sidebar
     def before_render
       @public_links = [
         {
-          title: "Dashboard",
+          title: ".dashboard",
           path: root_path,
           icon: "layout-dashboard"
         }
