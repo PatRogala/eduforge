@@ -103,4 +103,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Lookbook shows you how your view components look in isolation
+  gem "lookbook"
 end
