@@ -39,7 +39,8 @@ module Sidebar
         {
           title: ".sign_out",
           path: destroy_user_session_path,
-          icon: "log-out"
+          icon: "log-out",
+          type: :delete
         }
       ]
     end
