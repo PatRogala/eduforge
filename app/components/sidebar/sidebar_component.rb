@@ -13,7 +13,9 @@ module Sidebar
     end
 
     def bottom_links
-      @non_logged_in_links
+      return @non_logged_in_links if current_user.nil?
+
+      @logged_in_links if current_user.present?
     end
 
     def before_render
@@ -30,6 +32,14 @@ module Sidebar
           title: ".sign_in",
           path: new_user_session_path,
           icon: "log-in"
+        }
+      ]
+
+      @logged_in_links = [
+        {
+          title: ".sign_out",
+          path: destroy_user_session_path,
+          icon: "log-out"
         }
       ]
     end
