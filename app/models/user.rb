@@ -18,7 +18,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  has_many :user_roles, dependent: :destroy
+  has_many :user_roles, dependent: :delete_all
   has_many :roles, through: :user_roles
 
   validates :reset_password_token, uniqueness: true, allow_nil: true
@@ -27,10 +27,6 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  def admin?
-    roles.ids.include?(Role::ADMIN_ID)
-  end
 
   def instructor?
     roles.ids.include?(Role::INSTRUCTOR_ID)

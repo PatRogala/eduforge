@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (role_id => roles.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (role_id => roles.id) ON DELETE => cascade
+#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 class UserRole < ApplicationRecord
   belongs_to :user

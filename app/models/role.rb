@@ -16,14 +16,8 @@ class Role < ApplicationRecord
   ADMIN_ID = 1
   INSTRUCTOR_ID = 2
 
-  has_many :user_roles, dependent: :destroy
+  has_many :user_roles, dependent: :delete_all
   has_many :users, through: :user_roles
 
-  def self.admin
-    find(ADMIN_ID)
-  end
-
-  def self.instructor
-    find(INSTRUCTOR_ID)
-  end
+  validates :name, presence: true, uniqueness: true
 end
