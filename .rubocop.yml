@@ -37,3 +37,6 @@ Metrics/BlockLength:
 # We don't need to use underscores in numbers
 Style/NumericLiterals:
   Enabled: false
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
