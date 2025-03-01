@@ -1,16 +1,16 @@
 .h-svh.absolute.top-0.left-0.px-4.py-4.hidden.md:flex.md:flex-col.bg-neutral-100.dark:bg-blue-600.flex-shrink-0.justify-between.gap-10#sidebar-component{style: "width: 60px;"}
   .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
-    = link_to root_path, class: "font-normal flex space-x-2 items-center text-sm py-1 relative z-20", data: { turbo_frame: "main_content" } do
+    = link_to root_path, class: "font-normal flex space-x-2 items-center text-sm py-1 relative z-20" do
       .h-5.w-6.bg-black.dark:bg-white.rounded-br-lg.rounded-tr-sm.rounded-tl-lg.rounded-bl-sm.flex-shrink-0
       %span.text-sm.font-bold.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;"}= t(".logo")
     .mt-8.flex.flex-col.gap-2
       - navigation_links.each do |link|
-        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", data: { turbo_frame: "main_content" }, aria: { label: link[:title] } do
+        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", aria: { label: link[:title] } do
           = lucide_icon(link[:icon])
           %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;", "aria-hidden": "false"}= t(link[:title])
   %div
     .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
       - bottom_links.each do |link|
-        = link_to link[:path], class: "flex items-center justify-start gap-2 py-2 group/sidebar", data: { turbo_frame: "main_content" }, aria: { label: link[:title] } do
+        = button_to link[:path], method: link[:type] || :get, class: "flex items-center justify-start gap-2 py-2 group/sidebar w-full", aria: { label: link[:title] }, data: { turbo: false } do
           = lucide_icon(link[:icon])
           %span.text-sm.transition.duration-150.whitespace-pre.inline-block{class: "group-hover/sidebar:translate-x-1 !p-0 !m-0", style: "display: none; opacity: 0;", "aria-hidden": "false"}= t(link[:title])
