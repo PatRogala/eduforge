@@ -9,7 +9,11 @@ module Sidebar
     end
 
     def navigation_links
-      @public_links
+      links_to_render = []
+      links_to_render += @public_links
+      links_to_render += @instructor_links if current_user&.instructor?
+
+      links_to_render
     end
 
     def bottom_links
@@ -24,6 +28,14 @@ module Sidebar
           title: ".dashboard",
           path: root_path,
           icon: "layout-dashboard"
+        }
+      ]
+
+      @instructor_links = [
+        {
+          title: ".created_courses",
+          path: root_path,
+          icon: "book-plus"
         }
       ]
 
