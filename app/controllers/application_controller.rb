@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   def authenticate_instructor!
-    redirect_to root_path, alert: t("controllers.alerts.must_be_instructor") unless current_user&.instructor?
+    return if current_user&.instructor?
+
+    redirect_to root_path, alert: t("controllers.alerts.must_be_instructor"),
+                           status: :forbidden
   end
 end
