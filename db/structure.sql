@@ -41,6 +41,38 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: programming_courses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.programming_courses (
+    id bigint NOT NULL,
+    title character varying NOT NULL,
+    instructor_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: programming_courses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.programming_courses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: programming_courses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.programming_courses_id_seq OWNED BY public.programming_courses.id;
+
+
+--
 -- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -148,6 +180,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: programming_courses id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_courses ALTER COLUMN id SET DEFAULT nextval('public.programming_courses_id_seq'::regclass);
+
+
+--
 -- Name: roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -174,6 +213,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: programming_courses programming_courses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_courses
+    ADD CONSTRAINT programming_courses_pkey PRIMARY KEY (id);
 
 
 --
@@ -206,6 +253,20 @@ ALTER TABLE ONLY public.user_roles
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_programming_courses_on_instructor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_courses_on_instructor_id ON public.programming_courses USING btree (instructor_id);
+
+
+--
+-- Name: index_programming_courses_on_title; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_programming_courses_on_title ON public.programming_courses USING btree (title);
 
 
 --
@@ -244,6 +305,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: programming_courses fk_rails_09edd126fa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_courses
+    ADD CONSTRAINT fk_rails_09edd126fa FOREIGN KEY (instructor_id) REFERENCES public.users(id);
+
+
+--
 -- Name: user_roles fk_rails_318345354e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -266,6 +335,7 @@ ALTER TABLE ONLY public.user_roles
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250303154434'),
 ('20250301150707'),
 ('20250301145248'),
 ('20250301144134'),

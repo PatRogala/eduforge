@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :programming_course do
+    title { Faker::Lorem.word }
+  end
+
   factory :user do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
