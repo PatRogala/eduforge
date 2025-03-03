@@ -1,5 +1,5 @@
 %div.flex.flex-col.items-center.justify-center{class: "min-h-[90vh]"}
-  .bg-white.p-8.rounded-lg.shadow-md.w-full.max-w-md
+  .bg-white.p-8.rounded-lg.shadow-lg.w-full.max-w-md.border-2.border-blue-600
     %h2.text-2xl.font-bold.text-center.mb-6.text-gray-800= t('.forgot_your_password')
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'space-y-4 w-full' }) do |f|
       = render "devise/shared/error_messages", resource: resource

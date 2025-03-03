@@ -98,4 +98,9 @@ RSpec.configure do |config|
   config.after do
     Prosopite.finish
   end
+
+  # TODO: Remove when Devise fixes this issue
+  config.before(:each, type: :request) do
+    Rails.application.reload_routes_unless_loaded
+  end
 end

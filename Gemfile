@@ -94,6 +94,7 @@ group :development, :test do
   gem "bundler-audit"
 
   # RSpec as testing framework
+  gem "rails-controller-testing"
   gem "rspec-rails"
 
   # Fixtures replacement with a straightforward definition syntax
@@ -101,6 +102,9 @@ group :development, :test do
 
   # Faker for generating fake data
   gem "faker"
+
+  # Byebug for debugging
+  gem "byebug"
 end
 
 group :development do

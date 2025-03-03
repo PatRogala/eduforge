@@ -34,7 +34,7 @@ module Sidebar
       @instructor_links = [
         {
           title: ".created_courses",
-          path: root_path,
+          path: new_instructor_course_path,
           icon: "book-plus"
         }
       ]
