@@ -43,3 +43,6 @@
 
 # Rspec examples
 examples.txt
+
+# byebug 
+.byebug_history

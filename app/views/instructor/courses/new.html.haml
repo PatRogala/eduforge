@@ -1,0 +1,15 @@
+.container.mx-auto.p-8
+  .grid.grid-cols-1.md:grid-cols-3.gap-8
+    = link_to root_path, class: "transform hover:scale-105 transition-transform duration-300" do
+      .bg-white.border-2.border-blue-600.rounded-lg.p-8.h-64.flex.flex-col.items-center.justify-center.text-center.shadow-lg
+        = lucide_icon 'code', class: 'w-16 h-16 text-blue-600 mb-4'
+        %h2.text-2xl.font-bold.text-gray-800.uppercase Programowanie
+        %p.mt-2.text-gray-600 Stwórz kurs programowania
+    .bg-gray-100.border-2.border-gray-300.rounded-lg.p-8.h-64.flex.flex-col.items-center.justify-center.text-center.opacity-75.cursor-not-allowed
+      = lucide_icon 'palette', class: 'w-16 h-16 text-gray-400 mb-4'
+      %h2.text-2xl.font-bold.text-gray-400 PROJEKTOWANIE
+      %p.mt-2.text-gray-400 Już wkrótce!
+    .bg-gray-100.border-2.border-gray-300.rounded-lg.p-8.h-64.flex.flex-col.items-center.justify-center.text-center.opacity-75.cursor-not-allowed
+      = lucide_icon 'brain', class: 'w-16 h-16 text-gray-400 mb-4'
+      %h2.text-2xl.font-bold.text-gray-400 AI
+      %p.mt-2.text-gray-400 Już wkrótce!
