@@ -2,3 +2,10 @@ pl:
   controllers:
     alerts:
       must_be_instructor: Musisz być instruktorem, aby wykonać tę akcję.
+  instructor:
+    programming_courses:
+      new:
+        title: Nowy kurs programowania
+        submit: Utwórz
+      create:
+        success: Kurs został utworzony.
