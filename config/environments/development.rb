@@ -70,5 +70,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Previews for lookbook
-  config.lookbook.preview_paths = ["app/components/previews"]
+  config.lookbook.preview_paths = ["app/previews"]
 end
