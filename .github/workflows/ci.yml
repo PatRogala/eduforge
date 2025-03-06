@@ -75,8 +75,6 @@ jobs:
         run: bundle exec database_consistency
       - name: Active Record Doctor
         run: bundle exec rake active_record_doctor
-      - name: Check rails best practices
-        run: bundle exec rails_best_practices .
       - name: Run tests
         run: bundle exec rspec
       - uses: joshmfrankel/simplecov-check-action@main

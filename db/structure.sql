@@ -309,7 +309,7 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 --
 
 ALTER TABLE ONLY public.programming_courses
-    ADD CONSTRAINT fk_rails_09edd126fa FOREIGN KEY (instructor_id) REFERENCES public.users(id);
+    ADD CONSTRAINT fk_rails_09edd126fa FOREIGN KEY (instructor_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 
 --
@@ -335,6 +335,7 @@ ALTER TABLE ONLY public.user_roles
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250306213049'),
 ('20250303154434'),
 ('20250301150707'),
 ('20250301145248'),
