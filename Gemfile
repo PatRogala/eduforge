@@ -105,6 +105,9 @@ group :development, :test do
 
   # Byebug for debugging
   gem "byebug"
+
+  # Code coverage analysis tool for Ruby.
+  gem "simplecov", require: false
 end
 
 group :development do
