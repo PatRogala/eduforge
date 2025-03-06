@@ -64,7 +64,7 @@ Rails.application.configure do
   end
 
   # Force strict loading by default, raise on lazy loading.
-  config.active_record.strict_loading_by_default = true
+  # config.active_record.strict_loading_by_default = true
 
   # Devise action mailer
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }

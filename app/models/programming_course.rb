@@ -22,4 +22,9 @@ class ProgrammingCourse < ApplicationRecord
   belongs_to :instructor, class_name: "User"
 
   validates :title, presence: true, uniqueness: true
+
+  def created_time_ago
+    days = (Time.current - created_at).to_i / 1.day
+    "Stworzono #{days} dni temu"
+  end
 end

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Instructor routes to manage created courses
   namespace :instructor do
     resources :courses, only: [:new]
-    resources :programming_courses, only: [:new, :create]
+    resources :programming_courses, only: [:index, :new, :create]
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
