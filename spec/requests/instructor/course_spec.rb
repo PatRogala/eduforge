@@ -39,9 +39,9 @@ RSpec.describe "Instructor::Courses" do
         sign_in regular_user
       end
 
-      it "redirects to root page" do
+      it "forbids unauthorized access" do
         get new_instructor_course_path
-        expect(response).to redirect_to(root_path)
+        expect(response).to be_forbidden
       end
     end
   end
