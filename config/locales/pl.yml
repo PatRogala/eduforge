@@ -16,4 +16,37 @@ pl:
         no_courses_yet: Nie masz jeszcze żadnych kursów.
         no_courses_description: Kliknij przycisk poniżej, aby stworzyć nowy kurs.
         create_your_first_course: Stwórz swój pierwszy kurs
+      show:
+        back: Powrót
+        course_details: Szczegóły kursu
+        edit: Edytuj
+        created_at: Stworzono
+        instructor: Instruktor
+        course_content: Kontent
+        edit_content: Edytuj kontent
+        no_content_yet: Nie masz jeszcze żadnego kontentu.
+        course_settings: Ustawienia
+        edit_settings: Edytuj ustawienia
+        no_settings_configured: Brak ustawien
+      edit:
+        edit_course: Edytuj kurs
+        back_to_course: Powrót
+        edit_course_details: Edytuj szczegoly
+        title: tytuł
+        save: Zapisz
+        cancel: Anuluj
+        course_content: Kontent
+        edit_content: Edytuj kontent
+        no_content_yet: Nie masz jeszcze żadnego kontentu.
+        course_settings: Ustawienia
+        edit_settings: Edytuj ustawienia
+        no_settings_configured: Brak ustawien
+        course_details: szzcegoly
+        edit: Edytuj
+        created_at: Stworzono
+        instructor: Instruktor
+        edit_course_content: Edytuj kontent
+        content_editor_coming_soon: Edytor kontentu wkrótce.
+        edit_course_settings: Edytuj ustawienia
+        settings_editor_coming_soon: Edytor ustawien wkrótce.
     

@@ -19,7 +19,7 @@
               %span.text-sm.text-gray-500
                 = lucide_icon 'calendar', class: 'w-4 h-4 inline mr-1'
                 = course.created_time_ago
-              = link_to "#", class: "text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium" do
+              = link_to instructor_programming_course_path(course), class: "text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium" do
                 = t('.view_details')
                 = lucide_icon 'chevron-right', class: 'w-4 h-4 ml-1'
   - else

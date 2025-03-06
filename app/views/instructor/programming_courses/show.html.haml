@@ -1,0 +1,37 @@
+%div.flex.flex-col.gap-6.p-4
+  %div.flex.justify-between.items-center
+    %h1.text-2xl.font-bold.text-gray-800= @course.title
+    = link_to t('.back'), instructor_programming_courses_path, class: 'px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors duration-200'
+
+  = turbo_frame_tag "course_details" do
+    %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
+      %div.flex.justify-between.items-center.mb-4
+        %h2.text-lg.font-semibold.text-gray-700= t('.course_details')
+        = link_to t('.edit'), edit_instructor_programming_course_path(@course), class: 'text-blue-600 hover:text-blue-700'
+      
+      %div.space-y-4
+        %div.flex.items-center.gap-2
+          %span.text-gray-600= t('.created_at')
+          %span.text-gray-800= @course.created_time_ago
+
+        %div.flex.items-center.gap-2
+          %span.text-gray-600= t('.instructor')
+          %span.text-gray-800= @course.instructor.email
+
+  = turbo_frame_tag "course_content" do
+    %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
+      %div.flex.justify-between.items-center.mb-4
+        %h2.text-lg.font-semibold.text-gray-700= t('.course_content')
+        = link_to t('.edit_content'), edit_instructor_programming_course_path(@course, section: 'content'), class: 'text-blue-600 hover:text-blue-700'
+      
+      %div.space-y-4
+        %p.text-gray-600= t('.no_content_yet')
+
+  = turbo_frame_tag "course_settings" do
+    %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
+      %div.flex.justify-between.items-center.mb-4
+        %h2.text-lg.font-semibold.text-gray-700= t('.course_settings')
+        = link_to t('.edit_settings'), edit_instructor_programming_course_path(@course, section: 'settings'), class: 'text-blue-600 hover:text-blue-700'
+      
+      %div.space-y-4
+        %p.text-gray-600= t('.no_settings_configured')
