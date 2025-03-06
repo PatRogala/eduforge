@@ -79,7 +79,8 @@ jobs:
         run: bundle exec rake active_record_doctor
       - name: Run tests
         run: bundle exec rspec
-      - uses: joshmfrankel/simplecov-check-action@main
+      - name: SimpleCov+ Action
+        uses: joshmfrankel/simplecov-check-action@1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
     
