@@ -34,6 +34,57 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      - name: Security audit dependencies
+        run: bundle exec bundle audit check --update
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
+      - name: Lint Ruby files
+        run: bundle exec rubocop
+  
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+    services:
+      postgres:
+        image: postgres:17-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      # Add or replace database setup steps here
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+      - name: Checking for database consistency
+        run: bundle exec database_consistency
+      - name: Active Record Doctor
+        run: bundle exec rake active_record_doctor
+      - name: Run tests
+        run: bundle exec rspec
+      - name: SimpleCov+ Action
+        uses: joshmfrankel/simplecov-check-action@1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+    
 

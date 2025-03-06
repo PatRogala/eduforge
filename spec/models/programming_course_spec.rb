@@ -15,7 +15,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (instructor_id => users.id)
+#  fk_rails_...  (instructor_id => users.id) ON DELETE => cascade
 #
 require "rails_helper"
 

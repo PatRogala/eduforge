@@ -46,3 +46,6 @@ examples.txt
 
 # byebug 
 .byebug_history
+
+# coverage
+/coverage
