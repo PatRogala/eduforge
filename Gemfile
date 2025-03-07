@@ -68,6 +68,7 @@ gem "lucide-rails"
 gem "pundit"
 
 # Pretty URLs and work with human-friendly strings
+gem "babosa"
 gem "friendly_id"
 
 group :development, :test do

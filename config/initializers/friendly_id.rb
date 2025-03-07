@@ -23,7 +23,7 @@ FriendlyId.defaults do |config|
   # When there is no good candidate, a UUID will be appended, matching the existing
   # conflict behavior.
 
-  # config.treat_reserved_as_conflict = true
+  config.treat_reserved_as_conflict = true
 
   #  ## Friendly Finders
   #
@@ -99,9 +99,9 @@ FriendlyId.defaults do |config|
   # Here we use the Babosa library to transliterate Russian Cyrillic slugs to
   # ASCII. If you use this, don't forget to add "babosa" to your Gemfile.
   #
-  # config.use Module.new {
-  #   def normalize_friendly_id(text)
-  #     text.to_slug.normalize! :transliterations => [:russian, :latin]
-  #   end
-  # }
+  config.use Module.new {
+    def normalize_friendly_id(text)
+      text.to_slug.normalize! :transliterations => [:polish, :latin]
+    end
+  }
 end
