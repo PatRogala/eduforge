@@ -67,6 +67,9 @@ gem "lucide-rails"
 # Authorization system
 gem "pundit"
 
+# Pretty URLs and work with human-friendly strings
+gem 'friendly_id'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"

@@ -49,4 +49,6 @@ pl:
         content_editor_coming_soon: Edytor kontentu wkrótce.
         edit_course_settings: Edytuj ustawienia
         settings_editor_coming_soon: Edytor ustawien wkrótce.
+      update:
+        success: Kurs został zaktualizowany.
     

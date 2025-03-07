@@ -20,7 +20,7 @@ module Instructor
     # Only allow instructor to manage courses created by themself
     class Scope < ApplicationPolicy::Scope
       def resolve
-        scope.where(instructor: user)
+        scope.where(instructor: user).friendly
       end
     end
   end
