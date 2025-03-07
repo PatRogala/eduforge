@@ -253,6 +253,7 @@ RSpec.describe "Instructor::ProgrammingCourses" do
 
       it "redirects to the course show page with valid attributes" do
         patch instructor_programming_course_path(programming_course), params: valid_attributes
+        programming_course.reload
         expect(response).to redirect_to(instructor_programming_course_path(programming_course))
       end
 

@@ -93,9 +93,6 @@ group :development, :test do
   # Compares DB constraints with model validations
   gem "database_consistency"
 
-  # Rails best practices guidelines
-  gem "rails_best_practices"
-
   # Patch-level verification for bundler
   gem "bundler-audit"
 

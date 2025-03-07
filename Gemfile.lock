@@ -93,8 +93,6 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
     byebug (11.1.3)
-    code_analyzer (0.5.5)
-      sexp_processor
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
@@ -319,14 +317,6 @@ GEM
     rails-i18n (8.0.1)
       i18n (>= 0.7, < 2)
       railties (>= 8.0.0, < 9)
-    rails_best_practices (1.23.2)
-      activesupport
-      code_analyzer (~> 0.5.5)
-      erubis
-      i18n
-      json
-      require_all (~> 3.0)
-      ruby-progressbar
     railties (8.0.1)
       actionpack (= 8.0.1)
       activesupport (= 8.0.1)
@@ -343,7 +333,6 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
-    require_all (3.0.0)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -519,7 +508,6 @@ DEPENDENCIES
   rails
   rails-controller-testing
   rails-i18n
-  rails_best_practices
   rspec-rails
   rubocop
   rubocop-factory_bot
