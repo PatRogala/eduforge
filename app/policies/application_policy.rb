@@ -35,6 +35,7 @@ class ApplicationPolicy
     false
   end
 
+  # Default scope for all policies
   class Scope
     def initialize(user, scope)
       @user = user

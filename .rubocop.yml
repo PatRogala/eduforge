@@ -1,3 +1,6 @@
+inherit_gem:
+  pundit: config/rubocop-rspec.yml
+
 plugins:
   - rubocop-rails
   - rubocop-rspec
@@ -40,3 +43,11 @@ Style/NumericLiterals:
 
 Metrics/MethodLength:
   CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
+
+# In some scenarios we need more memoized objects
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+# We are okay with subject {}
+RSpec/NamedSubject:
+  EnforcedStyle: named_only

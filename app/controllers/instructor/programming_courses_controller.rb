@@ -1,28 +1,36 @@
 module Instructor
   # Allow instructors to create Programming Courses
   class ProgrammingCoursesController < ApplicationController
+    POLICY_CLASS = Instructor::ProgrammingCoursePolicy
+    POLICY_SCOPE_CLASS = Instructor::ProgrammingCoursePolicy::Scope
+
     before_action :authenticate_user!
     before_action :authenticate_instructor!
 
     def index
-      @courses = current_user.programming_courses
+      @courses = policy_scope(ProgrammingCourse, policy_scope_class: POLICY_SCOPE_CLASS)
+      authorize @courses, policy_class: POLICY_CLASS
     end
 
     def show
-      @course = ProgrammingCourse.find(params[:id])
+      @course = policy_scope(ProgrammingCourse, policy_scope_class: POLICY_SCOPE_CLASS).find(params[:id])
+      authorize @course, policy_class: POLICY_CLASS
     end
 
     def new
       @course = ProgrammingCourse.new
+      authorize @course, policy_class: POLICY_CLASS
     end
 
     def edit
-      @course = ProgrammingCourse.find(params[:id])
+      @course = policy_scope(ProgrammingCourse, policy_scope_class: POLICY_SCOPE_CLASS).find(params[:id])
+      authorize @course, policy_class: POLICY_CLASS
     end
 
     def create
       @course = ProgrammingCourse.new(course_params)
       @course.instructor = current_user
+      authorize @course, policy_class: POLICY_CLASS
 
       if @course.save
         redirect_to instructor_programming_courses_path, notice: t(".success")
@@ -32,6 +40,9 @@ module Instructor
     end
 
     def update
+      @course = policy_scope(ProgrammingCourse, policy_scope_class: POLICY_SCOPE_CLASS).find(params[:id])
+      authorize @course, policy_class: POLICY_CLASS
+
       if @course.update(course_params)
         redirect_to instructor_programming_course_path(@course), notice: t(".success")
       else
