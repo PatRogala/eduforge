@@ -3,6 +3,7 @@
 # Table name: programming_courses
 #
 #  id            :bigint           not null, primary key
+#  slug          :string
 #  title         :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -11,6 +12,7 @@
 # Indexes
 #
 #  index_programming_courses_on_instructor_id  (instructor_id)
+#  index_programming_courses_on_slug           (slug) UNIQUE
 #  index_programming_courses_on_title          (title) UNIQUE
 #
 # Foreign Keys

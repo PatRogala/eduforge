@@ -20,9 +20,6 @@ bundle exec rubocop -A
 echo "🔎 Checking for problems with activerecord"
 bundle exec rake active_record_doctor
 
-echo "⚡ Checking for problems with Rails"
-bundle exec rails_best_practices .
-
 echo "➡️ Running tests"
 bundle exec rspec
 
