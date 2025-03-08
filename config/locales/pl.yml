@@ -53,6 +53,8 @@ pl:
         settings_editor_coming_soon: Edytor ustawien wkrótce.
         description: Opis
         description_placeholder: Opis kursu
+        content: Kontent
+        settings: Ustawienia
       update:
         success: Kurs został zaktualizowany.
     
