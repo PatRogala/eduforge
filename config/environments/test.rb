@@ -45,4 +45,6 @@ Rails.application.configure do
     Prosopite.rails_logger = true
     Prosopite.raise = true
   end
+
+  config.active_storage.service = :test
 end
