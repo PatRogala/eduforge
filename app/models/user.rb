@@ -20,7 +20,7 @@
 class User < ApplicationRecord
   has_many :user_roles, dependent: :delete_all
   has_many :roles, through: :user_roles
-  has_many :programming_courses, foreign_key: :instructor_id, inverse_of: :instructor, dependent: :delete_all
+  has_many :programming_courses, foreign_key: :instructor_id, inverse_of: :instructor, dependent: :destroy
 
   validates :reset_password_token, uniqueness: true, allow_nil: true
   validates :email, presence: true, uniqueness: true

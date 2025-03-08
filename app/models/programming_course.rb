@@ -24,6 +24,7 @@ class ProgrammingCourse < ApplicationRecord
   extend FriendlyId
 
   belongs_to :instructor, class_name: "User"
+  has_rich_text :description
 
   validates :title, presence: true, uniqueness: true
   validates :slug, uniqueness: true, allow_blank: true

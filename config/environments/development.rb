@@ -71,4 +71,6 @@ Rails.application.configure do
 
   # Previews for lookbook
   config.lookbook.preview_paths = ["app/previews"]
+
+  config.active_storage.service = :local
 end
