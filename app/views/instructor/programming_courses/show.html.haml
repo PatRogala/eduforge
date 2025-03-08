@@ -18,6 +18,13 @@
           %span.text-gray-600= t('.instructor')
           %span.text-gray-800= @course.instructor.email
 
+        %div.mt-4
+          %span.text-gray-600.block.mb-2= t('.description')
+          - if @course.description.present?
+            %div.prose.prose-sm.text-gray-800= @course.description
+          - else
+            %p.text-gray-500.italic= t('.no_description_yet')
+
   = turbo_frame_tag "course_content" do
     %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
       %div.flex.justify-between.items-center.mb-4

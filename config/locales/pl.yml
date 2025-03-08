@@ -28,6 +28,8 @@ pl:
         course_settings: Ustawienia
         edit_settings: Edytuj ustawienia
         no_settings_configured: Brak ustawien
+        description: Opis
+        no_description_yet: Nie masz jeszcze opisu.
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót
@@ -49,6 +51,8 @@ pl:
         content_editor_coming_soon: Edytor kontentu wkrótce.
         edit_course_settings: Edytuj ustawienia
         settings_editor_coming_soon: Edytor ustawien wkrótce.
+        description: Opis
+        description_placeholder: Opis kursu
       update:
         success: Kurs został zaktualizowany.
     
