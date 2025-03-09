@@ -1,0 +1,20 @@
+.md:hidden{data: { controller: "mobile-menu" }}
+  %button.fixed.top-4.right-4.z-50.p-2.rounded-md.bg-blue-600.text-white.hover:bg-blue-700.transition-colors.duration-200#mobile-menu-toggle{data: { action: "click->mobile-menu#toggle" }}
+    = lucide_icon("menu")
+
+  .fixed.inset-0.bg-blue-600.z-40.transform.transition-transform.duration-300.ease-in-out.flex.flex-col.justify-between.overflow-y-auto.p-6#mobile-menu{class: "translate-x-full", data: { mobile_menu_target: "menu" }}
+    .flex.flex-col.flex-1.overflow-y-auto.overflow-x-hidden.text-white
+      = link_to root_path, class: "font-normal flex items-center gap-3 text-lg py-3 border-b border-blue-500 mb-4" do
+        .h-6.w-7.bg-white.rounded-br-lg.rounded-tr-sm.rounded-tl-lg.rounded-bl-sm.flex-shrink-0
+        %span.text-lg.font-bold= t(".logo")
+      .mt-4.flex.flex-col.gap-3
+        - navigation_links.each do |link|
+          = link_to link[:path], class: "flex items-center gap-3 py-3 hover:bg-blue-500 rounded-md px-2 transition-colors duration-200" do
+            = lucide_icon(link[:icon], class: "w-5 h-5")
+            %span.text-base= t(link[:title])
+    %div
+      .flex.flex-col.border-t.border-blue-500.pt-4.mt-4
+        - bottom_links.each do |link|
+          = button_to link[:path], method: link[:type] || :get, class: "flex items-center gap-3 py-3 hover:bg-blue-500 rounded-md px-2 transition-colors duration-200 w-full text-left text-white", data: { turbo: false } do
+            = lucide_icon(link[:icon], class: "w-5 h-5")
+            %span.text-base= t(link[:title])
