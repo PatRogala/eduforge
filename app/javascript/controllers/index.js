@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
+
+import MobileMenuController from "./mobile_menu_controller"
+application.register("mobile-menu", MobileMenuController)
