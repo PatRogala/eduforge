@@ -37,6 +37,7 @@ RUN curl -fsSL https://bun.sh/install | bash -s -- "bun-v${BUN_VERSION}"
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle update --bundler
+RUN gem update --system 3.6.6
 RUN bundle install
 
 # Install node modules

@@ -12,6 +12,8 @@ services:
     depends_on:
       postgresql:
         condition: service_started
+      dragonfly:
+        condition: service_started
     volumes:
       - .:/app
       - bundler_cache:/usr/local/bundle
@@ -31,6 +33,15 @@ services:
     healthcheck:
       test: pg_isready -U postgres -h postgresql
       interval: 5s
+  dragonfly:
+    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    ulimits:
+      memlock: -1
+    ports:
+      - "6379:6379"
+    volumes:
+      - dragonflydata:/data
 volumes:
   postgres:
   bundler_cache:
+  dragonflydata:

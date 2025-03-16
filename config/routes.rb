@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  if Rails.env.development?
+  authenticate :user, ->(user) { user.admin? } do
     mount Lookbook::Engine, at: "/lookbook"
     mount PgHero::Engine, at: "pghero"
+    mount Sidekiq::Web, at: "/sidekiq"
   end
 
   # Instructor routes to manage created courses
