@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :programming_course do
-    title { Faker::Lorem.word }
+    title { Faker::Lorem.unique.word }
   end
 
   factory :user do
