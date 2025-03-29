@@ -10,20 +10,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -72,7 +58,7 @@ CREATE TABLE public.active_storage_attachments (
     record_type character varying NOT NULL,
     record_id bigint NOT NULL,
     blob_id bigint NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL
+    created_at timestamp(6) with time zone NOT NULL
 );
 
 
@@ -108,7 +94,7 @@ CREATE TABLE public.active_storage_blobs (
     service_name character varying NOT NULL,
     byte_size bigint NOT NULL,
     checksum character varying,
-    created_at timestamp(6) without time zone NOT NULL
+    created_at timestamp(6) with time zone NOT NULL
 );
 
 
@@ -168,8 +154,8 @@ ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.acti
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
 );
 
 
@@ -183,7 +169,7 @@ CREATE TABLE public.friendly_id_slugs (
     sluggable_id integer NOT NULL,
     sluggable_type character varying(50),
     scope character varying,
-    created_at timestamp(6) without time zone
+    created_at timestamp(6) with time zone
 );
 
 
@@ -214,8 +200,8 @@ CREATE TABLE public.programming_courses (
     id bigint NOT NULL,
     title character varying NOT NULL,
     instructor_id bigint NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL,
     slug character varying
 );
 
@@ -246,8 +232,8 @@ ALTER SEQUENCE public.programming_courses_id_seq OWNED BY public.programming_cou
 CREATE TABLE public.roles (
     id bigint NOT NULL,
     name character varying NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
 );
 
 
@@ -287,8 +273,8 @@ CREATE TABLE public.user_roles (
     id bigint NOT NULL,
     user_id bigint NOT NULL,
     role_id bigint NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
 );
 
 
@@ -320,10 +306,10 @@ CREATE TABLE public.users (
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
-    reset_password_sent_at timestamp(6) without time zone,
-    remember_created_at timestamp(6) without time zone,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    reset_password_sent_at timestamp(6) with time zone,
+    remember_created_at timestamp(6) with time zone,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
 );
 
 
