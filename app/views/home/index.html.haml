@@ -1,1 +1,38 @@
-Elo
+%section.container.mx-auto.px-4.mb-12
+  .bg-gradient-to-br.from-blue-600.to-indigo-700.rounded-xl.p-8.md:p-12.shadow-lg.border.border-indigo-400.transform.transition-all.duration-300.hover:shadow-xl{class: "hover:scale-[1.01]"}
+    .flex.flex-col.md:flex-row.items-center
+      .mb-6.md:mb-0.md:pr-8{class: "md:w-2/3"}
+        %h2.text-2xl.md:text-4xl.font-extrabold.text-white.mb-4.drop-shadow-sm
+          %span.bg-clip-text.text-transparent.bg-gradient-to-r.from-yellow-300.to-yellow-100 Featured Course
+        %p.text-indigo-100.mb-6.text-lg Master the fundamentals of web development with our comprehensive course. Learn HTML, CSS, and JavaScript through hands-on projects and expert guidance.
+        .flex.space-x-4
+          %a.bg-yellow-500.hover:bg-yellow-400.text-indigo-900.font-bold.py-3.px-6.rounded-lg.transition-all.duration-200.inline-flex.items-center.shadow-md.hover:shadow-lg.hover:-translate-y-1{href: "#"}
+            %i.mr-2 🎓
+            Enroll Now
+      .flex.justify-end.items-center{class: "md:w-1/3"}
+        .relative.p-4.bg-white.bg-opacity-20.backdrop-blur-sm.rounded-full.shadow-lg
+          =lucide_icon 'code', class: "w-24 h-24 text-yellow-300 drop-shadow-md"
+
+%section.container.mx-auto.px-4.mb-16
+  .flex.justify-between.items-center.mb-8
+    %h2.text-2xl.font-bold.text-gray-800 Available Courses
+    %a.text-blue-600.hover:text-blue-800.flex.items-center.transition-colors.duration-200{href: "#"}
+      View All
+      %i.ml-1 →
+  
+  .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+    - 6.times do |i|
+      .bg-white.rounded-lg.shadow-md.overflow-hidden.border.border-gray-200.transition-all.duration-300.hover:shadow-lg.hover:border-blue-300
+        .h-40.bg-gradient-to-r{class: i.even? ? "from-purple-500 to-pink-600" : "from-blue-500 to-indigo-600"}
+          .h-full.flex.items-center.justify-center
+            %i.text-white.text-4xl.opacity-50= ["💻", "🔍", "🧩", "📊", "🔐", "🚀"][i % 6]
+        .p-6
+          %h3.text-xl.font-bold.text-gray-800.mb-2= ["Introduction to Programming", "Web Development Fundamentals", "Data Structures & Algorithms", "Machine Learning Basics", "Cybersecurity Essentials", "Mobile App Development"][i % 6]
+          %p.text-gray-600.mb-4.line-clamp-3= ["Learn the fundamentals of programming with hands-on exercises.", "Master HTML, CSS, and JavaScript to build responsive websites.", "Understand core computer science concepts with practical examples.", "Explore the basics of AI and machine learning algorithms.", "Learn to protect systems and data from cyber threats.", "Build cross-platform mobile applications with modern frameworks."][i % 6]
+          .flex.justify-between.items-center
+            %span.text-sm.text-gray-500
+              %i.mr-1 👥
+              #{rand(10..50)} students
+            %a.text-blue-600.hover:text-blue-800.font-medium.text-sm.flex.items-center{href: "#"}
+              View Course
+              %i.ml-1 →
