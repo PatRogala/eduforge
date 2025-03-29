@@ -118,6 +118,9 @@ group :development, :test do
 
   # Code coverage analysis tool for Ruby.
   gem "simplecov", require: false
+
+  # Use dotenv for local environment variables
+  gem "dotenv-rails"
 end
 
 group :development do
