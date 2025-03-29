@@ -4,9 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticate :user, ->(user) { user.admin? } do
-    mount Lookbook::Engine, at: "/lookbook"
     mount PgHero::Engine, at: "pghero"
     mount Sidekiq::Web, at: "/sidekiq"
+  end
+
+  # Lookbook is an open source UI development tool that helps you build modular front-end UIs in Ruby on Rails applications.
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
   end
 
   # Instructor routes to manage created courses
