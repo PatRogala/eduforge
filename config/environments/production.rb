@@ -68,4 +68,7 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Use lograge for logging.
+  config.lograge.enabled = true
 end
