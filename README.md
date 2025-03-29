@@ -98,9 +98,9 @@ This application utilizes [Lograge](https://github.com/roidrage/lograge) in the 
 -   **Custom Fields:** Each log entry includes the following custom fields for enhanced context:
     -   `exception`: The class name of any exception that occurred during the request.
     -   `exception_message`: The message associated with the exception.
-    *   `time`: The timestamp when the log event occurred (using the application's time zone).
-    *   `host`: The hostname of the server processing the request.
-    *   `pid`: The process ID of the Rails application instance.
+    -   `time`: The timestamp when the log event occurred (using the application's time zone).
+    -   `host`: The hostname of the server processing the request.
+    -   `pid`: The process ID of the Rails application instance.
 -   **Log File:** Lograge output is directed to `log/lograge_production.log`.
 -   **Original Rails Log:** The standard verbose Rails log (`log/production.log`) is also kept (`config.lograge.keep_original_rails_log = true`) for more detailed debugging if needed, though the Lograge JSON output is preferred for monitoring and analysis.
 
