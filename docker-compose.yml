@@ -12,6 +12,8 @@ services:
     depends_on:
       postgresql:
         condition: service_started
+      redis:
+        condition: service_started
     volumes:
       - .:/app
       - bundler_cache:/usr/local/bundle
@@ -31,6 +33,13 @@ services:
     healthcheck:
       test: pg_isready -U postgres -h postgresql
       interval: 5s
+  redis:
+    image: redis:7
+    ulimits:
+      memlock: -1
+    volumes:
+      - redisdata:/data
 volumes:
   postgres:
   bundler_cache:
+  redisdata:

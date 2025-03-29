@@ -32,4 +32,8 @@ class User < ApplicationRecord
   def instructor?
     roles.ids.include?(Role::INSTRUCTOR_ID)
   end
+
+  def admin?
+    roles.ids.include?(Role::ADMIN_ID)
+  end
 end
