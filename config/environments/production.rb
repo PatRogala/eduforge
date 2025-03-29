@@ -71,4 +71,22 @@ Rails.application.configure do
 
   # Use lograge for logging.
   config.lograge.enabled = true
+
+  # Configure Lograge format (json is ideal for log aggregators like ELK, Datadog, etc.)
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  # Add custom fields to logs
+  config.lograge.custom_options = lambda do |event|
+    {
+      exception: event.payload[:exception]&.first,
+      exception_message: event.payload[:exception]&.last,
+      time: Time.current,
+      host: Socket.gethostname,
+      pid: Process.pid
+    }
+  end
+
+  # Keep the backtrace for API debugging
+  config.lograge.keep_original_rails_log = true
+  config.lograge.logger = ActiveSupport::Logger.new("#{Rails.root}/log/lograge_#{Rails.env}.log")
 end
