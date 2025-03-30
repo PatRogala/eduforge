@@ -1,12 +1,9 @@
 %section.container.mx-auto.px-4.mb-16
   .flex.justify-between.items-center.mb-8
     %h2.text-2xl.font-bold.text-gray-800= t('.title')
-    = link_to courses_path, class: "text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center transition-colors duration-200" do
-      = t('.view_all')
-      %i.ml-1 →
   
   .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
-    - courses.each do |course|
+    - @courses.each do |course|
       .bg-white.rounded-lg.shadow-md.overflow-hidden.border.border-gray-200.transition-all.duration-300.hover:shadow-lg.hover:border-blue-300
         .h-40.bg-gradient-to-r.from-purple-500.to-pink-600
           .h-full.flex.items-center.justify-center
