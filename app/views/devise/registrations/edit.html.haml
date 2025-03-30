@@ -1,3 +1,77 @@
+.py-8.px-4{ class: "sm:px-6 lg:px-8 max-w-3xl mx-auto" }
+  %h1.text-2xl.font-bold.text-gray-900.mb-6{ class: "md:text-3xl" }= t(".title")
+
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "space-y-8") do |f|
+    -# --- Profile Information Section ---
+    .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4
+      .px-4.py-5{ class: "sm:p-6" }
+        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".profile_information")
+        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".profile_information_description")
+
+        .mt-6.grid.grid-cols-1.gap-y-6.gap-x-4{ class: "sm:grid-cols-6" }
+          -# .sm:col-span-3
+          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_first_name" } First name
+          -#   .mt-1
+          -#     %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "text", name: "user[first_name]", id: "user_first_name", value: "Amelia", autocomplete: "given-name" }
+
+          -# .sm:col-span-3
+          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_last_name" } Last name
+          -#   .mt-1
+          -#     %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "text", name: "user[last_name]", id: "user_last_name", value: "Earhart", autocomplete: "family-name" }
+
+          .sm:col-span-4
+            = f.label :email, class: "block text-sm font-medium text-gray-700"
+            .mt-1
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+
+          -# .sm:col-span-6
+          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_bio" } Bio
+          -#   .mt-1
+          -#     %textarea.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ name: "user[bio]", id: "user_bio", rows: "3" } Pilot and aviation enthusiast. Learning web development on the side!
+          -#   %p.mt-2.text-sm.text-gray-500 Brief description for your profile.
+
+    -# --- Profile Picture Section ---
+    -# .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4
+    -#   .px-4.py-5{ class: "sm:p-6" }
+    -#     %h3.text-lg.leading-6.font-medium.text-gray-900 Profile Picture
+    -#     .mt-6.flex.items-center.gap-x-4
+    -#       %img.h-16.w-16.rounded-full.bg-gray-100{ src: "https://placehold.co/128x128/7f9cf5/ffffff?text=AE", alt: "Current profile photo" }
+    -#       %div
+    -#         %label.cursor-pointer.rounded-md.bg-white.py-1.5.px-2.5.text-sm.font-semibold.text-gray-900.shadow-sm.ring-1.ring-inset.ring-gray-300{ for: "user_avatar", class: "hover:bg-gray-50" }
+    -#           %span Change
+    -#           %input.sr-only{ type: "file", name: "user[avatar]", id: "user_avatar", accept: "image/*" }
+    -#         %p.mt-1.text-xs.leading-5.text-gray-500 JPG, GIF or PNG. 1MB max.
+
+    -# --- Password Change Section ---
+    .bg-white.shadow.sm:rounded-lg.overflow-hidden
+      .px-4.py-5{ class: "sm:p-6" }
+        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".password_change")
+        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".password_change_description")
+
+        .mt-6.grid.grid-cols-1.gap-y-6{ class: "sm:grid-cols-6" }
+          .sm:col-span-4
+            = f.label :current_password, class: "block text-sm font-medium text-gray-700"
+            %p.mt-1.max-w-2xl.text-sm.text-gray-500 (#{t('.we_need_your_current_password_to_confirm_your_changes')})
+            .mt-1
+              = f.password_field :current_password, autocomplete: "current-password", autocomplete: "current-password", class: " block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+
+          .sm:col-span-4
+            = f.label :password, class: "block text-sm font-medium text-gray-700"
+            .mt-1
+              = f.password_field :password, autocomplete: "new-password", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+
+          .sm:col-span-4
+            %label.block.text-sm.font-medium.text-gray-700{ for: "user_password_confirmation" } Confirm new password
+            .mt-1
+              %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "password", name: "user[password_confirmation]", id: "user_password_confirmation", autocomplete: "new-password" }
+
+    -# --- Form Actions ---
+    .flex.justify-end.pt-5
+      %button.mr-3.rounded-md.bg-white.py-2.px-4.text-sm.font-medium.text-gray-700.shadow-sm.ring-1.ring-inset.ring-gray-300{ type: "button", class: "hover:bg-gray-50" } Cancel
+      %button.inline-flex.justify-center.rounded-md.border.border-transparent.bg-blue-600.py-2.px-4.text-sm.font-medium.text-white.shadow-sm{ type: "submit", class: "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" } Save Changes
+
+-# ---e
+
 %h2= t('.title', resource: devise_i18n_fix_model_name_case(resource.model_name.human, i18n_key: 'registrations.edit.title'))
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = render "devise/shared/error_messages", resource: resource

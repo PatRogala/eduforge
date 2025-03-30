@@ -1,0 +1,9 @@
+pl:
+  devise:
+    registrations:
+      edit:
+        title: Edytuj profil
+        profile_information: Informacje o profilu
+        profile_information_description: Opcjonalnie możesz dodać krótki opis o sobie.
+        password_change: Zaktualizuj hasło
+        password_change_description: Zostaw puste pole, jeśli nie chcesz zmienić hasła.
