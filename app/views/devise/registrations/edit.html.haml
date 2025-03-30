@@ -8,6 +8,7 @@
         %h3.text-lg.leading-6.font-medium.text-gray-900= t(".profile_information")
         %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".profile_information_description")
 
+        = render "devise/shared/error_messages", resource: resource
         .mt-6.grid.grid-cols-1.gap-y-6.gap-x-4{ class: "sm:grid-cols-6" }
           -# .sm:col-span-3
           -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_first_name" } First name
@@ -61,49 +62,10 @@
               = f.password_field :password, autocomplete: "new-password", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 
           .sm:col-span-4
-            %label.block.text-sm.font-medium.text-gray-700{ for: "user_password_confirmation" } Confirm new password
+            = f.label :password_confirmation, class: "block text-sm font-medium text-gray-700"
             .mt-1
-              %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "password", name: "user[password_confirmation]", id: "user_password_confirmation", autocomplete: "new-password" }
+              = f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 
     -# --- Form Actions ---
     .flex.justify-end.pt-5
-      %button.mr-3.rounded-md.bg-white.py-2.px-4.text-sm.font-medium.text-gray-700.shadow-sm.ring-1.ring-inset.ring-gray-300{ type: "button", class: "hover:bg-gray-50" } Cancel
-      %button.inline-flex.justify-center.rounded-md.border.border-transparent.bg-blue-600.py-2.px-4.text-sm.font-medium.text-white.shadow-sm{ type: "submit", class: "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" } Save Changes
-
--# ---e
-
-%h2= t('.title', resource: devise_i18n_fix_model_name_case(resource.model_name.human, i18n_key: 'registrations.edit.title'))
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email)
-  .field
-    = f.label :password
-    %i
-      (#{t('.leave_blank_if_you_don_t_want_to_change_it')})
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i
-      (#{t('.we_need_your_current_password_to_confirm_your_changes')})
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit t('.update')
-%h3= t('.cancel_my_account')
-%div
-  = t('.unhappy')
-  = button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete
-= link_to t('devise.shared.links.back'), :back
+      = f.submit t('.update'), class: "inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
