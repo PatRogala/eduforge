@@ -1,25 +1,11 @@
 module Sidebar
   # Left sidebar of the application, with navigation links
   class SidebarComponent < ViewComponent::Base
-    attr_reader :current_user
+    attr_reader :current_user, :public_links, :instructor_links, :non_logged_in_links, :logged_in_links
 
     def initialize(current_user:)
       super
       @current_user = current_user
-    end
-
-    def navigation_links
-      links_to_render = []
-      links_to_render += @public_links
-      links_to_render += @instructor_links if current_user&.instructor?
-
-      links_to_render
-    end
-
-    def bottom_links
-      return @non_logged_in_links if current_user.nil?
-
-      @logged_in_links if current_user.present?
     end
 
     def before_render
@@ -55,6 +41,23 @@ module Sidebar
           type: :delete
         }
       ]
+    end
+
+    private
+
+    def active_link_class(path)
+      current_path = request.path
+      active_classes = "bg-blue-100 text-blue-700 font-medium"
+      inactive_classes = "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+      current_path == path ? active_classes : inactive_classes
+    end
+
+    def instructor?
+      current_user&.instructor?
+    end
+
+    def admin?
+      current_user&.admin?
     end
   end
 end
