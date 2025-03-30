@@ -59,6 +59,7 @@ pl:
         success: Kurs został zaktualizowany.
   courses:
     index:
-      title: Wszystkie nasze kursy!
-      view_course: Więcej informacji
+      title: Odkryj nasze kursy
+      view_all: Sprawdź katalog
+      courses: kursów
     
