@@ -1,23 +1,26 @@
-%section.container.mx-auto.px-4.mb-16
-  .flex.justify-between.items-center.mb-8
-    %h2.text-2xl.font-bold.text-gray-800= t('.title')
-    = link_to courses_path, class: "text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center transition-colors duration-200" do
-      = t('.view_all')
-      %i.ml-1 →
-  
-  .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+-# Section for displaying a list of courses
+
+.py-8.px-4{ class: "md:px-6 lg:px-8" }
+  .flex.justify-between.items-center.mb-6
+    %h2.text-2xl.font-bold.text-gray-900{ class: "md:text-3xl" }= t(".title")
+    = link_to courses_path, class: "text-sm font-medium text-blue-600 whitespace-nowrap hover:text-blue-800 hover:underline" do
+      %span= t(".view_all")
+      %span.hidden{ class: "sm:inline" }= t(".courses")
+
+  .grid.grid-cols-1.gap-6{ class: "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" }
     - courses.each do |course|
-      .bg-white.rounded-lg.shadow-md.overflow-hidden.border.border-gray-200.transition-all.duration-300.hover:shadow-lg.hover:border-blue-300
-        .h-40.bg-gradient-to-r.from-purple-500.to-pink-600
-          .h-full.flex.items-center.justify-center
-            %i.text-white.text-4xl.opacity-50= ["💻", "🔍", "🧩", "📊", "🔐", "🚀"][1]
-        .p-6
-          %h3.text-xl.font-bold.text-gray-800.mb-2= course.title
-          %p.text-gray-600.mb-4.line-clamp-3= course.description.to_plain_text.truncate(100)
-          .flex.justify-between.items-center
-            -# %span.text-sm.text-gray-500
-            -#   %i.mr-1 👥
-            -#   #{rand(10..50)} students
-            %a.text-blue-600.hover:text-blue-800.font-medium.text-sm.flex.items-center{href: "#"}
-              = t('.view_course')
-              %i.ml-1 →
+      = link_to "#", class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
+        %div
+          %img.w-full.aspect-video.object-cover{ src: "https://placehold.co/400x225/3498db/ffffff?text=Course+1", alt: "Introduction to Ruby" }
+        .p-4
+          %span.inline-block.bg-red-100.text-red-800.text-xs.font-medium.px-2.5.py-0.5.rounded-full.mb-2 Programming
+          %h3.text-lg.font-semibold.text-gray-900.line-clamp-2.group-hover:text-blue-600= course.title
+          .mt-3.flex.items-center.space-x-3.text-sm.text-gray-500
+            .flex.items-center
+              = lucide_icon('clock', class: "w-4 h-4 mr-1")
+              %span 60 mins
+            .flex.items-center
+              = lucide_icon('layers', class: "w-4 h-4 mr-1")
+              %span 8 Lessons
+
+    
