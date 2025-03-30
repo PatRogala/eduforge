@@ -20,5 +20,5 @@
     = render Flash::FlashMessageComponent.new(notice: notice, alert: alert)
     = render Sidebar::SidebarComponent.new(current_user: current_user)
     = render MobileMenu::MobileMenuComponent.new(current_user: current_user)
-    %div.mx-auto.p-2.md:p-8{class: "ml-0 md:ml-[60px]"}
+    %div.mx-auto.p-2.md:p-8{class: "ml-0 md:ml-64"}
       = yield
