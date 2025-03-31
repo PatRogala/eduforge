@@ -4,7 +4,7 @@
 
   .grid.grid-cols-1.gap-6{ class: "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" }
     - @courses.each do |course|
-      = link_to "#", class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
+      = link_to course, class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
         %div
           = image_tag course.cover_image, class: "w-full aspect-video object-cover"
         .p-4
