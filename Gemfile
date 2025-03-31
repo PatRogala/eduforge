@@ -72,7 +72,7 @@ gem "babosa"
 gem "friendly_id"
 
 # Image processing for ActionText
-gem "image_processing", "~> 1.14"
+gem "image_processing"
 
 # Simple, efficient background jobs for Ruby.
 gem "sidekiq"

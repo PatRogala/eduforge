@@ -536,7 +536,7 @@ DEPENDENCIES
   haml-rails
   high_voltage
   html2haml
-  image_processing (~> 1.14)
+  image_processing
   jsbundling-rails
   kamal
   lograge
