@@ -1,55 +1,104 @@
-%div.flex.flex-col.gap-6.p-4
-  %div.flex.justify-between.items-center
-    %h1.text-2xl.font-bold.text-gray-800= @course.title
-    = link_to t('.back'), instructor_programming_courses_path, class: 'px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors duration-200'
+-# app/views/instructor/programming_courses/show.html.haml
 
-  = turbo_frame_tag "course_details" do
-    %div.bg-white.p-6.rounded-lg.shadow-md.border.border-gray-200.transition-all.duration-300.hover:shadow-lg
-      %div.flex.justify-between.items-center.mb-6
-        %h2.text-xl.font-semibold.text-gray-800.flex.items-center.gap-2
-          = lucide_icon 'info', class: 'w-5 h-5 text-blue-600'
-          = t('.course_details')
-        = link_to edit_instructor_programming_course_path(@course), class: 'px-3 py-1.5 bg-blue-50 hover:bg-blue-100 rounded-md text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center gap-1.5 text-sm font-medium' do
-          = lucide_icon 'edit-3', class: 'w-4 h-4'
-          = t('.edit')
-      
-      %div.grid.grid-cols-1.md:grid-cols-2.gap-6
-        %div.flex.flex-col.gap-1.p-3.rounded-lg.bg-gray-50.border.border-gray-100
-          %span.text-sm.font-medium.text-gray-500= t('.created_at')
-          %div.flex.items-center.gap-2
-            = lucide_icon 'calendar', class: 'w-4 h-4 text-gray-400'
-            %span.text-base.font-medium.text-gray-800= @course.created_time_ago
+.mx-auto.max-w-7xl.px-4.py-8{ class: "sm:px-6 lg:px-8" }
+  -# Header
+  .flex.flex-col.gap-4.mb-8{ class: "sm:flex-row sm:justify-between sm:items-center" }
+    %h1.text-3xl.font-bold.leading-tight.tracking-tight.text-gray-900= @course.title
+    = link_to instructor_programming_courses_path, class: 'inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do
+      = lucide_icon 'arrow-left', class: 'w-4 h-4'
+      = t('.back_to_list')
 
-        %div.flex.flex-col.gap-1.p-3.rounded-lg.bg-gray-50.border.border-gray-100
-          %span.text-sm.font-medium.text-gray-500= t('.instructor')
-          %div.flex.items-center.gap-2
-            = lucide_icon 'user', class: 'w-4 h-4 text-gray-400'
-            %span.text-base.font-medium.text-gray-800= @course.instructor.email
+  -# Main Content Area - Grid for potential side-by-side layout later, or just stack sections
+  .flex.flex-col.gap-8
+    
+    -# --- Course Details Frame ---
+    = turbo_frame_tag dom_id(@course, :details) do
+      .bg-white.shadow-sm.ring-1.rounded-xl.overflow-hidden{class: "ring-gray-900/5"}
+        -# Optional Cover Image Header
+        - if @course.cover_image.attached?
+          %div.h-48.bg-gray-200{ class: 'md:h-64' }
+            = image_tag @course.cover_image, class: "w-full h-full object-cover", alt: "Cover image for #{@course.title}"
+        
+        .p-6{ class: "md:p-8" }
+          .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
+            %div
+              %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
+                = lucide_icon 'info', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
+                = t('.course_details')
+              %p.mt-1.text-sm.text-gray-500= t('.course_details_description')
+            
+            = link_to edit_instructor_programming_course_path(@course, section: 'details'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+              = lucide_icon 'edit-3', class: 'w-4 h-4'
+              = t('.edit_details')
 
-        %div.col-span-1.md:col-span-2
-          %div.flex.flex-col.gap-2.p-4.rounded-lg.bg-gray-50.border.border-gray-100
-            %span.text-sm.font-medium.text-gray-500.flex.items-center.gap-1.5
-              = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-400'
+          -# Details Grid
+          .grid.grid-cols-1.gap-x-6.gap-y-4.mb-6{ class: "sm:grid-cols-2" }
+            .flex.items-center.gap-3.p-3.rounded-lg.ring-1.ring-gray-100{class: "bg-gray-50/80"}
+              = lucide_icon 'user', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
+              %div
+                %dt.text-xs.font-medium.text-gray-500= t('.instructor')
+                %dd.text-sm.font-semibold.text-gray-800= @course.instructor.email
+            
+            .flex.items-center.gap-3.p-3.rounded-lg.ring-1.ring-gray-100{class: "bg-gray-50/80"}
+              = lucide_icon 'calendar', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
+              %div
+                %dt.text-xs.font-medium.text-gray-500= t('.created_at')
+                %dd.text-sm.font-semibold.text-gray-800= @course.created_time_ago
+
+            -# Optional: Show Slug if needed for instructors
+            -# .flex.items-center.gap-3.p-3.rounded-lg.bg-gray-50/80.ring-1.ring-gray-100
+            -#  = lucide_icon 'link', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
+            -#  %div
+            -#    %dt.text-xs.font-medium.text-gray-500= t('.slug')
+            -#    %dd.text-sm.font-semibold.text-gray-800.truncate= @course.slug
+
+          -# Description
+          %div
+            %h3.text-base.font-medium.text-gray-900.flex.items-center.gap-2.mb-2
+              = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-500'
               = t('.description')
             - if @course.description.present?
-              %div.prose.prose-sm.text-gray-800.mt-2.bg-white.p-4.rounded-md.border.border-gray-100= @course.description
+              -# Apply prose styles for rich text rendering
+              .prose.prose-sm.max-w-none.text-gray-700.p-4.bg-gray-50.rounded-md.ring-1.ring-gray-100= @course.description
             - else
-              %p.text-gray-500.italic.mt-2.bg-white.p-4.rounded-md.border.border-gray-100= t('.no_description_yet')
+              %p.text-sm.text-gray-500.italic.p-4.bg-gray-50.rounded-md.ring-1.ring-gray-100= t('.no_description_yet')
 
-  = turbo_frame_tag "course_content" do
-    %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
-      %div.flex.justify-between.items-center.mb-4
-        %h2.text-lg.font-semibold.text-gray-700= t('.course_content')
-        = link_to t('.edit_content'), edit_instructor_programming_course_path(@course, section: 'content'), class: 'text-blue-600 hover:text-blue-700'
-      
-      %div.space-y-4
-        %p.text-gray-600= t('.no_content_yet')
+    -# --- Course Content Frame ---
+    = turbo_frame_tag dom_id(@course, :content) do
+      .bg-white.shadow-sm.ring-1.rounded-xl.p-6{ class: "md:p-8 ring-gray-900/5" }
+        .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
+          %div
+            %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
+              = lucide_icon 'book-open', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
+              = t('.course_content')
+            %p.mt-1.text-sm.text-gray-500 Modules, lessons, and assignments.
+          
+          = link_to edit_instructor_programming_course_path(@course, section: 'content'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+            = lucide_icon 'edit-3', class: 'w-4 h-4'
+            = t('.edit_content') # Or "Manage Content"
 
-  = turbo_frame_tag "course_settings" do
-    %div.bg-white.p-6.rounded-lg.shadow-sm.border.border-gray-200
-      %div.flex.justify-between.items-center.mb-4
-        %h2.text-lg.font-semibold.text-gray-700= t('.course_settings')
-        = link_to t('.edit_settings'), edit_instructor_programming_course_path(@course, section: 'settings'), class: 'text-blue-600 hover:text-blue-700'
-      
-      %div.space-y-4
-        %p.text-gray-600= t('.no_settings_configured')
+        -# Placeholder for displaying content structure (e.g., list of lessons/modules)
+        .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
+          = lucide_icon 'construction', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
+          %p.text-gray-600.font-medium= t('.no_content_yet')
+          %p.text-sm.text-gray-500 Use the 'Edit Content' button to add modules and lessons.
+
+    -# --- Course Settings Frame ---
+    = turbo_frame_tag dom_id(@course, :settings) do
+      .bg-white.shadow-sm.ring-1.rounded-xl.p-6{ class: "md:p-8 ring-gray-900/5" }
+        .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
+          %div
+            %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
+              = lucide_icon 'settings', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
+              = t('.course_settings')
+            %p.mt-1.text-sm.text-gray-500 Visibility, enrollment, etc.
+
+          = link_to edit_instructor_programming_course_path(@course, section: 'settings'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+            = lucide_icon 'edit-3', class: 'w-4 h-4'
+            = t('.edit_settings')
+
+        -# Placeholder for displaying settings
+        .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
+          = lucide_icon 'sliders', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
+          %p.text-gray-600.font-medium= t('.no_settings_configured')
+          %p.text-sm.text-gray-500 Use the 'Edit Settings' button to configure the course.

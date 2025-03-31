@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :programming_course do
     title { Faker::Lorem.unique.word }
+    cover_image { Rails.root.join("spec/fixtures/files/test.jpeg") }
   end
 
   factory :user do

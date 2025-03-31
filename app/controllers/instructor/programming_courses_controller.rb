@@ -53,7 +53,7 @@ module Instructor
     private
 
     def course_params
-      params.expect(programming_course: %i[title description])
+      params.expect(programming_course: %i[title description cover_image])
     end
   end
 end

@@ -17,19 +17,20 @@ pl:
         no_courses_description: Kliknij przycisk poniżej, aby stworzyć nowy kurs.
         create_your_first_course: Stwórz swój pierwszy kurs
       show:
-        back: Powrót
+        back_to_list: Powrót
+        edit_details: Edytuj szczegóły
         course_details: Szczegóły kursu
-        edit: Edytuj
-        created_at: Stworzono
         instructor: Instruktor
+        created_at: Stworzono
+        description: Opis
         course_content: Kontent
         edit_content: Edytuj kontent
         no_content_yet: Nie masz jeszcze żadnego kontentu.
         course_settings: Ustawienia
         edit_settings: Edytuj ustawienia
         no_settings_configured: Brak ustawien
-        description: Opis
-        no_description_yet: Nie masz jeszcze opisu.
+        course_details: Informacje ogólne
+        course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót
@@ -55,6 +56,8 @@ pl:
         description_placeholder: Opis kursu
         content: Kontent
         settings: Ustawienia
+        view_course: Zobacz kurs
+        details: Szczegóły
       update:
         success: Kurs został zaktualizowany.
   courses:
@@ -62,4 +65,8 @@ pl:
       title: Odkryj nasze kursy
       view_all: Sprawdź katalog
       courses: kursów
-    
+  shared:
+    cancel: Anuluj
+    save_changes: Zapisz zmiany
+    save_content: Zapisz kontent
+    save_settings: Zapisz ustawienia

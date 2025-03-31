@@ -25,6 +25,7 @@ class ProgrammingCourse < ApplicationRecord
 
   belongs_to :instructor, class_name: "User"
   has_rich_text :description
+  has_one_attached :cover_image
 
   validates :title, presence: true, uniqueness: true
   validates :slug, uniqueness: true, allow_blank: true
