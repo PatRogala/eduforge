@@ -30,15 +30,14 @@
         %section.bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
           %h2.text-xl.font-semibold.text-gray-800.mb-4.flex.items-center.gap-2
             = lucide_icon 'file-text', class: 'w-5 h-5 text-blue-600'
-            About this Course
-          -# Use `raw` for HTML description, ensure sanitization if user-generated
+            = t('.about_this_course')
           .prose.prose-sm.sm:prose.max-w-none.text-gray-700= @course.description
 
         -# Syllabus / Course Content Section
         %section.bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
           %h2.text-xl.font-semibold.text-gray-800.mb-5.flex.items-center.gap-2
             = lucide_icon 'list-checks', class: 'w-5 h-5 text-blue-600'
-            What You'll Learn (Syllabus)
+            = t('.what_will_you_learn')
           
           -# Placeholder for Chapters/Lessons Structure
           .space-y-5
@@ -100,7 +99,7 @@
 
           -# Course Details Box
           .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-            %h3.text-base.font-semibold.text-gray-900.mb-4 Course Details
+            %h3.text-base.font-semibold.text-gray-900.mb-4= t('.course_details')
             %dl.space-y-3
               .flex.items-center.gap-2.text-sm
                 %dt= lucide_icon 'layers', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
@@ -121,7 +120,7 @@
 
           -# Instructor Box
           .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-            %h3.text-base.font-semibold.text-gray-900.mb-4 About the Instructor
+            %h3.text-base.font-semibold.text-gray-900.mb-4= t('.instructor')
             .flex.items-center.gap-4
               %img.h-12.w-12.rounded-full.bg-gray-100{ src: instructor_avatar_url, alt: instructor_name }
               %div
