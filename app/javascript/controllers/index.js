@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AvatarPreviewController from "./avatar_preview_controller"
+application.register("avatar-preview", AvatarPreviewController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 

@@ -32,16 +32,22 @@
           -#   %p.mt-2.text-sm.text-gray-500 Brief description for your profile.
 
     -# --- Profile Picture Section ---
-    -# .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4
-    -#   .px-4.py-5{ class: "sm:p-6" }
-    -#     %h3.text-lg.leading-6.font-medium.text-gray-900 Profile Picture
-    -#     .mt-6.flex.items-center.gap-x-4
-    -#       %img.h-16.w-16.rounded-full.bg-gray-100{ src: "https://placehold.co/128x128/7f9cf5/ffffff?text=AE", alt: "Current profile photo" }
-    -#       %div
-    -#         %label.cursor-pointer.rounded-md.bg-white.py-1.5.px-2.5.text-sm.font-semibold.text-gray-900.shadow-sm.ring-1.ring-inset.ring-gray-300{ for: "user_avatar", class: "hover:bg-gray-50" }
-    -#           %span Change
-    -#           %input.sr-only{ type: "file", name: "user[avatar]", id: "user_avatar", accept: "image/*" }
-    -#         %p.mt-1.text-xs.leading-5.text-gray-500 JPG, GIF or PNG. 1MB max.
+    .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4{ data: { controller: "avatar-preview" } }
+      .px-4.py-5{ class: "sm:p-6" }
+        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".profile_picture")
+        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".profile_picture_description")
+        .mt-6.flex.items-center.gap-x-4
+          - if resource.avatar.attached?
+            = image_tag resource.avatar.variant(resize_to_fill: [128, 128]), class: "h-16 w-16 rounded-full bg-gray-100", alt: "Current profile photo", data: { avatar_preview_target: "preview" }
+          - else
+            .h-16.w-16.rounded-full.bg-gray-100.flex.items-center.justify-center.avatar-placeholder
+              %span.text-gray-500.text-xl= resource.email[0].upcase
+            %img.h-16.w-16.rounded-full.bg-gray-100.hidden{ alt: "Preview profile photo", data: { avatar_preview_target: "preview" } }
+          %div
+            = f.label :avatar, class: "cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" do
+              %span= t(".change")
+              = f.file_field :avatar, class: "sr-only", accept: "image/*", data: { avatar_preview_target: "input", action: "change->avatar-preview#preview" }
+            %p.mt-1.text-xs.leading-5.text-gray-500= t(".avatar_requirements")
 
     -# --- Password Change Section ---
     .bg-white.shadow.sm:rounded-lg.overflow-hidden
