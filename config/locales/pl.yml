@@ -65,6 +65,12 @@ pl:
       title: Odkryj nasze kursy
       view_all: Sprawdź katalog
       courses: kursów
+  programming_courses:
+    show:
+      about_this_course: O czym jest kurs?
+      what_will_you_learn: Czego nauczysz się w tym kursie?
+      course_details: Szczegóły kursu
+      instructor: Kto prowadzi kurs?
   shared:
     cancel: Anuluj
     save_changes: Zapisz zmiany
