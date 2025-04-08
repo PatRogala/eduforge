@@ -7,3 +7,7 @@ pl:
         profile_information_description: Opcjonalnie możesz dodać krótki opis o sobie.
         password_change: Zaktualizuj hasło
         password_change_description: Zostaw puste pole, jeśli nie chcesz zmienić hasła.
+        profile_picture: Zdjęcie profilowe
+        profile_picture_description: Dodaj zdjęcie profilowe. Zdjęcie powinno mieć proporcje 1:1.
+        change: Zmień
+        avatar_requirements: JPG, PNG, GIF. Maksymalny rozmiar 1MB.

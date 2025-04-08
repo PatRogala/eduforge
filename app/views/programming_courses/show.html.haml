@@ -1,9 +1,6 @@
 -# app/views/courses/show.html.haml (Public Course Show Page)
 
 -# --- Sample Data (Replace with @course variable later) ---
-- course_description = "<p>Unlock the power of non-blocking I/O in Ruby. Learn practical techniques using Fibers, Async gem, and concurrent patterns to build high-performance applications.</p><p>This microlearning course breaks down complex concepts into digestible lessons, perfect for busy developers.</p>" # HTML for rich text
-- instructor_name = "Yukihiro Matsumoto"
-- instructor_avatar_url = "https://placehold.co/100x100/cbd5e1/475569?text=YM"
 - lesson_count = 15
 - total_duration_estimate = "Approx. 2.5 hours"
 - course_level = "Intermediate"
@@ -83,18 +80,10 @@
             - else
               %p.text-xl.font-semibold.text-gray-900.mb-4 Get Started Now!
 
-            -# --- ENROLLMENT PLACEHOLDER ---
-            %div.py-4.px-6.bg-yellow-50.border.border-yellow-200.rounded-md
-              %p.text-sm.font-medium.text-yellow-800.flex.items-center.justify-center.gap-2
-                = lucide_icon 'shopping-cart', class: 'w-4 h-4' # Or 'user-plus' for enrollment
-                Enrollment / Purchase Button Here
-              %p.text-xs.text-yellow-700.mt-1 (Coming Soon)
-            -# Example of a real button:
-            -# = link_to "#", class: "mt-6 block w-full rounded-md bg-blue-600 px-4 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" do
-            -#   = lucide_icon 'shopping-cart', class: 'inline-block w-5 h-5 mr-2 -mt-1' # Or 'play-circle'
-            -#   Buy Now / Enroll for Free
+            = link_to "#", class: "mt-6 block w-full rounded-md bg-blue-600 px-4 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" do
+              = lucide_icon 'shopping-cart', class: 'inline-block w-5 h-5 mr-2 -mt-1' # Or 'play-circle'
+              Buy Now / Enroll for Free
 
-            -# Optional: Add money-back guarantee text or similar trust signals
             %p.mt-4.text-xs.text-gray-500 Lifetime access. 30-day money-back guarantee.
 
           -# Course Details Box
@@ -110,10 +99,9 @@
                 %dd.text-gray-600= total_duration_estimate
 
               .flex.items-center.gap-2.text-sm
-                %dt= lucide_icon 'bar-chart', class: 'w-5 h-5 text-gray-400 flex-shrink-0' # Or 'gauge'
+                %dt= lucide_icon 'bar-chart', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
                 %dd.text-gray-600= course_level
 
-              -# Add other details like "Lifetime Access", "Certificate Included" etc.
               .flex.items-center.gap-2.text-sm
                 %dt= lucide_icon 'shield-check', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
                 %dd.text-gray-600 Full lifetime access
@@ -122,8 +110,11 @@
           .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
             %h3.text-base.font-semibold.text-gray-900.mb-4= t('.instructor')
             .flex.items-center.gap-4
-              %img.h-12.w-12.rounded-full.bg-gray-100{ src: instructor_avatar_url, alt: instructor_name }
+              - if @course.instructor.avatar.attached?
+                = image_tag @course.instructor.avatar, class: "h-12 w-12 rounded-full bg-gray-100"
+              - else
+                .h-12.w-12.rounded-full.bg-gray-100.flex.items-center.justify-center
+                  %span.text-gray-500.text-xl= @course.instructor.email[0].upcase
               %div
-                %p.text-sm.font-medium.text-gray-800= instructor_name
-                -# Optional: Link to instructor profile
-                %a.text-xs.text-blue-600.hover:underline{ href: "#"} View Profile
+                %p.text-sm.font-medium.text-gray-800= @course.instructor.email
+                %a.text-xs.text-blue-600.hover:underline{ href: "#"}= t('.view_profile')
