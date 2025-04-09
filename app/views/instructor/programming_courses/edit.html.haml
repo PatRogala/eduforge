@@ -23,7 +23,6 @@
         %div{data: {controller: 'inline-code-trix highlight-code-block'}}
           = f.label :description, class: 'block text-sm font-medium leading-6 text-gray-900 mb-2'
           = f.rich_text_area :description, class: 'trix-content block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6' # Add trix-content or specific styling class
-          %p.mt-2.text-xs.text-gray-500 Use the editor to format your course description.
 
         -# Cover Image Field
         %div
@@ -36,7 +35,7 @@
                 = lucide_icon 'image', class: 'w-8 h-8'
             %div
               = f.file_field :cover_image, class: 'block w-full text-sm text-gray-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 cursor-pointer'
-              %p.mt-1.text-xs.text-gray-500 JPG, PNG, GIF up to 5MB. Recommended aspect ratio 16:9.
+              -# %p.mt-1.text-xs.text-gray-500 JPG, PNG, GIF up to 5MB. Recommended aspect ratio 16:9.
 
       -# Actions for this form
       .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-gray-200.pt-6
