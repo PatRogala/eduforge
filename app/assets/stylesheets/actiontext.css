@@ -373,7 +373,6 @@ trix-editor .attachment__metadata {
     font-size: 0.9em;
     padding: 0.5em;
     white-space: pre;
-    background-color: #eee;
     overflow-x: auto; }
   .trix-content img {
     max-width: 100%;
@@ -552,4 +551,8 @@ trix-editor .attachment__metadata {
   border-radius: 6px;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   border: 1px solid #e1e4e8;
+}
+
+pre {
+  background-color: #eee;
 }

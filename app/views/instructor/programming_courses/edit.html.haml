@@ -20,7 +20,7 @@
             = f.text_field :title, class: 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6'
 
         -# Description Field (Rich Text)
-        %div{data: {controller: 'inline-code-trix'}}
+        %div{data: {controller: 'inline-code-trix highlight-code-block'}}
           = f.label :description, class: 'block text-sm font-medium leading-6 text-gray-900 mb-2'
           = f.rich_text_area :description, class: 'trix-content block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6' # Add trix-content or specific styling class
           %p.mt-2.text-xs.text-gray-500 Use the editor to format your course description.

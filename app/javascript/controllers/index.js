@@ -10,5 +10,11 @@ application.register("avatar-preview", AvatarPreviewController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
+import HighlightCodeBlockController from "./highlight_code_block_controller"
+application.register("highlight-code-block", HighlightCodeBlockController)
+
+import InlineCodeTrixController from "./inline_code_trix_controller"
+application.register("inline-code-trix", InlineCodeTrixController)
+
 import MobileMenuController from "./mobile_menu_controller"
 application.register("mobile-menu", MobileMenuController)

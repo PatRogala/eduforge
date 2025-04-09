@@ -10,6 +10,7 @@
     "@hotwired/turbo-rails": "^8.0.12",
     "@rails/actiontext": "^8.0.100",
     "autoprefixer": "^10.4.20",
+    "highlight.js": "^11.11.1",
     "postcss": "^8.5.3",
     "trix": "^2.1.12"
   }
