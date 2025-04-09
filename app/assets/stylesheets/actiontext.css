@@ -10,8 +10,7 @@ trix-editor {
   min-height: 5em;
   outline: none;
   max-height: 400px;
-  overflow: auto;
-}
+  overflow-y: auto; }
 
 trix-toolbar * {
   box-sizing: border-box; }
@@ -440,4 +439,117 @@ trix-editor .attachment__metadata {
 .trix-content action-text-attachment .attachment {
   padding: 0 !important;
   max-width: 100% !important;
+}
+
+/* Link styles */
+.trix-content a, trix-editor a {
+  color: #cc3737;
+  text-decoration: underline;
+}
+
+.trix-content a:hover, trix-editor a:hover {
+  text-decoration: none;
+}
+
+/* Image styling */
+.trix-content figure, trix-editor figure {
+  display: block;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.trix-content img, trix-editor img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Horizontal rule */
+.trix-content hr, trix-editor hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 2em 0;
+}
+
+/* Image styling */
+.trix-content figure, trix-editor figure {
+  display: block;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.trix-content img, trix-editor img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* List styles */
+.trix-content ul, .trix-content ol, trix-editor ul, trix-editor ol {
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.trix-content ul, trix-editor ul {
+  list-style-type: disc;
+}
+
+.trix-content ol, trix-editor ol {
+  list-style-type: decimal;
+}
+
+.trix-content li, trix-editor li {
+  margin-bottom: 0.5em;
+}
+
+.trix-content blockquote, trix-editor blockquote {
+  font-style: italic;
+  padding-left: 1.5em;
+  border-left: 4px solid #ccc;
+  margin-bottom: 1.5em;
+  color: #555;
+}
+
+/* Header styles */
+.trix-content h1, trix-editor h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.25em;
+  padding-top: 1em;
+}
+
+.trix-content h2, trix-editor h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.2em;
+}
+
+.trix-content h3, trix-editor h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* Paragraph styles */
+.trix-content p, trix-editor p {
+  margin-bottom: 1em;
+}
+
+.trix-content pre {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.trix-content code {
+  background-color: rgb(40, 44, 52);
+  color: white;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  border: 1px solid #e1e4e8;
 }
