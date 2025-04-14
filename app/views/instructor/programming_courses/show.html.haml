@@ -76,11 +76,39 @@
           = lucide_icon 'edit-3', class: 'w-4 h-4'
           = t('.add_content')
 
-      -# Placeholder for displaying content structure (e.g., list of lessons/modules)
-      .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
-        = lucide_icon 'construction', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
-        %p.text-gray-600.font-medium= t('.no_content_yet')
-        %p.text-sm.text-gray-500 Use the 'Edit Content' button to add modules and lessons.
+      -# List of Chapters and Lessons or Placeholder
+      - if @course.programming_course_chapters.any?
+        -# Scrollable container for chapters/lessons
+        .max-h-96.overflow-y-auto.pr-2.space-y-6.bg-gray-50.p-4.rounded-lg.ring-1.ring-gray-200{ class: "lg:max-h-[32rem]" }
+          -# Iterate over chapters
+          - @course.programming_course_chapters.each do |chapter|
+            %div
+              .flex.items-center.justify-between.mb-2.pb-1.border-b.border-gray-200
+                %h3.text-base.font-semibold.text-gray-800.flex.items-center.gap-2
+                  = lucide_icon 'folder-open', class: 'w-4 h-4 text-gray-500 flex-shrink-0'
+                  = chapter.title
+
+              - if chapter.programming_course_lessons.any?
+                %ul.space-y-1.pl-1
+                  - chapter.programming_course_lessons.each do |lesson|
+                    %li.flex.items-center.justify-between.gap-3.py-1.px-2.rounded.group.hover:bg-gray-100
+                      .flex.items-center.gap-2.min-w-0
+                        = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-400 flex-shrink-0'
+                        %span.text-sm.text-gray-700.truncate= lesson.title
+
+                      -# Edit Lesson Link (appears on hover via group-hover potentially, or always visible)
+                      = link_to edit_instructor_programming_course_lesson_path(@course, lesson), class: 'flex-shrink-0 rounded p-1 text-blue-600 hover:bg-blue-100 hover:text-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-1', title: t('.edit_lesson_title', lesson_title: lesson.title) do
+                        = lucide_icon 'edit-3', class: 'w-3.5 h-3.5'
+                        %span.sr-only= t('.edit_lesson', title: lesson.title)
+
+              - else
+                %p.text-sm.text-gray-500.italic.pl-7.py-1= t('.no_lessons_in_chapter')
+      - else
+        -# Original Placeholder (when no chapters exist yet)
+        .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
+          = lucide_icon 'construction', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
+          %p.text-gray-600.font-medium= t('.no_content_yet')
+          %p.text-sm.text-gray-500= t('.use_add_button_to_start') # Updated placeholder text slightly
 
     -# --- Course Settings Frame ---
     = turbo_frame_tag dom_id(@course, :settings) do

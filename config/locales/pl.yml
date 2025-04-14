@@ -32,6 +32,8 @@ pl:
         no_settings_configured: Brak ustawien
         course_details: Informacje ogólne
         course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
+        edit_lesson_title: Edytuj lekcję
+        edit_lesson: Edytuj lekcję
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót
