@@ -79,6 +79,12 @@ pl:
         content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
         submit: "Utwórz lekcję"
         cancel: "Anuluj"
+        chapter: "Rozdział"
+        select_chapter: "Wybierz rozdział"
+        new_chapter_placeholder: "Nowy rozdział"
+        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
+      create:
+        success: "Lekcja została utworzona."
   courses:
     index:
       title: Odkryj nasze kursy

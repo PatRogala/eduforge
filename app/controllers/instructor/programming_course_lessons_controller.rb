@@ -31,6 +31,11 @@ module Instructor
     end
 
     def create
+      if params[:new_chapter_title]&.strip.present?
+        chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
+        params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
+      end
+
       @lesson = ProgrammingCourseLesson.new(lesson_params)
       authorize @lesson, policy_class: POLICY_CLASS
 
