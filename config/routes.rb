@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   # Instructor routes to manage created courses
   namespace :instructor do
     resources :courses, only: [:new]
-    resources :programming_courses, except: [:destroy]
+    resources :programming_courses, except: [:destroy] do
+      resources :chapters, controller: 'programming_course_chapters', only: [] do
+        resources :lessons, controller: 'programming_course_lessons', only: [:edit, :update]
+      end
+    end
   end
 
   # Generic routes for courses

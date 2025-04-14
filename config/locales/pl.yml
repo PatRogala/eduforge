@@ -60,6 +60,13 @@ pl:
         details: Szczegóły
       update:
         success: Kurs został zaktualizowany.
+    programming_course_lessons:
+      edit:
+        title: "Edytuj lekcję"
+        course: "Kurs"
+        chapter: "Rozdział"
+      update:
+        success: "Lekcja została zaktualizowana."
   courses:
     index:
       title: Odkryj nasze kursy
@@ -77,3 +84,6 @@ pl:
     save_changes: Zapisz zmiany
     save_content: Zapisz kontent
     save_settings: Zapisz ustawienia
+  common:
+    back: "Cofnij"
+    save: "Zapisz"

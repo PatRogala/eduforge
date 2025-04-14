@@ -29,3 +29,14 @@
 
 en:
   hello: "Hello world"
+  instructor:
+    programming_course_lessons:
+      edit:
+        title: "Edit Lesson"
+        course: "Course"
+        chapter: "Chapter"
+      update:
+        success: "Lesson was successfully updated."
+  common:
+    back: "Back"
+    save: "Save"
