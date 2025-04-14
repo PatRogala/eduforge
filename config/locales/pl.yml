@@ -34,6 +34,7 @@ pl:
         course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
         edit_lesson_title: Edytuj lekcję
         edit_lesson: Edytuj lekcję
+        use_add_button_to_start: Użyj przycisku powyżej, aby dodać nową lekcję.
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót

@@ -31,6 +31,6 @@ class ProgrammingCourseLesson < ApplicationRecord
   def approximate_duration
     return 0 if content.blank?
 
-    content.to_plain_text.scan(/\w/).count / 100.0
+    content.to_plain_text.scan(/\w/).count / 150.0
   end
 end
