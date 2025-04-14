@@ -9,12 +9,16 @@
     .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
       - @courses.each do |course|
         .bg-white.rounded-lg.shadow-md.overflow-hidden.border.border-gray-200.transition-all.duration-300.hover:shadow-lg.hover:border-blue-300
-          .h-40.bg-gradient-to-r.from-blue-500.to-indigo-600.relative
-            .absolute.inset-0.flex.items-center.justify-center
-              = lucide_icon 'code', class: 'w-16 h-16 text-white opacity-50'
+          - if course.cover_image.attached?
+            .aspect-video.overflow-hidden.rounded-lg.rounded-b-none
+              = image_tag course.cover_image, class: "w-full h-full object-cover"
+          - else
+            .aspect-video.bg-gradient-to-r.from-blue-500.to-indigo-600.relative.rounded-lg.rounded-b-none
+              .absolute.inset-0.flex.items-center.justify-center
+                = lucide_icon 'code', class: 'w-16 h-16 text-white opacity-50'
           .p-6
             %h2.text-xl.font-bold.text-gray-800.mb-2= course.title
-            %p.text-gray-600.mb-4= "This is a sample description for course. It covers various programming concepts and practical exercises."
+            %p.text-gray-600.mb-4= course.description.to_plain_text.truncate(100)
             .flex.justify-between.items-center
               %span.text-sm.text-gray-500
                 = lucide_icon 'calendar', class: 'w-4 h-4 inline mr-1'
