@@ -10,7 +10,10 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
   let(:another_course) { create(:programming_course, instructor: another_instructor) }
   let(:another_chapter) { create(:programming_course_chapter, programming_course: another_course) }
   let(:another_lesson) { create(:programming_course_lesson, programming_course_chapter: another_chapter) }
-  let(:lesson_attributes) { attributes_for(:programming_course_lesson).merge(programming_course_chapter_id: chapter.id) }
+  let(:lesson_attributes) do
+    attributes_for(:programming_course_lesson).merge(programming_course_chapter_id: chapter.id)
+  end
+  let(:invalid_attributes) { { programming_course_lesson: { title: nil } } }
 
   before do
     create(:user_role, user: user, role: instructor_role)
@@ -58,7 +61,8 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
   describe "POST /instructor/programming_courses/:programming_course_id/lessons" do
     context "when user is not authenticated" do
       it "redirects to sign in page" do
-        post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: lesson_attributes }
+        post instructor_programming_course_lessons_path(programming_course),
+             params: { programming_course_lesson: lesson_attributes }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -69,13 +73,15 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
       end
 
       it "creates a new lesson" do
-        expect {
-          post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: lesson_attributes }
-        }.to change(ProgrammingCourseLesson, :count).by(1)
+        expect do
+          post instructor_programming_course_lessons_path(programming_course),
+               params: { programming_course_lesson: lesson_attributes }
+        end.to change(ProgrammingCourseLesson, :count).by(1)
       end
 
       it "redirects to the programming course page" do
-        post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: lesson_attributes }
+        post instructor_programming_course_lessons_path(programming_course),
+             params: { programming_course_lesson: lesson_attributes }
         expect(response).to redirect_to(instructor_programming_course_path(programming_course))
       end
 
@@ -83,14 +89,21 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
         let(:invalid_attributes) { { title: "" } }
 
         it "does not create a new lesson" do
-          expect {
-            post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: invalid_attributes }
-          }.not_to change(ProgrammingCourseLesson, :count)
+          expect do
+            post instructor_programming_course_lessons_path(programming_course),
+                 params: { programming_course_lesson: invalid_attributes }
+          end.not_to change(ProgrammingCourseLesson, :count)
         end
 
         it "renders the new template" do
-          post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: invalid_attributes }
+          post instructor_programming_course_lessons_path(programming_course),
+               params: { programming_course_lesson: invalid_attributes }
           expect(response).to render_template(:new)
+        end
+
+        it "return unprocessable entity status" do
+          post instructor_programming_course_lessons_path(programming_course),
+               params: { programming_course_lesson: invalid_attributes }
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -104,7 +117,8 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
       end
 
       it "forbids unauthorized access" do
-        post instructor_programming_course_lessons_path(programming_course), params: { programming_course_lesson: lesson_attributes }
+        post instructor_programming_course_lessons_path(programming_course),
+             params: { programming_course_lesson: lesson_attributes }
         expect(response).to be_forbidden
       end
     end
@@ -163,22 +177,34 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
         sign_in user
       end
 
-      it "updates the lesson and redirects to course page" do
+      it "updates the lesson title" do
         patch instructor_programming_course_lesson_path(programming_course, lesson), params: valid_attributes
-        expect(response).to redirect_to(instructor_programming_course_path(programming_course))
         expect(lesson.reload.title).to eq("Updated Title")
+      end
+
+      it "updates the lesson content" do
+        patch instructor_programming_course_lesson_path(programming_course, lesson), params: valid_attributes
         expect(lesson.reload.content.to_plain_text).to eq("Updated Content")
       end
 
-      it "renders edit template with unprocessable_entity status when update fails" do
-        allow_any_instance_of(ProgrammingCourseLesson).to receive(:update).and_return(false)
+      it "redirects to course page" do
         patch instructor_programming_course_lesson_path(programming_course, lesson), params: valid_attributes
+        expect(response).to redirect_to(instructor_programming_course_path(programming_course))
+      end
+
+      it "renders edit template when update fails" do
+        patch instructor_programming_course_lesson_path(programming_course, lesson), params: invalid_attributes
         expect(response).to render_template(:edit)
+      end
+
+      it "returns unprocessable_entity status when update fails" do
+        patch instructor_programming_course_lesson_path(programming_course, lesson), params: invalid_attributes
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it "does not allow to update another instructor's course lesson" do
-        patch instructor_programming_course_lesson_path(programming_course, another_chapter, another_lesson), params: valid_attributes
+        patch instructor_programming_course_lesson_path(programming_course, another_chapter, another_lesson),
+              params: valid_attributes
         expect(response).not_to be_successful
       end
     end

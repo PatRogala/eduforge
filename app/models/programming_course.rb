@@ -26,7 +26,7 @@ class ProgrammingCourse < ApplicationRecord
   belongs_to :instructor, class_name: "User"
   has_rich_text :description
   has_one_attached :cover_image
-  has_many :programming_course_chapters, dependent: :delete_all
+  has_many :programming_course_chapters, dependent: :destroy
   has_many :programming_course_lessons, through: :programming_course_chapters
 
   validates :title, presence: true, uniqueness: true

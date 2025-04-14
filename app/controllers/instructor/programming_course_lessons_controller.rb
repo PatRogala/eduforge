@@ -7,48 +7,40 @@ module Instructor
     before_action :authenticate_user!
     before_action :authenticate_instructor!
     before_action :set_programming_course
-    before_action :set_lesson, only: [:edit, :update]
-    before_action :set_chapter, only: [:edit, :update]
-
-    def edit
-      authorize @lesson, policy_class: POLICY_CLASS
-    end
-
-    def update
-      authorize @lesson, policy_class: POLICY_CLASS
-
-      if params[:new_chapter_title]&.strip.present?
-        chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
-        params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
-      end
-
-      if @lesson.update(lesson_params)
-        redirect_to instructor_programming_course_path(@programming_course), 
-                    notice: t('.success')
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
+    before_action :set_lesson, only: %i[edit update]
+    before_action :set_chapter, only: %i[edit update]
 
     def new
       @lesson = ProgrammingCourseLesson.new
       authorize @lesson, policy_class: POLICY_CLASS
     end
 
-    def create
-      if params[:new_chapter_title]&.strip.present?
-        chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
-        params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
-      end
+    def edit
+      authorize @lesson, policy_class: POLICY_CLASS
+    end
 
+    def create
+      create_chapter_if_needed
       @lesson = ProgrammingCourseLesson.new(lesson_params)
       authorize @lesson, policy_class: POLICY_CLASS
 
       if @lesson.save
         redirect_to instructor_programming_course_path(@programming_course),
-                    notice: t('.success')
+                    notice: t(".success")
       else
         render :new, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      authorize @lesson, policy_class: POLICY_CLASS
+      create_chapter_if_needed
+
+      if @lesson.update(lesson_params)
+        redirect_to instructor_programming_course_path(@programming_course),
+                    notice: t(".success")
+      else
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -68,7 +60,15 @@ module Instructor
     end
 
     def lesson_params
-      params.require(:programming_course_lesson).permit(:title, :content, :programming_course_chapter_id)
+      params.expect(programming_course_lesson: %i[title content programming_course_chapter_id])
+    end
+
+    def create_chapter_if_needed
+      return if params[:new_chapter_title]&.strip.blank?
+
+      chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
+      params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
+      chapter
     end
   end
 end
