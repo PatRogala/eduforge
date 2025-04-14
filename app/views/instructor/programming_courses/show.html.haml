@@ -72,9 +72,9 @@
             = t('.course_content')
           %p.mt-1.text-sm.text-gray-500 Modules, lessons, and assignments.
         
-        = link_to edit_instructor_programming_course_path(@course, section: 'content'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+        = link_to new_instructor_programming_course_lesson_path(@course), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
           = lucide_icon 'edit-3', class: 'w-4 h-4'
-          = t('.edit_content') # Or "Manage Content"
+          = t('.add_content') # Or "Manage Content"
 
       -# Placeholder for displaying content structure (e.g., list of lessons/modules)
       .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100

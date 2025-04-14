@@ -25,6 +25,7 @@ pl:
         description: Opis
         course_content: Kontent
         edit_content: Edytuj kontent
+        add_content: Dodaj nową lekcję
         no_content_yet: Nie masz jeszcze żadnego kontentu.
         course_settings: Ustawienia
         edit_settings: Edytuj ustawienia
@@ -68,9 +69,15 @@ pl:
       update:
         success: "Lekcja została zaktualizowana."
       new:
-        title: "Nowa lekcja"
+        title: "Dodaj nową lekcję"
+        new_lesson: "Nowa lekcja"
         course: "Kurs"
-        submit: "Utwórz"
+        back_to_course: "Wróć do kursu"
+        title_label: "Tytuł lekcji" # Implicitly used by form.label :title
+        content_label: "Zawartość lekcji" # Implicitly used by form.label :content
+        title_placeholder: "n.p. Wprowadzenie do ...."
+        content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
+        submit: "Utwórz lekcję"
         cancel: "Anuluj"
   courses:
     index:
