@@ -66,6 +66,10 @@ pl:
         title: "Edytuj lekcję"
         course: "Kurs"
         chapter: "Rozdział"
+        chapter: "Rozdział"
+        select_chapter: "Wybierz rozdział"
+        new_chapter_placeholder: "Nowy rozdział"
+        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
       update:
         success: "Lekcja została zaktualizowana."
       new:

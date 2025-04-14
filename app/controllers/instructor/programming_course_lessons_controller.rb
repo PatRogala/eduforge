@@ -17,6 +17,11 @@ module Instructor
     def update
       authorize @lesson, policy_class: POLICY_CLASS
 
+      if params[:new_chapter_title]&.strip.present?
+        chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
+        params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
+      end
+
       if @lesson.update(lesson_params)
         redirect_to instructor_programming_course_path(@programming_course), 
                     notice: t('.success')
