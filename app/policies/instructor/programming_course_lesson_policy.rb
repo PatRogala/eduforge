@@ -9,6 +9,14 @@ module Instructor
       end
     end
 
+    def new?
+      user.instructor?
+    end
+
+    def create?
+      new?
+    end
+
     def edit?
       record.programming_course.instructor == user
     end

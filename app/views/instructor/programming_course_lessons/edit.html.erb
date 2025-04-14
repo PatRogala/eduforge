@@ -8,7 +8,7 @@
     </p>
   </div>
 
-  <%= form_with(model: @lesson, url: instructor_programming_course_chapter_lesson_path(@programming_course, @chapter, @lesson), method: :patch, class: "space-y-6") do |form| %>
+  <%= form_with(model: @lesson, url: instructor_programming_course_lesson_path(@programming_course, @chapter, @lesson), method: :patch, class: "space-y-6") do |form| %>
     <% if @lesson.errors.any? %>
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
         <h2 class="font-bold mb-2"><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>

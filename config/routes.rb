@@ -17,9 +17,7 @@ Rails.application.routes.draw do
   namespace :instructor do
     resources :courses, only: [:new]
     resources :programming_courses, except: [:destroy] do
-      resources :chapters, controller: 'programming_course_chapters', only: [] do
-        resources :lessons, controller: 'programming_course_lessons', only: [:edit, :update]
-      end
+      resources :lessons, controller: 'programming_course_lessons', only: [:new, :create, :edit, :update]
     end
   end
 
