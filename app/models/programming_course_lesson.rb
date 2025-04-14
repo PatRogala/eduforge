@@ -27,4 +27,10 @@ class ProgrammingCourseLesson < ApplicationRecord
   def position
     programming_course_chapter.programming_course_lessons.order(:created_at).index(self) + 1
   end
+
+  def approximate_duration
+    return 0 if content.blank?
+
+    content.to_plain_text.scan(/\w/).count / 100.0
+  end
 end

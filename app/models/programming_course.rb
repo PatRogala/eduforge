@@ -42,4 +42,14 @@ class ProgrammingCourse < ApplicationRecord
   def should_generate_new_friendly_id?
     title_changed? || slug.blank?
   end
+
+  def approximate_duration
+    programming_course_lessons.inject(0) do |sum, lesson|
+      sum + lesson.approximate_duration
+    end
+  end
+
+  def approximate_duration_in_hours
+    (approximate_duration / 60.0).round(1)
+  end
 end
