@@ -44,8 +44,12 @@ Metrics/MethodLength:
 
 # In some scenarios we need more memoized objects
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Max: 15
 
 # We are okay with subject {}
 RSpec/NamedSubject:
   EnforcedStyle: named_only
+
+# 4 is a reasonable limit
+RSpec/NestedGroups:
+  Max: 4

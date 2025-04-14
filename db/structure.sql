@@ -193,6 +193,70 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 
 
 --
+-- Name: programming_course_chapters; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.programming_course_chapters (
+    id bigint NOT NULL,
+    title character varying NOT NULL,
+    programming_course_id bigint NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: programming_course_chapters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.programming_course_chapters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: programming_course_chapters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.programming_course_chapters_id_seq OWNED BY public.programming_course_chapters.id;
+
+
+--
+-- Name: programming_course_lessons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.programming_course_lessons (
+    id bigint NOT NULL,
+    title character varying NOT NULL,
+    programming_course_chapter_id bigint NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: programming_course_lessons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.programming_course_lessons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: programming_course_lessons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.programming_course_lessons_id_seq OWNED BY public.programming_course_lessons.id;
+
+
+--
 -- Name: programming_courses; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -368,6 +432,20 @@ ALTER TABLE ONLY public.friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: programming_course_chapters id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_chapters ALTER COLUMN id SET DEFAULT nextval('public.programming_course_chapters_id_seq'::regclass);
+
+
+--
+-- Name: programming_course_lessons id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_lessons ALTER COLUMN id SET DEFAULT nextval('public.programming_course_lessons_id_seq'::regclass);
+
+
+--
 -- Name: programming_courses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -444,6 +522,22 @@ ALTER TABLE ONLY public.friendly_id_slugs
 
 
 --
+-- Name: programming_course_chapters programming_course_chapters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_chapters
+    ADD CONSTRAINT programming_course_chapters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: programming_course_lessons programming_course_lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_lessons
+    ADD CONSTRAINT programming_course_lessons_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: programming_courses programming_courses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -481,6 +575,13 @@ ALTER TABLE ONLY public.user_roles
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idx_on_programming_course_chapter_id_190b893302; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_on_programming_course_chapter_id_190b893302 ON public.programming_course_lessons USING btree (programming_course_chapter_id);
 
 
 --
@@ -530,6 +631,13 @@ CREATE UNIQUE INDEX index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type_and_sluggable_id ON public.friendly_id_slugs USING btree (sluggable_type, sluggable_id);
+
+
+--
+-- Name: index_programming_course_chapters_on_programming_course_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_course_chapters_on_programming_course_id ON public.programming_course_chapters USING btree (programming_course_id);
 
 
 --
@@ -597,6 +705,14 @@ ALTER TABLE ONLY public.programming_courses
 
 
 --
+-- Name: programming_course_chapters fk_rails_105bc035a1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_chapters
+    ADD CONSTRAINT fk_rails_105bc035a1 FOREIGN KEY (programming_course_id) REFERENCES public.programming_courses(id) ON DELETE CASCADE;
+
+
+--
 -- Name: user_roles fk_rails_318345354e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -621,6 +737,14 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 
 --
+-- Name: programming_course_lessons fk_rails_a076f56f7c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_lessons
+    ADD CONSTRAINT fk_rails_a076f56f7c FOREIGN KEY (programming_course_chapter_id) REFERENCES public.programming_course_chapters(id) ON DELETE CASCADE;
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -635,6 +759,8 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250414072643'),
+('20250414072610'),
 ('20250307164429'),
 ('20250307164428'),
 ('20250307114855'),

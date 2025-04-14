@@ -422,6 +422,8 @@ GEM
       sexp_processor (~> 4.16)
     securerandom (0.4.1)
     sexp_processor (4.17.3)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sidekiq (8.0.2)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
@@ -558,6 +560,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-rspec_rails
+  shoulda-matchers
   sidekiq
   simplecov
   solid_cache

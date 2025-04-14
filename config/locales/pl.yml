@@ -25,12 +25,15 @@ pl:
         description: Opis
         course_content: Kontent
         edit_content: Edytuj kontent
+        add_content: Dodaj nową lekcję
         no_content_yet: Nie masz jeszcze żadnego kontentu.
         course_settings: Ustawienia
         edit_settings: Edytuj ustawienia
         no_settings_configured: Brak ustawien
         course_details: Informacje ogólne
         course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
+        edit_lesson_title: Edytuj lekcję
+        edit_lesson: Edytuj lekcję
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót
@@ -60,6 +63,34 @@ pl:
         details: Szczegóły
       update:
         success: Kurs został zaktualizowany.
+    programming_course_lessons:
+      edit:
+        title: "Edytuj lekcję"
+        course: "Kurs"
+        chapter: "Rozdział"
+        chapter: "Rozdział"
+        select_chapter: "Wybierz rozdział"
+        new_chapter_placeholder: "Nowy rozdział"
+        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
+      update:
+        success: "Lekcja została zaktualizowana."
+      new:
+        title: "Dodaj nową lekcję"
+        new_lesson: "Nowa lekcja"
+        course: "Kurs"
+        back_to_course: "Wróć do kursu"
+        title_label: "Tytuł lekcji" # Implicitly used by form.label :title
+        content_label: "Zawartość lekcji" # Implicitly used by form.label :content
+        title_placeholder: "n.p. Wprowadzenie do ...."
+        content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
+        submit: "Utwórz lekcję"
+        cancel: "Anuluj"
+        chapter: "Rozdział"
+        select_chapter: "Wybierz rozdział"
+        new_chapter_placeholder: "Nowy rozdział"
+        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
+      create:
+        success: "Lekcja została utworzona."
   courses:
     index:
       title: Odkryj nasze kursy
@@ -77,3 +108,6 @@ pl:
     save_changes: Zapisz zmiany
     save_content: Zapisz kontent
     save_settings: Zapisz ustawienia
+  common:
+    back: "Cofnij"
+    save: "Zapisz"
