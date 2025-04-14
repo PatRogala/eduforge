@@ -28,4 +28,18 @@ FactoryBot.define do
       name { "Instructor" }
     end
   end
+
+  factory :programming_course_lesson do
+    title { Faker::Educator.subject }
+    programming_course_chapter
+
+    after(:build) do |lesson|
+      lesson.content = ActionText::Content.new(Faker::Markdown.sandwich)
+    end
+  end
+
+  factory :programming_course_chapter do
+    title { Faker::Educator.course_name }
+    programming_course
+  end
 end

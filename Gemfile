@@ -133,3 +133,8 @@ group :development do
   # Lookbook shows you how your view components look in isolation
   gem "lookbook"
 end
+
+group :test do
+  # One-liners to test common Rails functionality
+  gem "shoulda-matchers"
+end
