@@ -67,6 +67,11 @@ pl:
         chapter: "Rozdział"
       update:
         success: "Lekcja została zaktualizowana."
+      new:
+        title: "Nowa lekcja"
+        course: "Kurs"
+        submit: "Utwórz"
+        cancel: "Anuluj"
   courses:
     index:
       title: Odkryj nasze kursy
