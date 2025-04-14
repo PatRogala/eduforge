@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="inline-code-trix"
 export default class extends Controller {
   connect() {
-    console.log("inline code trix controller connected")
     Trix.config.textAttributes.inlineCode = { 
       tagName: "code", 
       inheritable: true 
