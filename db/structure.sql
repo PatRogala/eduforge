@@ -225,6 +225,39 @@ ALTER SEQUENCE public.programming_course_chapters_id_seq OWNED BY public.program
 
 
 --
+-- Name: programming_course_enrollments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.programming_course_enrollments (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    programming_course_id bigint NOT NULL,
+    enrolled_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: programming_course_enrollments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.programming_course_enrollments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: programming_course_enrollments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.programming_course_enrollments_id_seq OWNED BY public.programming_course_enrollments.id;
+
+
+--
 -- Name: programming_course_lessons; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -439,6 +472,13 @@ ALTER TABLE ONLY public.programming_course_chapters ALTER COLUMN id SET DEFAULT 
 
 
 --
+-- Name: programming_course_enrollments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_enrollments ALTER COLUMN id SET DEFAULT nextval('public.programming_course_enrollments_id_seq'::regclass);
+
+
+--
 -- Name: programming_course_lessons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -530,6 +570,14 @@ ALTER TABLE ONLY public.programming_course_chapters
 
 
 --
+-- Name: programming_course_enrollments programming_course_enrollments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_enrollments
+    ADD CONSTRAINT programming_course_enrollments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: programming_course_lessons programming_course_lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -582,6 +630,13 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE INDEX idx_on_programming_course_chapter_id_190b893302 ON public.programming_course_lessons USING btree (programming_course_chapter_id);
+
+
+--
+-- Name: idx_on_user_id_programming_course_id_dcb9194487; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_on_user_id_programming_course_id_dcb9194487 ON public.programming_course_enrollments USING btree (user_id, programming_course_id);
 
 
 --
@@ -638,6 +693,20 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type_and_sluggable_id ON publi
 --
 
 CREATE INDEX index_programming_course_chapters_on_programming_course_id ON public.programming_course_chapters USING btree (programming_course_id);
+
+
+--
+-- Name: index_programming_course_enrollments_on_programming_course_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_course_enrollments_on_programming_course_id ON public.programming_course_enrollments USING btree (programming_course_id);
+
+
+--
+-- Name: index_programming_course_enrollments_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_course_enrollments_on_user_id ON public.programming_course_enrollments USING btree (user_id);
 
 
 --
@@ -713,6 +782,22 @@ ALTER TABLE ONLY public.programming_course_chapters
 
 
 --
+-- Name: programming_course_enrollments fk_rails_1dd12344ca; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_enrollments
+    ADD CONSTRAINT fk_rails_1dd12344ca FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: programming_course_enrollments fk_rails_1f8a6eefdd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_course_enrollments
+    ADD CONSTRAINT fk_rails_1f8a6eefdd FOREIGN KEY (programming_course_id) REFERENCES public.programming_courses(id) ON DELETE CASCADE;
+
+
+--
 -- Name: user_roles fk_rails_318345354e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -759,6 +844,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250415000000'),
 ('20250414072643'),
 ('20250414072610'),
 ('20250307164429'),
