@@ -42,4 +42,9 @@ FactoryBot.define do
     title { Faker::Educator.course_name }
     programming_course
   end
+
+  factory :programming_course_enrollment do
+    user
+    programming_course
+  end
 end
