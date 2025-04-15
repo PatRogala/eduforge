@@ -40,7 +40,8 @@ RSpec.describe ProgrammingCourseEnrollment do
     it "prevents duplicate enrollments" do
       create(:programming_course_enrollment, user: user, programming_course: course)
       duplicate_enrollment = build(:programming_course_enrollment, user: user, programming_course: course)
-      expect(duplicate_enrollment.errors[:user_id]).to include("is already enrolled in this course")
+      duplicate_enrollment.valid?
+      expect(duplicate_enrollment.errors[:user_id]).to include("Jesteś już zapisany na ten kurs")
     end
   end
 

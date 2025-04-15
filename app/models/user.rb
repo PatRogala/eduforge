@@ -39,4 +39,8 @@ class User < ApplicationRecord
   def admin?
     roles.ids.include?(Role::ADMIN_ID)
   end
+
+  def enrolled_in_programming_courses?(programming_course)
+    programming_course_enrollments.exists?(programming_course: programming_course)
+  end
 end

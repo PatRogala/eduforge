@@ -27,5 +27,5 @@ class ProgrammingCourseEnrollment < ApplicationRecord
 
   validates :user_id,
             uniqueness: { scope: :programming_course_id,
-                          message: t("activerecord.attributes.programming_course_enrollment.already_enrolled") }
+                          message: I18n.t("activerecord.attributes.programming_course_enrollment.already_enrolled") }
 end

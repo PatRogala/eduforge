@@ -99,11 +99,13 @@ pl:
       courses: kursów
   programming_courses:
     show:
-      about_this_course: O czym jest kurs?
-      what_will_you_learn: Czego nauczysz się w tym kursie?
-      course_details: Szczegóły kursu
-      instructor: Kto prowadzi kurs?
-      view_profile: Zobacz profil
+      about_this_course: "O kursie"
+      what_will_you_learn: "Czego się nauczysz"
+      course_details: "Szczegóły kursu"
+      instructor: "Instruktor"
+      view_profile: "Zobacz profil"
+      enroll_now: "Zapisz się teraz"
+      already_enrolled: "Jesteś już zapisany"
   shared:
     cancel: Anuluj
     save_changes: Zapisz zmiany
@@ -116,3 +118,6 @@ pl:
     attributes:
       programming_course_enrollment:
         already_enrolled: "Jesteś już zapisany na ten kurs"
+  programming_course_enrollments:
+    create:
+      success: "Zapisano Cię na ten kurs"
