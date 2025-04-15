@@ -44,7 +44,7 @@
 # Rspec examples
 examples.txt
 
-# byebug 
+# byebug
 .byebug_history
 
 # coverage
@@ -57,4 +57,4 @@ examples.txt
 !.env.test
 
 # IDE files
-context.md
+.cursorrules
