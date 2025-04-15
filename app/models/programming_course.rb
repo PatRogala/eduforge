@@ -28,7 +28,7 @@ class ProgrammingCourse < ApplicationRecord
   has_one_attached :cover_image
   has_many :programming_course_chapters, dependent: :destroy
   has_many :programming_course_lessons, through: :programming_course_chapters
-  has_many :programming_course_enrollments, dependent: :destroy
+  has_many :programming_course_enrollments, dependent: :delete_all
   has_many :enrolled_users, through: :programming_course_enrollments, source: :user
 
   validates :title, presence: true, uniqueness: true

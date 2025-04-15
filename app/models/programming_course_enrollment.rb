@@ -14,7 +14,6 @@
 #
 #  idx_on_user_id_programming_course_id_dcb9194487                (user_id,programming_course_id) UNIQUE
 #  index_programming_course_enrollments_on_programming_course_id  (programming_course_id)
-#  index_programming_course_enrollments_on_user_id                (user_id)
 #
 # Foreign Keys
 #
@@ -28,4 +27,13 @@ class ProgrammingCourseEnrollment < ApplicationRecord
   validates :user_id,
             uniqueness: { scope: :programming_course_id,
                           message: I18n.t("activerecord.attributes.programming_course_enrollment.already_enrolled") }
+  validates :enrolled_at, presence: true
+
+  before_validation :set_enrolled_at
+
+  private
+
+  def set_enrolled_at
+    self.enrolled_at = Time.current
+  end
 end

@@ -703,13 +703,6 @@ CREATE INDEX index_programming_course_enrollments_on_programming_course_id ON pu
 
 
 --
--- Name: index_programming_course_enrollments_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_programming_course_enrollments_on_user_id ON public.programming_course_enrollments USING btree (user_id);
-
-
---
 -- Name: index_programming_courses_on_instructor_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -844,6 +837,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250415141955'),
 ('20250415000000'),
 ('20250414072643'),
 ('20250414072610'),

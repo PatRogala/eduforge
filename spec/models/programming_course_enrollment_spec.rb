@@ -13,7 +13,6 @@
 #
 #  idx_on_user_id_programming_course_id_dcb9194487                (user_id,programming_course_id) UNIQUE
 #  index_programming_course_enrollments_on_programming_course_id  (programming_course_id)
-#  index_programming_course_enrollments_on_user_id                (user_id)
 #
 # Foreign Keys
 #
