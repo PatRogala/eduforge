@@ -15,18 +15,19 @@ Rails.application.routes.draw do
 
   # Instructor routes to manage created courses
   namespace :instructor do
-    resources :courses, only: [:new]
-    resources :programming_courses, except: [:destroy] do
-      resources :lessons, controller: 'programming_course_lessons', only: [:new, :create, :edit, :update]
+    resources :courses, only: %i[new]
+    resources :programming_courses, except: %i[destroy] do
+      resources :lessons, controller: "programming_course_lessons", only: %i[new create edit update]
     end
   end
 
   # Generic routes for courses
-  resources :courses, only: [:index]
-  resources :programming_courses, only: [:show]
+  resources :courses, only: %i[index]
 
   resources :programming_courses, only: %i[show]
   resources :programming_course_enrollments, only: %i[create]
+
+  resources :programming_course_lessons, only: %i[show]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

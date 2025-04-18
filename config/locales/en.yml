@@ -40,3 +40,6 @@ en:
   common:
     back: "Back"
     save: "Save"
+  programming_course_lessons:
+    show:
+      course_content: "Course Content"

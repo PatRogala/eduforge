@@ -106,6 +106,9 @@ pl:
       view_profile: "Zobacz profil"
       enroll_now: "Zapisz się teraz"
       already_enrolled: "Jesteś już zapisany"
+  programming_course_lessons:
+    show:
+      course_content: "Kontent"
   shared:
     cancel: Anuluj
     save_changes: Zapisz zmiany
