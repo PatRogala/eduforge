@@ -1,3 +1,4 @@
+# Show a single lesson of a programming course to the user
 class ProgrammingCourseLessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_lesson
