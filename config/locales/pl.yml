@@ -69,10 +69,24 @@ pl:
         title: "Edytuj lekcję"
         course: "Kurs"
         chapter: "Rozdział"
-        chapter: "Rozdział"
         select_chapter: "Wybierz rozdział"
-        new_chapter_placeholder: "Nowy rozdział"
-        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
+        new_chapter_placeholder: "Nazwa nowego rozdziału"
+        new_chapter_hint: "Pozostaw puste, aby nie tworzyć nowego rozdziału"
+        programming_task_section: "Zadanie programistyczne"
+        add_programming_task: "Dodaj zadanie programistyczne"
+        programming_task:
+          title: "Zadanie programistyczne"
+          initial_code: "Kod początkowy"
+          solution_code: "Kod rozwiązania"
+          test_cases: "Przypadki testowe"
+          hints: "Podpowiedzi"
+          difficulty_level: "Poziom trudności"
+          points: "Punkty"
+          select_difficulty: "Wybierz poziom trudności"
+          hints_placeholder: "Wpisz podpowiedzi, każdą w nowej linii"
+          easy: "Łatwy"
+          medium: "Średni"
+          hard: "Trudny"
       update:
         success: "Lekcja została zaktualizowana."
       new:
@@ -90,8 +104,28 @@ pl:
         select_chapter: "Wybierz rozdział"
         new_chapter_placeholder: "Nowy rozdział"
         new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
+        programming_task_section: "Zadanie programistyczne"
+        add_programming_task: "Dodaj zadanie programistyczne"
       create:
         success: "Lekcja została utworzona."
+      programming_task_form:
+        title: "Zadanie programistyczne"
+        initial_code_placeholder: "Kod początkowy"
+        initial_code_hint: "Wprowadź kod początkowy dla zadania programistycznego."
+        solution_code_placeholder: "Kod rozwiązania"
+        solution_code_hint: "Wprowadź kod rozwiązania dla zadania programistycznego."
+        test_cases_placeholder: "Wprowadź przypadki testowe dla zadania programistycznego."
+        test_cases_hint: "Wprowadź przypadki testowe dla zadania programistycznego."
+        hints_placeholder: "Wpisz podpowiedzi, każdą w nowej linii"
+        hints_hint: "Wprowadź podpowiedzi dla zadania programistycznego."
+        difficulty_levels:
+          easy: "Łatwy"
+          medium: "Średni"
+          hard: "Trudny"
+        select_difficulty: "Wybierz poziom trudności"
+        points_placeholder: "Wprowadź liczbę punktów dla zadania programistycznego."
+        points_hint: "Wprowadź liczbę punktów dla zadania programistycznego."
+
   courses:
     index:
       title: Odkryj nasze kursy

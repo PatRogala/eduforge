@@ -26,6 +26,8 @@ class ProgrammingCourseLesson < ApplicationRecord
 
   delegate :programming_course, to: :programming_course_chapter
 
+  attr_accessor :has_programming_task
+
   def position
     programming_course_chapter.programming_course_lessons.order(:created_at).index(self) + 1
   end
@@ -34,5 +36,9 @@ class ProgrammingCourseLesson < ApplicationRecord
     return 0 if content.blank?
 
     content.to_plain_text.scan(/\w/).count / 150.0
+  end
+
+  def has_programming_task?
+    programming_task.present?
   end
 end

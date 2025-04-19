@@ -25,6 +25,7 @@ module Instructor
       authorize @lesson, policy_class: POLICY_CLASS
 
       if @lesson.save
+        create_programming_task if params[:has_programming_task] == "1"
         redirect_to instructor_programming_course_path(@programming_course),
                     notice: t(".success")
       else
@@ -37,6 +38,7 @@ module Instructor
       create_chapter_if_needed
 
       if @lesson.update(lesson_params)
+        handle_programming_task
         redirect_to instructor_programming_course_path(@programming_course),
                     notice: t(".success")
       else
@@ -60,7 +62,7 @@ module Instructor
     end
 
     def lesson_params
-      params.expect(programming_course_lesson: %i[title content programming_course_chapter_id])
+      params.require(:programming_course_lesson).permit(:title, :content, :programming_course_chapter_id)
     end
 
     def create_chapter_if_needed
@@ -69,6 +71,32 @@ module Instructor
       chapter = @programming_course.programming_course_chapters.create(title: params[:new_chapter_title].strip)
       params[:programming_course_lesson][:programming_course_chapter_id] = chapter.id if chapter.persisted?
       chapter
+    end
+
+    def create_programming_task
+      task_params = params.require(:programming_task).permit(
+        :initial_code, :solution_code, :test_cases, :difficulty_level, :points, hints: []
+      )
+      @lesson.create_programming_task(task_params)
+    end
+
+    def handle_programming_task
+      if params[:has_programming_task] == "1"
+        if @lesson.programming_task
+          update_programming_task
+        else
+          create_programming_task
+        end
+      elsif @lesson.programming_task
+        @lesson.programming_task.destroy
+      end
+    end
+
+    def update_programming_task
+      task_params = params.require(:programming_task).permit(
+        :initial_code, :solution_code, :test_cases, :difficulty_level, :points, hints: []
+      )
+      @lesson.programming_task.update(task_params)
     end
   end
 end
