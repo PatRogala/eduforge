@@ -35,20 +35,26 @@ class ProgrammingCourseLesson < ApplicationRecord
   end
 
   def next_lesson
-    # First try to find next lesson in the same chapter
-    next_in_chapter = programming_course_chapter.programming_course_lessons
-                                                .where("created_at > ?", created_at)
-                                                .order(:created_at)
-                                                .first
+    next_in_chapter || first_lesson_in_next_chapter
+  end
 
-    return next_in_chapter if next_in_chapter.present?
+  private
 
-    # If no next lesson in current chapter, find first lesson in next chapter
+  def next_in_chapter
+    programming_course_chapter.programming_course_lessons
+                              .where("created_at > ?", created_at)
+                              .order(:created_at)
+                              .first
+  end
+
+  def first_lesson_in_next_chapter
     next_chapter = programming_course.programming_course_chapters
                                      .where("created_at > ?", programming_course_chapter.created_at)
                                      .order(:created_at)
                                      .first
 
-    next_chapter&.programming_course_lessons&.order(:created_at)&.first
+    return unless next_chapter
+
+    next_chapter.programming_course_lessons.order(:created_at).first
   end
 end
