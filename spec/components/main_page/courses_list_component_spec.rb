@@ -6,6 +6,8 @@ RSpec.describe MainPage::CoursesListComponent, type: :component do
 
   before do
     allow(Rails.cache).to receive(:fetch).with("main_page_programming_courses", expires_in: 1.day).and_return([course])
+    allow(Rails.cache).to receive(:fetch).with("programming_course_#{course.id}_approximate_duration_in_hours",
+                                               expires_in: 1.day).and_return(1.0)
   end
 
   it "renders the component when courses are available" do
