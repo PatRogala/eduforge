@@ -33,4 +33,28 @@ class ProgrammingCourseLesson < ApplicationRecord
 
     content.to_plain_text.scan(/\w/).count / 150.0
   end
+
+  def next_lesson
+    next_in_chapter || first_lesson_in_next_chapter
+  end
+
+  private
+
+  def next_in_chapter
+    programming_course_chapter.programming_course_lessons
+                              .where("created_at > ?", created_at)
+                              .order(:created_at)
+                              .first
+  end
+
+  def first_lesson_in_next_chapter
+    next_chapter = programming_course.programming_course_chapters
+                                     .where("created_at > ?", programming_course_chapter.created_at)
+                                     .order(:created_at)
+                                     .first
+
+    return unless next_chapter
+
+    next_chapter.programming_course_lessons.order(:created_at).first
+  end
 end
