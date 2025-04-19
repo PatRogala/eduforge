@@ -56,13 +56,13 @@
           %p.mt-2.text-sm.text-gray-500= t('.content_hint')
 
         -# Programming Task Section
-        %div
+        %div{ data: { controller: "toggle" }}
           .flex.items-center.justify-between.mb-4
             %h2.text-lg.font-semibold.text-gray-900= t('.programming_task_section')
             .flex.items-center.gap-2
               = form.check_box :has_programming_task,
                 class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600",
-                data: { controller: "toggle", action: "change->toggle#toggle" }
+                data: { action: "change->toggle#toggle" }
               = form.label :has_programming_task, t('.add_programming_task'), class: "text-sm text-gray-700"
 
           #programming_task_form{ class: "hidden", data: { toggle_target: "element" } }
