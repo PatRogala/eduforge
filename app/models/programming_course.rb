@@ -45,13 +45,15 @@ class ProgrammingCourse < ApplicationRecord
     title_changed? || slug.blank?
   end
 
-  def approximate_duration
-    programming_course_lessons.inject(0) do |sum, lesson|
-      sum + lesson.approximate_duration
+  def approximate_duration_in_minutes
+    programming_course_lessons.with_rich_text_content_and_embeds.inject(0) do |sum, lesson|
+      sum + lesson.approximate_duration_in_minutes
     end
   end
 
   def approximate_duration_in_hours
-    (approximate_duration / 60.0).round(1)
+    Rails.cache.fetch("programming_course_#{id}_approximate_duration_in_hours", expires_in: 1.day) do
+      (approximate_duration_in_minutes / 60.0).round(1)
+    end
   end
 end
