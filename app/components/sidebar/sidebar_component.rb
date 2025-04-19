@@ -35,10 +35,9 @@ module Sidebar
 
       @logged_in_links = [
         {
-          title: ".sign_out",
-          path: destroy_user_session_path,
-          icon: "log-out",
-          type: :delete
+          title: ".my_courses",
+          path: my_courses_programming_courses_path,
+          icon: "book-open"
         }
       ]
     end

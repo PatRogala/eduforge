@@ -17,6 +17,12 @@
           = lucide_icon(link[:icon], class: "mr-3 h-5 w-5 flex-shrink-0")
           = t(link[:title])
 
+      - if current_user
+        - logged_in_links.each do |link|
+          = link_to link[:path], class: "group flex items-center px-2 py-2 text-sm rounded-md #{active_link_class(link[:path])}" do
+            = lucide_icon(link[:icon], class: "mr-3 h-5 w-5 flex-shrink-0")
+            = t(link[:title])
+
       -# --- Instructor Links ---
       - if instructor?
         .pt-4.mt-4.space-y-1.border-t.border-gray-200
