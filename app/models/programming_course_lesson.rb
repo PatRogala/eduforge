@@ -1,3 +1,4 @@
+# Represents a lesson within a programming course chapter
 # == Schema Information
 #
 # Table name: programming_course_lessons
@@ -19,6 +20,7 @@
 class ProgrammingCourseLesson < ApplicationRecord
   belongs_to :programming_course_chapter
   has_rich_text :content
+  has_one :programming_task, dependent: :destroy
 
   validates :title, presence: true
 

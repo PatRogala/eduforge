@@ -323,6 +323,43 @@ ALTER SEQUENCE public.programming_courses_id_seq OWNED BY public.programming_cou
 
 
 --
+-- Name: programming_tasks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.programming_tasks (
+    id bigint NOT NULL,
+    initial_code text NOT NULL,
+    solution_code text NOT NULL,
+    test_cases jsonb DEFAULT '[]'::jsonb NOT NULL,
+    hints text[] DEFAULT '{}'::text[],
+    difficulty_level character varying NOT NULL,
+    points integer DEFAULT 0 NOT NULL,
+    programming_course_lesson_id bigint NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: programming_tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.programming_tasks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: programming_tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.programming_tasks_id_seq OWNED BY public.programming_tasks.id;
+
+
+--
 -- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -493,6 +530,13 @@ ALTER TABLE ONLY public.programming_courses ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: programming_tasks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_tasks ALTER COLUMN id SET DEFAULT nextval('public.programming_tasks_id_seq'::regclass);
+
+
+--
 -- Name: roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -591,6 +635,14 @@ ALTER TABLE ONLY public.programming_course_lessons
 
 ALTER TABLE ONLY public.programming_courses
     ADD CONSTRAINT programming_courses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: programming_tasks programming_tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_tasks
+    ADD CONSTRAINT programming_tasks_pkey PRIMARY KEY (id);
 
 
 --
@@ -724,6 +776,27 @@ CREATE UNIQUE INDEX index_programming_courses_on_title ON public.programming_cou
 
 
 --
+-- Name: index_programming_tasks_on_difficulty_level; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_tasks_on_difficulty_level ON public.programming_tasks USING btree (difficulty_level);
+
+
+--
+-- Name: index_programming_tasks_on_points; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_tasks_on_points ON public.programming_tasks USING btree (points);
+
+
+--
+-- Name: index_programming_tasks_on_programming_course_lesson_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_programming_tasks_on_programming_course_lesson_id ON public.programming_tasks USING btree (programming_course_lesson_id);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -791,6 +864,14 @@ ALTER TABLE ONLY public.programming_course_enrollments
 
 
 --
+-- Name: programming_tasks fk_rails_28bb452d52; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.programming_tasks
+    ADD CONSTRAINT fk_rails_28bb452d52 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id);
+
+
+--
 -- Name: user_roles fk_rails_318345354e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -837,6 +918,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250419164743'),
 ('20250415141955'),
 ('20250415000000'),
 ('20250414072643'),
