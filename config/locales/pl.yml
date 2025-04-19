@@ -97,6 +97,10 @@ pl:
       title: Odkryj nasze kursy
       view_all: Sprawdź katalog
       courses: kursów
+    my_courses:
+      my_courses: "Moje kursy"
+      no_courses: "Nie jesteś zapisany na żadne kursy"
+      browse_courses: "Przeglądaj dostępne kursy"
   programming_courses:
     show:
       about_this_course: "O kursie"
@@ -124,3 +128,5 @@ pl:
   programming_course_enrollments:
     create:
       success: "Zapisano Cię na ten kurs"
+  sidebar:
+    my_courses: "Moje kursy"

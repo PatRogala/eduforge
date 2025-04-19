@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   end
 
   # Generic routes for courses
-  resources :courses, only: %i[index]
+  resources :courses, only: %i[index] do
+    collection do
+      get :my_courses
+    end
+  end
 
   resources :programming_courses, only: %i[show]
   resources :programming_course_enrollments, only: %i[create]
