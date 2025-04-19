@@ -36,7 +36,7 @@ module Sidebar
       @logged_in_links = [
         {
           title: ".my_courses",
-          path: my_courses_programming_courses_path,
+          path: my_courses_courses_path,
           icon: "book-open"
         }
       ]
