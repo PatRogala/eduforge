@@ -28,7 +28,7 @@ class ProgrammingCourseLesson < ApplicationRecord
     programming_course_chapter.programming_course_lessons.order(:created_at).index(self) + 1
   end
 
-  def approximate_duration
+  def approximate_duration_in_minutes
     return 0 if content.blank?
 
     content.to_plain_text.scan(/\w/).count / 150.0
