@@ -56,4 +56,8 @@ class ProgrammingCourse < ApplicationRecord
       (approximate_duration_in_minutes / 60.0).round(1)
     end
   end
+
+  def first_lesson
+    programming_course_lessons.order(:created_at).first
+  end
 end

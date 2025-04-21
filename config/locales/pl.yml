@@ -147,6 +147,7 @@ pl:
   programming_course_lessons:
     show:
       course_content: "Kontent"
+      next_lesson: "Następna lekcja"
   shared:
     cancel: Anuluj
     save_changes: Zapisz zmiany
