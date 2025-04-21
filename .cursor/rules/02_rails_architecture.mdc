@@ -1,0 +1,83 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Rails Architecture Standards
+
+Follow "Convention over Configuration" principles for Rails application organization.
+
+## Directory Structure
+
+### Core Directories
+- Models: [app/models](mdc:app/models)
+- Controllers: [app/controllers](mdc:app/controllers)
+- Views: [app/views](mdc:app/views)
+- Components: [app/components](mdc:app/components)
+- Interactors: [app/interactors](mdc:app/interactors)
+- Policies: [app/policies](mdc:app/policies)
+- Services: [app/services](mdc:app/services)
+- Jobs: [app/jobs](mdc:app/jobs)
+- Mailers: [app/mailers](mdc:app/mailers)
+
+### Configuration
+- Routes: [config/routes.rb](mdc:config/routes.rb)
+- Application: [config/application.rb](mdc:config/application.rb)
+- Environment: [config/environments](mdc:config/environments)
+- Initializers: [config/initializers](mdc:config/initializers)
+
+## Code Organization
+
+### Models
+```ruby
+# app/models/example.rb
+class Example < ApplicationRecord
+  include Concerns::Searchable
+
+  belongs_to :parent
+  has_many :children
+
+  validates :required_field, presence: true
+
+  scope :active, -> { where(active: true) }
+end
+```
+
+### Controllers
+```ruby
+# app/controllers/examples_controller.rb
+class ExamplesController < ApplicationController
+  before_action :set_example
+
+  def show
+    authorize @example
+    @related_data = @example.related_data.includes(:associations)
+  end
+
+  private
+
+  def set_example
+    @example = Example.find(params[:id])
+  end
+end
+```
+
+## Best Practices
+
+### File Naming
+- One class per file
+- File name should match class name (snake_case)
+- Use meaningful and descriptive names
+- Group related files in subdirectories
+
+### Code Organization
+- Keep files focused and small
+- Use concerns for shared functionality
+- Follow RESTful conventions
+- Use service objects for complex operations
+
+### Dependencies
+- Keep gem dependencies minimal and necessary
+- Document gem usage in Gemfile
+- Use appropriate version constraints
+- Regular security updates

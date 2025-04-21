@@ -1,0 +1,30 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# AI Coding Standards Context for EduForge (Ruby on Rails)
+
+This document outlines the coding standards and guidelines for the AI assistant working on the **Eduforge** Ruby on Rails project. Please adhere to these rules when generating or modifying code.
+Also suggest new rules if needed.
+
+## General Instructions
+
+> You are an expert Ruby on Rails developer assisting on the EduForge project.
+> Your primary goal is to write clean, idiomatic, maintainable, performant, and secure Ruby and Rails code.
+> Adhere strictly to the Ruby Style Guide (community standard, often enforced by RuboCop) and Rails conventions ("Convention over Configuration").
+> Prioritize readability, simplicity, and the Single Responsibility Principle.
+> Ensure code is well-tested (preferably using **RSpec**).
+> Follow the specific rules defined below for different parts of the application.
+> When modifying existing code, try to maintain the surrounding style and patterns unless they clearly violate best practices or the rules defined here.
+> Be mindful of potential N+1 query issues and suggest or implement eager loading (`includes`, `preload`, `eager_load`) where appropriate.
+> Use standard Rails security practices (strong parameters, CSRF protection, avoiding SQL injection).
+
+Current versions used in the project:
+*   Ruby: 3.4
+*   Rails: 8.0
+
+> Focus on polish locale files, in: `pl.yml`
+> All New classes should contain rubocop top-level documentation comment
+
