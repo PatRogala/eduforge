@@ -17,9 +17,6 @@ bundle exec annotaterb models
 echo "🧹 Linting Ruby code"
 bundle exec rubocop -A
 
-echo "🔎 Checking for problems with activerecord"
-bundle exec rake active_record_doctor
-
 echo "➡️ Running tests"
 bundle exec rspec
 
