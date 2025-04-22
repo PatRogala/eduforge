@@ -26,14 +26,10 @@
 class ProgrammingTask < ApplicationRecord
   belongs_to :programming_course_lesson
 
-  DIFFICULTY_LEVELS = %w[easy medium hard].freeze
+  enum :difficulty, { easy: "easy", medium: "medium", hard: "hard" }, prefix: true
 
   validates :initial_code, presence: true
   validates :solution_code, presence: true
   validates :test_cases, presence: true
-  validates :difficulty, presence: true, inclusion: { in: DIFFICULTY_LEVELS }
-
-  def self.difficulty_levels
-    DIFFICULTY_LEVELS
-  end
+  validates :difficulty, presence: true
 end

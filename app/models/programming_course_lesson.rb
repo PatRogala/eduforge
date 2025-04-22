@@ -26,6 +26,8 @@ class ProgrammingCourseLesson < ApplicationRecord
 
   delegate :programming_course, to: :programming_course_chapter
 
+  accepts_nested_attributes_for :programming_task, allow_destroy: true, reject_if: :all_blank
+
   attr_accessor :has_programming_task
 
   def position

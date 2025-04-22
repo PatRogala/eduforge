@@ -16,6 +16,7 @@ module Instructor
     end
 
     def edit
+      @lesson.build_programming_task unless @lesson.programming_task
       authorize @lesson, policy_class: POLICY_CLASS
     end
 
@@ -25,11 +26,14 @@ module Instructor
         @lesson = ProgrammingCourseLesson.new(lesson_params)
         authorize @lesson, policy_class: POLICY_CLASS
 
+        handle_task_destruction_on_create
+
         if @lesson.save
-          create_programming_task if params[:has_programming_task] == "1"
           redirect_to instructor_programming_course_path(@programming_course),
                       notice: t(".success")
         else
+          @lesson.build_programming_task if params.dig(:programming_course_lesson,
+                                                       :has_programming_task) == "1" && @lesson.programming_task.nil?
           render :new, status: :unprocessable_entity
         end
       end
@@ -41,7 +45,6 @@ module Instructor
         create_chapter_if_needed
 
         if @lesson.update(lesson_params)
-          handle_programming_task
           redirect_to instructor_programming_course_path(@programming_course),
                       notice: t(".success")
         else
@@ -66,7 +69,8 @@ module Instructor
     end
 
     def lesson_params
-      params.require(:programming_course_lesson).permit(:title, :content, :programming_course_chapter_id)
+      params.require(:programming_course_lesson).permit(:title, :content, :programming_course_chapter_id,
+                                                        programming_task_attributes: %i[id initial_code solution_code test_cases difficulty hints _destroy])
     end
 
     def create_chapter_if_needed
@@ -77,30 +81,29 @@ module Instructor
       chapter
     end
 
-    def create_programming_task
-      task_params = params.require(:programming_task).permit(
-        :initial_code, :solution_code, :test_cases, :difficulty_level, :points, hints: []
-      )
-      @lesson.create_programming_task(task_params)
+    def handle_task_destruction_on_create
+      # If the checkbox is "0" (unchecked), ensure no task attributes are processed
+      return unless params.dig(:programming_course_lesson, :has_programming_task) == "0"
+
+      # Remove the nested attributes hash entirely so reject_if works reliably
+      # and no attempt is made to create/update the task.
+      lesson_params.delete(:programming_task_attributes)
     end
 
-    def handle_programming_task
-      if params[:has_programming_task] == "1"
-        if @lesson.programming_task
-          update_programming_task
-        else
-          create_programming_task
-        end
-      elsif @lesson.programming_task
-        @lesson.programming_task.destroy
+    def handle_task_destruction_on_update(attrs)
+      # If checkbox is unchecked ("0") and a task exists, mark it for destruction
+      if params.dig(:programming_course_lesson, :has_programming_task) == "0" && @lesson.programming_task.present?
+        # Add _destroy: '1' to the nested attributes hash
+        attrs[:programming_task_attributes] ||= {} # Ensure hash exists
+        attrs[:programming_task_attributes][:id] = @lesson.programming_task.id # Ensure ID is present for destruction
+        attrs[:programming_task_attributes][:_destroy] = "1"
+      elsif params.dig(:programming_course_lesson, :has_programming_task) == "1" && attrs[:programming_task_attributes]
+        # If checkbox is checked, ensure _destroy is not set or is false
+        attrs[:programming_task_attributes].delete(:_destroy)
+      elsif params.dig(:programming_course_lesson, :has_programming_task) == "0"
+        # If checkbox is unchecked and no task exists, ensure no attributes are sent
+        attrs.delete(:programming_task_attributes)
       end
-    end
-
-    def update_programming_task
-      task_params = params.require(:programming_task).permit(
-        :initial_code, :solution_code, :test_cases, :difficulty, :hints
-      )
-      @lesson.programming_task.update(task_params)
     end
   end
 end
