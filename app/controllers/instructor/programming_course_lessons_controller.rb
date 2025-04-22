@@ -45,6 +45,8 @@ module Instructor
         authorize @lesson, policy_class: POLICY_CLASS
         create_chapter_if_needed
 
+        handle_task_destruction_on_update(lesson_params)
+
         if @lesson.update(lesson_params)
           redirect_to instructor_programming_course_path(@programming_course),
                       notice: t(".success")

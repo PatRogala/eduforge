@@ -66,6 +66,10 @@ pl:
         success: Kurs został zaktualizowany.
     programming_course_lessons:
       edit:
+        back_to_course: "Wróć do kursu"
+        content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
+        cancel: "Anuluj"
+        submit: "Zapisz"
         title: "Edytuj lekcję"
         course: "Kurs"
         chapter: "Rozdział"

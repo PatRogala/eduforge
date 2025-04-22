@@ -32,4 +32,12 @@ class ProgrammingTask < ApplicationRecord
   validates :solution_code, presence: true
   validates :test_cases, presence: true
   validates :difficulty, presence: true
+
+  before_validation :set_language
+
+  private
+
+  def set_language
+    self.language = "ruby"
+  end
 end
