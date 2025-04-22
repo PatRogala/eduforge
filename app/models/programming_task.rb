@@ -4,10 +4,10 @@
 # Table name: programming_tasks
 #
 #  id                           :bigint           not null, primary key
-#  difficulty_level             :string           not null
-#  hints                        :text             default([]), is an Array
+#  difficulty                   :string           not null
+#  hints                        :jsonb            not null
 #  initial_code                 :text             not null
-#  points                       :integer          default(0), not null
+#  language                     :string           not null
 #  solution_code                :text             not null
 #  test_cases                   :jsonb            not null
 #  created_at                   :datetime         not null
@@ -16,8 +16,7 @@
 #
 # Indexes
 #
-#  index_programming_tasks_on_difficulty_level              (difficulty_level)
-#  index_programming_tasks_on_points                        (points)
+#  index_programming_tasks_on_difficulty                    (difficulty)
 #  index_programming_tasks_on_programming_course_lesson_id  (programming_course_lesson_id)
 #
 # Foreign Keys
@@ -32,9 +31,7 @@ class ProgrammingTask < ApplicationRecord
   validates :initial_code, presence: true
   validates :solution_code, presence: true
   validates :test_cases, presence: true
-  validates :difficulty_level, presence: true, inclusion: { in: DIFFICULTY_LEVELS }
-  validates :points, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :time_limit, numericality: { greater_than: 0 }, allow_nil: true
+  validates :difficulty, presence: true, inclusion: { in: DIFFICULTY_LEVELS }
 
   def self.difficulty_levels
     DIFFICULTY_LEVELS

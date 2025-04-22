@@ -328,12 +328,12 @@ ALTER SEQUENCE public.programming_courses_id_seq OWNED BY public.programming_cou
 
 CREATE TABLE public.programming_tasks (
     id bigint NOT NULL,
+    language character varying NOT NULL,
     initial_code text NOT NULL,
     solution_code text NOT NULL,
-    test_cases jsonb DEFAULT '[]'::jsonb NOT NULL,
-    hints text[] DEFAULT '{}'::text[],
-    difficulty_level character varying NOT NULL,
-    points integer DEFAULT 0 NOT NULL,
+    test_cases jsonb DEFAULT '{}'::jsonb NOT NULL,
+    hints jsonb DEFAULT '{}'::jsonb NOT NULL,
+    difficulty character varying NOT NULL,
     programming_course_lesson_id bigint NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
@@ -776,17 +776,10 @@ CREATE UNIQUE INDEX index_programming_courses_on_title ON public.programming_cou
 
 
 --
--- Name: index_programming_tasks_on_difficulty_level; Type: INDEX; Schema: public; Owner: -
+-- Name: index_programming_tasks_on_difficulty; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_programming_tasks_on_difficulty_level ON public.programming_tasks USING btree (difficulty_level);
-
-
---
--- Name: index_programming_tasks_on_points; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_programming_tasks_on_points ON public.programming_tasks USING btree (points);
+CREATE INDEX index_programming_tasks_on_difficulty ON public.programming_tasks USING btree (difficulty);
 
 
 --

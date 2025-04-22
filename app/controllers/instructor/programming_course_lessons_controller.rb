@@ -94,7 +94,7 @@ module Instructor
 
     def update_programming_task
       task_params = params.require(:programming_task).permit(
-        :initial_code, :solution_code, :test_cases, :difficulty_level, :points, hints: []
+        :initial_code, :solution_code, :test_cases, :difficulty, :hints
       )
       @lesson.programming_task.update(task_params)
     end
