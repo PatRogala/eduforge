@@ -861,7 +861,7 @@ ALTER TABLE ONLY public.programming_course_enrollments
 --
 
 ALTER TABLE ONLY public.programming_tasks
-    ADD CONSTRAINT fk_rails_28bb452d52 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id);
+    ADD CONSTRAINT fk_rails_28bb452d52 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id) ON DELETE CASCADE;
 
 
 --
@@ -911,6 +911,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250422203748'),
 ('20250422202823'),
 ('20250419164743'),
 ('20250415141955'),

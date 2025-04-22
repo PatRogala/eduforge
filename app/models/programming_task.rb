@@ -21,7 +21,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (programming_course_lesson_id => programming_course_lessons.id)
+#  fk_rails_...  (programming_course_lesson_id => programming_course_lessons.id) ON DELETE => cascade
 #
 class ProgrammingTask < ApplicationRecord
   belongs_to :programming_course_lesson
