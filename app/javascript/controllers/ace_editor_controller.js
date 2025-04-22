@@ -15,6 +15,7 @@ export default class extends Controller {
   editor = null
 
   connect() {
+    console.log("ACE Editor connected")
     this.editor = ace.edit(this.editorTarget, {
       theme: `ace/theme/${this.themeValue}`,
       mode: `ace/mode/${this.modeValue}`,
