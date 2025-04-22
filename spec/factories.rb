@@ -47,4 +47,13 @@ FactoryBot.define do
     user
     programming_course
   end
+
+  factory :programming_task do
+    difficulty { :easy }
+    language { :ruby }
+    initial_code { Faker::Lorem.sentence }
+    solution_code { Faker::Lorem.sentence }
+    test_cases { Faker::Lorem.sentence }
+    hints { Faker::Lorem.sentence }
+  end
 end

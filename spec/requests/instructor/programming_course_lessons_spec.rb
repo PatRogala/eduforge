@@ -79,10 +79,44 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
         end.to change(ProgrammingCourseLesson, :count).by(1)
       end
 
-      it "redirects to the programming course page" do
+      it "creates a new lesson with programming task" do
+        task_attributes = {
+          initial_code: "def hello\n  'world'\nend",
+          solution_code: "def hello\n  'world'\nend",
+          test_cases: "assert_equal 'world', hello",
+          difficulty: "easy"
+        }
+
+        expect do
+          post instructor_programming_course_lessons_path(programming_course),
+               params: {
+                 programming_course_lesson: lesson_attributes.merge(
+                   has_programming_task: "1",
+                   programming_task_attributes: task_attributes
+                 )
+               }
+        end.to change(ProgrammingTask, :count).by(1)
+      end
+
+      it "creates a new lesson without programming task when checkbox is unchecked" do
+        expect do
+          post instructor_programming_course_lessons_path(programming_course),
+               params: {
+                 programming_course_lesson: lesson_attributes.merge(
+                   has_programming_task: "0",
+                   programming_task_attributes: {
+                     initial_code: "def hello\n  'world'\nend"
+                   }
+                 )
+               }
+        end.not_to change(ProgrammingTask, :count)
+      end
+
+      it "redirects to the programming course lesson page" do
         post instructor_programming_course_lessons_path(programming_course),
              params: { programming_course_lesson: lesson_attributes }
-        expect(response).to redirect_to(instructor_programming_course_path(programming_course))
+        expect(response).to redirect_to(edit_instructor_programming_course_lesson_path(programming_course,
+                                                                                       ProgrammingCourseLesson.last))
       end
 
       context "with invalid parameters" do
@@ -187,9 +221,45 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
         expect(lesson.reload.content.to_plain_text).to eq("Updated Content")
       end
 
+      it "adds programming task to existing lesson" do
+        task_attributes = {
+          initial_code: "def hello\n  'world'\nend",
+          solution_code: "def hello\n  'world'\nend",
+          test_cases: "assert_equal 'world', hello",
+          difficulty: "easy"
+        }
+
+        expect do
+          patch instructor_programming_course_lesson_path(programming_course, lesson),
+                params: {
+                  programming_course_lesson: {
+                    title: "Updated Title",
+                    has_programming_task: "1",
+                    programming_task_attributes: task_attributes
+                  }
+                }
+        end.to change(ProgrammingTask, :count).by(1)
+      end
+
+      it "removes programming task when checkbox is unchecked" do
+        task = create(:programming_task, programming_course_lesson: lesson)
+        lesson.reload
+
+        expect do
+          patch instructor_programming_course_lesson_path(programming_course, lesson),
+                params: {
+                  programming_course_lesson: {
+                    title: "Updated Title",
+                    has_programming_task: "0",
+                    programming_task_attributes: { id: task.id, _destroy: "1" }
+                  }
+                }
+        end.to change(ProgrammingTask, :count).by(-1)
+      end
+
       it "redirects to course page" do
         patch instructor_programming_course_lesson_path(programming_course, lesson), params: valid_attributes
-        expect(response).to redirect_to(instructor_programming_course_path(programming_course))
+        expect(response).to redirect_to(edit_instructor_programming_course_lesson_path(programming_course, lesson))
       end
 
       it "renders edit template when update fails" do

@@ -64,10 +64,10 @@
               = form.check_box :has_programming_task,
                   class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600",
                   data: { action: "change->toggle#toggle" },
-                  checked: @lesson.programming_task.persisted?
+                  checked: @lesson.programming_task&.persisted?
               = form.label :has_programming_task, t('.add_programming_task'), class: "text-sm text-gray-700"
 
-          #programming_task_form{ class: ("hidden" unless @lesson.programming_task.persisted? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
+          #programming_task_form{ class: ("hidden" unless @lesson.programming_task&.persisted? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
             = form.fields_for :programming_task do |task_form|
               = render "programming_task_form", task_form: task_form
 
