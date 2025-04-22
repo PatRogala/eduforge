@@ -783,13 +783,6 @@ CREATE INDEX index_programming_tasks_on_difficulty ON public.programming_tasks U
 
 
 --
--- Name: index_programming_tasks_on_programming_course_lesson_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_programming_tasks_on_programming_course_lesson_id ON public.programming_tasks USING btree (programming_course_lesson_id);
-
-
---
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -822,6 +815,13 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: unique_programming_task_per_lesson; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_programming_task_per_lesson ON public.programming_tasks USING btree (programming_course_lesson_id);
 
 
 --
@@ -911,6 +911,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250422202823'),
 ('20250419164743'),
 ('20250415141955'),
 ('20250415000000'),

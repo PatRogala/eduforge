@@ -16,8 +16,8 @@
 #
 # Indexes
 #
-#  index_programming_tasks_on_difficulty                    (difficulty)
-#  index_programming_tasks_on_programming_course_lesson_id  (programming_course_lesson_id)
+#  index_programming_tasks_on_difficulty  (difficulty)
+#  unique_programming_task_per_lesson     (programming_course_lesson_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -32,6 +32,8 @@ class ProgrammingTask < ApplicationRecord
   validates :solution_code, presence: true
   validates :test_cases, presence: true
   validates :difficulty, presence: true
+  validates :language, presence: true
+  validates :programming_course_lesson_id, uniqueness: true
 
   before_validation :set_language
 
