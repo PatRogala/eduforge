@@ -84,7 +84,8 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
           initial_code: "def hello\n  'world'\nend",
           solution_code: "def hello\n  'world'\nend",
           test_cases: "assert_equal 'world', hello",
-          difficulty: "easy"
+          difficulty: "easy",
+          hints: "This is a hint"
         }
 
         expect do
@@ -226,7 +227,8 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
           initial_code: "def hello\n  'world'\nend",
           solution_code: "def hello\n  'world'\nend",
           test_cases: "assert_equal 'world', hello",
-          difficulty: "easy"
+          difficulty: "easy",
+          hints: "This is a hint"
         }
 
         expect do
