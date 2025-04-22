@@ -12,6 +12,7 @@ module Instructor
 
     def new
       @lesson = ProgrammingCourseLesson.new
+      @lesson.build_programming_task unless @lesson.programming_task
       authorize @lesson, policy_class: POLICY_CLASS
     end
 

@@ -68,7 +68,6 @@
               = form.label :has_programming_task, t('.add_programming_task'), class: "text-sm text-gray-700"
 
           #programming_task_form{ class: ("hidden" unless @lesson.programming_task.present? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
-            = render "programming_task_form", task_form: form
             = form.fields_for :programming_task do |task_form|
               = render "programming_task_form", task_form: task_form
 

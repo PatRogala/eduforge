@@ -28,8 +28,6 @@ class ProgrammingCourseLesson < ApplicationRecord
 
   accepts_nested_attributes_for :programming_task, allow_destroy: true, reject_if: :all_blank
 
-  attr_accessor :has_programming_task
-
   def position
     programming_course_chapter.programming_course_lessons.order(:created_at).index(self) + 1
   end
