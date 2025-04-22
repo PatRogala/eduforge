@@ -20,7 +20,7 @@
 class ProgrammingCourseLesson < ApplicationRecord
   belongs_to :programming_course_chapter
   has_rich_text :content
-  has_one :programming_task, dependent: :destroy
+  has_one :programming_task, dependent: :delete
 
   validates :title, presence: true
 

@@ -34,6 +34,7 @@ class ProgrammingTask < ApplicationRecord
   validates :difficulty, presence: true
   validates :language, presence: true
   validates :programming_course_lesson_id, uniqueness: true
+  validates :hints, presence: true
 
   before_validation :set_language
 
