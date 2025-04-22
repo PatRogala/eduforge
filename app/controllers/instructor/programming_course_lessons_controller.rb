@@ -20,7 +20,7 @@ module Instructor
     end
 
     def create
-      transaction do
+      ActiveRecord::Base.transaction do
         create_chapter_if_needed
         @lesson = ProgrammingCourseLesson.new(lesson_params)
         authorize @lesson, policy_class: POLICY_CLASS
@@ -36,7 +36,7 @@ module Instructor
     end
 
     def update
-      transaction do
+      ActiveRecord::Base.transaction do
         authorize @lesson, policy_class: POLICY_CLASS
         create_chapter_if_needed
 
