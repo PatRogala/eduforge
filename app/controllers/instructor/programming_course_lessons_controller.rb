@@ -20,29 +20,33 @@ module Instructor
     end
 
     def create
-      create_chapter_if_needed
-      @lesson = ProgrammingCourseLesson.new(lesson_params)
-      authorize @lesson, policy_class: POLICY_CLASS
+      transaction do
+        create_chapter_if_needed
+        @lesson = ProgrammingCourseLesson.new(lesson_params)
+        authorize @lesson, policy_class: POLICY_CLASS
 
-      if @lesson.save
-        create_programming_task if params[:has_programming_task] == "1"
-        redirect_to instructor_programming_course_path(@programming_course),
-                    notice: t(".success")
-      else
-        render :new, status: :unprocessable_entity
+        if @lesson.save
+          create_programming_task if params[:has_programming_task] == "1"
+          redirect_to instructor_programming_course_path(@programming_course),
+                      notice: t(".success")
+        else
+          render :new, status: :unprocessable_entity
+        end
       end
     end
 
     def update
-      authorize @lesson, policy_class: POLICY_CLASS
-      create_chapter_if_needed
+      transaction do
+        authorize @lesson, policy_class: POLICY_CLASS
+        create_chapter_if_needed
 
-      if @lesson.update(lesson_params)
-        handle_programming_task
-        redirect_to instructor_programming_course_path(@programming_course),
-                    notice: t(".success")
-      else
-        render :edit, status: :unprocessable_entity
+        if @lesson.update(lesson_params)
+          handle_programming_task
+          redirect_to instructor_programming_course_path(@programming_course),
+                      notice: t(".success")
+        else
+          render :edit, status: :unprocessable_entity
+        end
       end
     end
 

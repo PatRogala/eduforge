@@ -2,6 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 import ace from "ace-builds"
 import "ace-builds/src-noconflict/theme-github"
 import "ace-builds/src-noconflict/mode-ruby"
+import "ace-builds/src-noconflict/mode-json"
+import "ace-builds/src-noconflict/worker-json"
+// import "ace-builds/src-noconflict/worker-ruby"
 
 export default class extends Controller {
   static targets = ["editor", "input"]
@@ -26,11 +29,6 @@ export default class extends Controller {
     this.editor.session.on("change", () => {
       this.inputTarget.value = this.editor.getValue();
     });
-
-    // Set initial content if needed (though reading from inputTarget is often better)
-    // if (this.hasContentValue) {
-    //   this.editor.setValue(this.contentValue, -1); // -1 moves cursor to start
-    // }
   }
 
   disconnect() {
