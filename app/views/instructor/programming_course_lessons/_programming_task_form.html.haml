@@ -38,22 +38,12 @@
       %p.mt-2.text-sm.text-gray-500= t('.hints_hint')
 
     %div
-      = task_form.label :difficulty_level, class: "block text-sm font-medium leading-6 text-gray-900"
+      = task_form.label :difficulty, class: "block text-sm font-medium leading-6 text-gray-900"
       .mt-2
-        = task_form.select :difficulty_level,
+        = task_form.select :difficulty,
           ProgrammingTask.difficulty_levels.map { |k, _| [t(".difficulty_levels.#{k}"), k] },
           { include_blank: t('.select_difficulty') },
           { class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" }
-
-    %div
-      = task_form.label :points, class: "block text-sm font-medium leading-6 text-gray-900"
-      .mt-2
-        = task_form.number_field :points,
-          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
-          min: 0,
-          step: 1,
-          placeholder: t('.points_placeholder')
-      %p.mt-2.text-sm.text-gray-500= t('.points_hint')
 
   .mt-6.flex.items-center.justify-end.gap-x-3
     = task_form.submit t('common.save'),
