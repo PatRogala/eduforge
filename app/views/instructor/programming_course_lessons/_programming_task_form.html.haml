@@ -1,40 +1,44 @@
 -# Programming task form
-= fields_for :programming_task, @lesson.programming_task || ProgrammingTask.new do |task_form|
+= fields_for :programming_task, @lesson.programming_task || @lesson.build_programming_task do |task_form|
   .space-y-6
     %div
       = task_form.label :initial_code, class: "block text-sm font-medium leading-6 text-gray-900"
-      .mt-2
-        = task_form.text_area :initial_code,
-          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
-          rows: 5,
-          placeholder: t('.initial_code_placeholder')
+      .mt-2{ "data-controller": "ace-editor",
+             "data-ace-editor-mode-value": "ruby" }
+        %div{ "data-ace-editor-target": "editor",
+              class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+        = task_form.hidden_field :initial_code,
+          "data-ace-editor-target": "input"
       %p.mt-2.text-sm.text-gray-500= t('.initial_code_hint')
 
     %div
       = task_form.label :solution_code, class: "block text-sm font-medium leading-6 text-gray-900"
-      .mt-2
-        = task_form.text_area :solution_code,
-          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
-          rows: 5,
-          placeholder: t('.solution_code_placeholder')
+      .mt-2{ "data-controller": "ace-editor",
+             "data-ace-editor-mode-value": "ruby" }
+        %div{ "data-ace-editor-target": "editor",
+              class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+        = task_form.hidden_field :solution_code,
+          "data-ace-editor-target": "input"
       %p.mt-2.text-sm.text-gray-500= t('.solution_code_hint')
 
     %div
       = task_form.label :test_cases, class: "block text-sm font-medium leading-6 text-gray-900"
-      .mt-2
-        = task_form.text_area :test_cases,
-          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
-          rows: 5,
-          placeholder: t('.test_cases_placeholder')
-      %p.mt-2.text-sm.text-gray-500= t('.test_cases_hint')
+      .mt-2{ "data-controller": "ace-editor",
+             "data-ace-editor-mode-value": "json" }
+        %div{ "data-ace-editor-target": "editor",
+              class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+        = task_form.hidden_field :test_cases,
+          "data-ace-editor-target": "input"
+      %p.mt-2.text-sm.text-gray-500= t('.test_cases_hint_html', format: 'JSON')
 
     %div
       = task_form.label :hints, class: "block text-sm font-medium leading-6 text-gray-900"
-      .mt-2
-        = task_form.text_area :hints,
-          class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
-          rows: 3,
-          placeholder: t('.hints_placeholder')
+      .mt-2{ "data-controller": "ace-editor",
+             "data-ace-editor-mode-value": "json" }
+        %div{ "data-ace-editor-target": "editor",
+              class: "block w-full rounded-md border border-gray-300 shadow-sm h-24" }
+        = task_form.hidden_field :hints,
+          "data-ace-editor-target": "input"
       %p.mt-2.text-sm.text-gray-500= t('.hints_hint')
 
     %div
@@ -43,7 +47,7 @@
         = task_form.select :difficulty,
           ProgrammingTask.difficulty_levels.map { |k, _| [t(".difficulty_levels.#{k}"), k] },
           { include_blank: t('.select_difficulty') },
-          { class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" }
+          { class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6" }
 
   .mt-6.flex.items-center.justify-end.gap-x-3
     = task_form.submit t('common.save'),

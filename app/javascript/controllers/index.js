@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AceEditorController from "./ace_editor_controller"
+application.register("ace-editor", AceEditorController)
+
 import AvatarPreviewController from "./avatar_preview_controller"
 application.register("avatar-preview", AvatarPreviewController)
 

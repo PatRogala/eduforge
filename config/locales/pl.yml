@@ -125,6 +125,7 @@ pl:
         select_difficulty: "Wybierz poziom trudności"
         points_placeholder: "Wprowadź liczbę punktów dla zadania programistycznego."
         points_hint: "Wprowadź liczbę punktów dla zadania programistycznego."
+        test_cases_hint_html: "Wprowadź przypadki testowe dla zadania programistycznego."
 
   courses:
     index:
