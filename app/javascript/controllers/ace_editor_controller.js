@@ -3,8 +3,6 @@ import ace from "ace-builds"
 import "ace-builds/src-noconflict/theme-github"
 import "ace-builds/src-noconflict/mode-ruby"
 import "ace-builds/src-noconflict/mode-json"
-import "ace-builds/src-noconflict/worker-json"
-// import "ace-builds/src-noconflict/worker-ruby"
 
 export default class extends Controller {
   static targets = ["editor", "input"]
@@ -23,6 +21,9 @@ export default class extends Controller {
       value: this.inputTarget.value,
       autoScrollEditorIntoView: true,
       copyWithEmptySelection: true,
+      tabSize: 2,
+      useSoftTabs: true,
+      useWorker: false,
     });
 
     // Ensure the hidden input value updates when the editor changes
