@@ -16,7 +16,7 @@
         %path{:d => "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
       = t('.back_to_course')
   .bg-white.shadow-sm.ring-1.rounded-xl{:class => "ring-gray-900/5"}
-    = form_with(model: @lesson, url: instructor_programming_course_lessons_path(@programming_course), method: :post, class: "p-6 md:p-8") do |form|
+    = form_with(model: @lesson, url: instructor_programming_course_lesson_path(@programming_course, @lesson), method: :patch, class: "p-6 md:p-8") do |form|
       - if @lesson.errors.any?
         .rounded-md.bg-red-50.p-4.mb-6
           .flex
@@ -64,10 +64,10 @@
               = form.check_box :has_programming_task,
                   class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600",
                   data: { action: "change->toggle#toggle" },
-                  checked: @lesson.programming_task.present?
+                  checked: @lesson.programming_task.persisted?
               = form.label :has_programming_task, t('.add_programming_task'), class: "text-sm text-gray-700"
 
-          #programming_task_form{ class: ("hidden" unless @lesson.programming_task.present? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
+          #programming_task_form{ class: ("hidden" unless @lesson.programming_task.persisted? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
             = form.fields_for :programming_task do |task_form|
               = render "programming_task_form", task_form: task_form
 

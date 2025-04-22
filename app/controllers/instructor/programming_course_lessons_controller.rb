@@ -30,7 +30,7 @@ module Instructor
         handle_task_destruction_on_create
 
         if @lesson.save
-          redirect_to instructor_programming_course_path(@programming_course),
+          redirect_to edit_instructor_programming_course_lesson_path(@programming_course, @lesson),
                       notice: t(".success")
         else
           @lesson.build_programming_task if params.dig(:programming_course_lesson,
@@ -45,10 +45,12 @@ module Instructor
         authorize @lesson, policy_class: POLICY_CLASS
         create_chapter_if_needed
 
-        handle_task_destruction_on_update(lesson_params)
+        lesson_attributes = lesson_params
 
-        if @lesson.update(lesson_params)
-          redirect_to instructor_programming_course_path(@programming_course),
+        handle_task_destruction_on_update(lesson_attributes)
+
+        if @lesson.update(lesson_attributes)
+          redirect_to edit_instructor_programming_course_lesson_path(@programming_course, @lesson),
                       notice: t(".success")
         else
           render :edit, status: :unprocessable_entity
