@@ -7,6 +7,7 @@
         "@hotwired/stimulus": "^3.2.2",
         "@hotwired/turbo-rails": "^8.0.12",
         "@rails/actiontext": "^8.0.100",
+        "ace-builds": "^1.40.0",
         "autoprefixer": "^10.4.20",
         "highlight.js": "^11.11.1",
         "postcss": "^8.5.3",
@@ -28,6 +29,8 @@
     "@rails/activestorage": ["@rails/activestorage@8.0.100", "", { "dependencies": { "spark-md5": "^3.0.1" } }, "sha512-/fIFav9RFFzQKK3a91O2OOdnHxPx+mBIR6wZDxeH9bcbDf2dZqhVcr5DGRJuhkF8U7C3s0tYvYafscmkBNRlHQ=="],
 
     "@types/trusted-types": ["@types/trusted-types@2.0.7", "", {}, "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="],
+
+    "ace-builds": ["ace-builds@1.40.0", "", {}, "sha512-wOCyJfNRsq/yLTR7z2KpwcjaInuUs/mosu/OFLGGUA+g+ApD9OJ1AToHDIp0Xpa2koHJ79bmOya73oWjCNbjlA=="],
 
     "autoprefixer": ["autoprefixer@10.4.20", "", { "dependencies": { "browserslist": "^4.23.3", "caniuse-lite": "^1.0.30001646", "fraction.js": "^4.3.7", "normalize-range": "^0.1.2", "picocolors": "^1.0.1", "postcss-value-parser": "^4.2.0" }, "peerDependencies": { "postcss": "^8.1.0" }, "bin": { "autoprefixer": "bin/autoprefixer" } }, "sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g=="],
 

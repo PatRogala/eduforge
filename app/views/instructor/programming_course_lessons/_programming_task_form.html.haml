@@ -1,0 +1,47 @@
+-# app/views/instructor/programming_course_lessons/_programming_task_form.html.haml
+
+-# task_form is passed from the parent form's fields_for block
+
+-# Include hidden field for ID, crucial for updates
+= task_form.hidden_field :id
+
+-# Include hidden field for _destroy if you plan complex UI deletion later
+-# = task_form.hidden_field :_destroy
+
+.space-y-6.border.border-gray-200.p-4.rounded-md.mt-4{class: "bg-gray-50/50"}
+  %div
+    = task_form.label :initial_code, class: "block text-sm font-medium leading-6 text-gray-900"
+    .mt-2{ "data-controller": "ace-editor", "data-ace-editor-mode-value": "ruby" }
+      %div{ "data-ace-editor-target": "editor", class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+      = task_form.hidden_field :initial_code, "data-ace-editor-target": "input"
+    %p.mt-2.text-sm.text-gray-500= t('.initial_code_hint')
+
+  %div
+    = task_form.label :solution_code, class: "block text-sm font-medium leading-6 text-gray-900"
+    .mt-2{ "data-controller": "ace-editor", "data-ace-editor-mode-value": "ruby" }
+      %div{ "data-ace-editor-target": "editor", class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+      = task_form.hidden_field :solution_code, "data-ace-editor-target": "input"
+    %p.mt-2.text-sm.text-gray-500= t('.solution_code_hint')
+
+  %div
+    = task_form.label :test_cases, class: "block text-sm font-medium leading-6 text-gray-900"
+    .mt-2{ "data-controller": "ace-editor", "data-ace-editor-mode-value": "json" }
+      %div{ "data-ace-editor-target": "editor", class: "block w-full rounded-md border border-gray-300 shadow-sm h-40" }
+      = task_form.hidden_field :test_cases, "data-ace-editor-target": "input"
+    %p.mt-2.text-sm.text-gray-500= t('.test_cases_hint_html', format: 'JSON')
+
+  %div
+    = task_form.label :hints, class: "block text-sm font-medium leading-6 text-gray-900"
+    .mt-2{ "data-controller": "ace-editor", "data-ace-editor-mode-value": "json" }
+      %div{ "data-ace-editor-target": "editor", class: "block w-full rounded-md border border-gray-300 shadow-sm h-24" }
+      = task_form.hidden_field :hints, "data-ace-editor-target": "input"
+    %p.mt-2.text-sm.text-gray-500= t('.hints_hint')
+
+  .grid.grid-cols-1.gap-6.sm:grid-cols-2
+    %div
+      = task_form.label :difficulty, class: "block text-sm font-medium leading-6 text-gray-900"
+      .mt-2
+        = task_form.select :difficulty,
+          ProgrammingTask.difficulties.keys.map { |k| [t(".difficulty_levels.#{k}", default: k.humanize), k] },
+          { include_blank: t('.select_difficulty') },
+          { class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" }

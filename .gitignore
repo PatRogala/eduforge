@@ -55,6 +55,3 @@ examples.txt
 .env.*.local
 !.env.development
 !.env.test
-
-# IDE files
-.cursorrules

@@ -1,3 +1,4 @@
+# Represents a lesson within a programming course chapter
 # == Schema Information
 #
 # Table name: programming_course_lessons
@@ -19,10 +20,13 @@
 class ProgrammingCourseLesson < ApplicationRecord
   belongs_to :programming_course_chapter
   has_rich_text :content
+  has_one :programming_task, dependent: :delete
 
   validates :title, presence: true
 
   delegate :programming_course, to: :programming_course_chapter
+
+  accepts_nested_attributes_for :programming_task, allow_destroy: true, reject_if: :all_blank
 
   def position
     programming_course_chapter.programming_course_lessons.order(:created_at).index(self) + 1
