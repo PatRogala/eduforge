@@ -1,0 +1,69 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+ # EduForge Application Overview
+
+ EduForge is a Ruby on Rails 8.0 e-learning platform.
+
+ ## Core Technologies
+
+ *   **Backend:** Ruby 3.4.2, Ruby on Rails 8.0
+ *   **Database:** PostgreSQL (Default timestamp type: `timestamptz`, Schema format: `:sql`)
+ *   **Authentication:** Devise
+ *   **Authorization:** Pundit
+ *   **Frontend:**
+     *   Hotwire (Turbo & Stimulus)
+     *   Tailwind CSS
+     *   ViewComponent
+     *   Ace Editor (for code input)
+     *   Trix (ActionText for rich text editing)
+     *   Highlight.js (for syntax highlighting in ActionText)
+     *   Lucide Icons
+ *   **JavaScript Bundling:** Bun
+ *   **Background Jobs:** ActiveJob (Configured with Sidekiq in production)
+ *   **Caching:** Rails Cache (Configured with Solid Cache in production)
+ *   **Testing:** RSpec, FactoryBot, Shoulda Matchers, SimpleCov, Pundit::RSpec, ViewComponent Test Helpers, Prosopite (N+1 detection)
+ *   **Deployment:** Kamal, Docker
+ *   **Database Monitoring:** PgHero (available to admins at `/pghero`)
+ *   **Logging:** Standard Rails logs (development/test), Lograge (JSON format) in production.
+
+ ## Key Conventions & Configurations
+
+ *   **Internationalization (i18n):**
+     *   Default locale: `:pl` (Polish)
+     *   Available locales: `:pl`, `:en`
+     *   Translations are managed in `config/locales/`. ViewComponent translations are often namespaced within their component directory (e.g., `app/components/main_page/courses_list_component.pl.yml`).
+     *   `t()` helper is used extensively in views and components.
+ *   **Database Timestamps:** Configured to use `timestamptz` for all `:datetime` columns via `config/initializers/postgres.rb`.
+ *   **Schema Format:** Uses `:sql` format (`config/application.rb`).
+ *   **Code Quality:**
+     *   Strong Migrations gem is used (`config/initializers/strong_migrations.rb`).
+     *   RuboCop auto-correction is enabled for generated files (`config/environments/development.rb`).
+     *   Prosopite is used for N+1 query detection in development and test environments (`config/initializers/prosopite.rb`, `config/environments/development.rb`, `config/environments/test.rb`).
+ *   **Logging (Production):**
+     *   Lograge is enabled (`config/environments/production.rb`).
+     *   Format: JSON (`Lograge::Formatters::Json`).
+     *   Custom fields: `exception`, `exception_message`, `time`, `host`, `pid`.
+     *   Output: `log/lograge_production.log`. Original Rails log (`log/production.log`) is kept.
+ *   **Modern Browser Requirement:** Uses `allow_browser versions: :modern` in `ApplicationController`.
+ *   **PWA Features:** Manifest and service worker configured via `config/routes.rb` and `app/views/pwa/`.
+ *   **Interactors:** Uses the `interactor` gem pattern for service objects (e.g., `app/interactors/enroll_in_programming_course.rb`).
+
+ ## Project Structure Highlights
+
+ *   **Components:** UI elements are built using ViewComponent (`app/components/`). Previews are available via Lookbook (`app/previews/`).
+ *   **Controllers:** Standard Rails controllers. Namespaced controllers for specific roles (`app/controllers/instructor/`).
+ *   **Models:** Standard ActiveRecord models (`app/models/`). Key domain models include `User`, `Role`, `ProgrammingCourse`, `ProgrammingCourseChapter`, `ProgrammingCourseLesson`, `ProgrammingTask`.
+ *   **Policies:** Pundit policies define authorization rules (`app/policies/`). Namespaced policies for specific roles (`app/policies/instructor/`).
+ *   **JavaScript:** Stimulus controllers manage frontend interactivity (`app/javascript/controllers/`). `ace-builds` and `highlight.js` are key JS libraries.
+ *   **CSS:** Tailwind CSS is the primary framework (`app/assets/tailwind/application.css`). Specific CSS for ActionText/Trix (`app/assets/stylesheets/actiontext.css`) and Ace Editor (`app/assets/stylesheets/ace-editor.css`).
+ *   **Configuration:** Standard Rails configuration files in `config/`. Notable additions include `deploy.yml` (Kamal), `cache.yml`, `queue.yml`.
+ *   **Database:** Migrations in `db/migrate/`. Schema files for different databases (`db/schema.sql`, `db/cache_schema.rb`, `db/queue_schema.rb`). Seeds in `db/seeds.rb`.
+
+ ## Development Environment
+
+ *   Uses Docker Compose (`docker-compose.yml`) for easy setup with PostgreSQL and Redis.
+ *   `bin/dev` starts the development server (likely using Foreman via `Procfile.dev`).
+ *   Uses `bun` for JavaScript dependency management and building (`bun.config.js`, `package.json`).

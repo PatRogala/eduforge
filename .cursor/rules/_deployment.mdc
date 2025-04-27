@@ -1,0 +1,47 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Deployment & Production Environment
+
+## Deployment Tool
+
+*   **Kamal:** Used for deploying the application. Configuration is in `config/deploy.yml`.
+    *   Defines service name (`eduforge`), image (`your-user/eduforge`).
+    *   Specifies target servers (`servers:` block).
+    *   Configures proxy settings (Traefik likely, with SSL via Let's Encrypt).
+    *   Manages registry credentials (using `KAMAL_REGISTRY_PASSWORD` secret).
+    *   Injects environment variables (`env:` block, including secrets like `RAILS_MASTER_KEY`).
+    *   Defines aliases for common commands (`console`, `logs`, `dbc`, etc.).
+    *   Handles asset bridging (`asset_path`).
+    *   Defines builder configuration (`builder:` block).
+    *   Can manage accessory services like databases or Redis (commented out in example).
+
+## Docker
+
+*   **Development:** `docker-compose.yml` defines services for the app (`eduforge`), `postgresql`, and `redis`. Uses `Dockerfile.dev`. Mounts the current directory for live code reloading.
+*   **Production:** Kamal builds a production Docker image (implicitly using `Dockerfile` unless `Dockerfile.prod` is specified or builder config overrides) and deploys containers to servers.
+
+## Production Environment (`config/environments/production.rb`)
+
+*   **Caching:** Uses `solid_cache_store` backed by the `cache` database configuration in `config/database.yml`.
+*   **Background Jobs:** Uses `:solid_queue` adapter, connecting to the `queue` database configuration. Solid Queue runs within Puma (`plugin :solid_queue` in `config/puma.rb`, enabled by `SOLID_QUEUE_IN_PUMA: true` in `deploy.yml`).
+*   **Logging:** Configured with Lograge for structured JSON logging to `log/lograge_production.log`. Includes custom fields and keeps the original Rails log. Log level defaults to `info`.
+*   **SSL:** Assumed (`config.assume_ssl = true`) and enforced (`config.force_ssl = true`).
+*   **Performance:** Code is eager-loaded (`config.eager_load = true`), reloading is disabled. Assets served with far-future expiry headers.
+*   **Database:** Connects to `eduforge_production` database using credentials likely from environment variables (`EDUFORGE_DATABASE_PASSWORD`). Separate databases defined for cache (`eduforge_production_cache`) and queue (`eduforge_production_queue`).
+
+## Database Configuration (`config/database.yml`)
+
+*   Uses PostgreSQL adapter.
+*   Defines `development`, `test`, and `production` environments.
+*   Production environment uses separate database configurations (`primary`, `cache`, `queue`) pointing to potentially different databases but likely using the same host/credentials (controlled by ENV vars). `migrations_paths` direct Solid Cache/Queue migrations.
+*   Connection pooling configured based on `RAILS_MAX_THREADS`.
+*   Specifies PostgreSQL connection details (host, user, password, port). Host is `postgresql` for Docker Compose setup.
+
+## Background Processing (Production)
+
+*   **Solid Queue:** Used as the ActiveJob backend.
+*   **Execution:** Runs within the Puma web server process (configured via `plugin :solid_queue` in `puma.rb` and `SOLID_QUEUE_IN_PUMA` env var).
+*   **Configuration:** `config/queue.yml` defines dispatcher and worker settings (polling intervals, batch sizes, threads, processes). `config/recurring.yml` can define scheduled tasks (currently commented out).
