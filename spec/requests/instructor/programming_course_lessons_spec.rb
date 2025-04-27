@@ -13,7 +13,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
   let(:lesson_attributes) do
     attributes_for(:programming_course_lesson).merge(programming_course_chapter_id: chapter.id)
   end
-  let(:invalid_attributes) { { programming_course_lesson: { title: nil } } }
+  let(:invalid_attributes) { { instructor_lesson_form: { title: nil } } }
 
   before do
     create(:user_role, user: user, role: instructor_role)
@@ -62,7 +62,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
     context "when user is not authenticated" do
       it "redirects to sign in page" do
         post instructor_programming_course_lessons_path(programming_course),
-             params: { programming_course_lesson: lesson_attributes }
+             params: { instructor_lesson_form: lesson_attributes }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
       it "creates a new lesson" do
         expect do
           post instructor_programming_course_lessons_path(programming_course),
-               params: { programming_course_lesson: lesson_attributes }
+               params: { instructor_lesson_form: lesson_attributes }
         end.to change(ProgrammingCourseLesson, :count).by(1)
       end
 
@@ -115,7 +115,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
 
       it "redirects to the programming course lesson page" do
         post instructor_programming_course_lessons_path(programming_course),
-             params: { programming_course_lesson: lesson_attributes }
+             params: { instructor_lesson_form: lesson_attributes }
         expect(response).to redirect_to(edit_instructor_programming_course_lesson_path(programming_course,
                                                                                        ProgrammingCourseLesson.last))
       end
@@ -126,19 +126,19 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
         it "does not create a new lesson" do
           expect do
             post instructor_programming_course_lessons_path(programming_course),
-                 params: { programming_course_lesson: invalid_attributes }
+                 params: { instructor_lesson_form: invalid_attributes }
           end.not_to change(ProgrammingCourseLesson, :count)
         end
 
         it "renders the new template" do
           post instructor_programming_course_lessons_path(programming_course),
-               params: { programming_course_lesson: invalid_attributes }
+               params: { instructor_lesson_form: invalid_attributes }
           expect(response).to render_template(:new)
         end
 
         it "return unprocessable entity status" do
           post instructor_programming_course_lessons_path(programming_course),
-               params: { programming_course_lesson: invalid_attributes }
+               params: { instructor_lesson_form: invalid_attributes }
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -153,7 +153,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
 
       it "forbids unauthorized access" do
         post instructor_programming_course_lessons_path(programming_course),
-             params: { programming_course_lesson: lesson_attributes }
+             params: { instructor_lesson_form: lesson_attributes }
         expect(response).to be_forbidden
       end
     end
@@ -198,7 +198,7 @@ RSpec.describe "Instructor::ProgrammingCourseLessons" do
   end
 
   describe "PATCH /instructor/lessons/:id" do
-    let(:valid_attributes) { { programming_course_lesson: { title: "Updated Title", content: "Updated Content" } } }
+    let(:valid_attributes) { { instructor_lesson_form: { title: "Updated Title", content: "Updated Content" } } }
 
     context "when user is not authenticated" do
       it "redirects to sign in page" do
