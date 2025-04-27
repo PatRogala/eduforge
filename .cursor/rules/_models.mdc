@@ -1,0 +1,88 @@
+---
+description: Details the ActiveRecord models, their relationships, validations, and key logic.
+globs:
+alwaysApply: false
+---
+# Models Overview
+
+Models follow standard ActiveRecord conventions and reside in `app/models/`.
+
+## Core Models & Relationships
+
+*   **User (`app/models/user.rb`)**
+    *   Uses Devise for authentication (`:database_authenticatable`, `:registerable`, `:recoverable`, `:rememberable`, `:validatable`).
+    *   `has_many :user_roles, dependent: :delete_all`
+    *   `has_many :roles, through: :user_roles`
+    *   `has_many :programming_courses, foreign_key: :instructor_id, inverse_of: :instructor, dependent: :destroy` (User as Instructor)
+    *   `has_many :programming_course_enrollments, dependent: :delete_all`
+    *   `has_many :enrolled_programming_courses, through: :programming_course_enrollments, source: :programming_course`
+    *   `has_one_attached :avatar`
+    *   Methods: `instructor?`, `admin?`, `enrolled_in_programming_courses?`
+
+*   **Role (`app/models/role.rb`)**
+    *   Represents user roles (e.g., Admin, Instructor).
+    *   Constants: `ADMIN_ID = 1`, `INSTRUCTOR_ID = 2`.
+    *   `has_many :user_roles, dependent: :delete_all`
+    *   `has_many :users, through: :user_roles`
+    *   Validates uniqueness and presence of `name`.
+
+*   **UserRole (`app/models/user_role.rb`)**
+    *   Join table between `User` and `Role`.
+    *   `belongs_to :user`
+    *   `belongs_to :role`
+
+*   **ProgrammingCourse (`app/models/programming_course.rb`)**
+    *   Represents an e-learning course.
+    *   Uses `FriendlyId` on `:title` for slugs (`slug` column). `should_generate_new_friendly_id?` is overridden.
+    *   `belongs_to :instructor, class_name: "User"`
+    *   `has_rich_text :description` (ActionText)
+    *   `has_one_attached :cover_image` (ActiveStorage)
+    *   `has_many :programming_course_chapters, dependent: :destroy`
+    *   `has_many :programming_course_lessons, through: :programming_course_chapters`
+    *   `has_many :programming_course_enrollments, dependent: :delete_all`
+    *   `has_many :enrolled_users, through: :programming_course_enrollments, source: :user`
+    *   Validates presence and uniqueness of `title`.
+    *   Methods: `created_time_ago`, `approximate_duration_in_minutes`, `approximate_duration_in_hours` (cached), `first_lesson`.
+
+*   **ProgrammingCourseChapter (`app/models/programming_course_chapter.rb`)**
+    *   Groups lessons within a course.
+    *   `belongs_to :programming_course`
+    *   `has_many :programming_course_lessons, dependent: :destroy`
+    *   Validates presence of `title`.
+    *   Methods: `position` (relative to other chapters in the course).
+
+*   **ProgrammingCourseLesson (`app/models/programming_course_lesson.rb`)**
+    *   Represents a single lesson within a chapter.
+    *   `belongs_to :programming_course_chapter`
+    *   `has_rich_text :content` (ActionText)
+    *   `has_one :programming_task, dependent: :delete`
+    *   `accepts_nested_attributes_for :programming_task, allow_destroy: true, reject_if: :all_blank`
+    *   Validates presence of `title`.
+    *   Delegates `programming_course` to `programming_course_chapter`.
+    *   Methods: `position` (relative to other lessons in the chapter), `approximate_duration_in_minutes`, `next_lesson`.
+
+*   **ProgrammingTask (`app/models/programming_task.rb`)**
+    *   Represents a coding exercise within a lesson.
+    *   `belongs_to :programming_course_lesson`
+    *   `enum :difficulty, { easy: "easy", medium: "medium", hard: "hard" }, prefix: true`
+    *   Validates presence of `initial_code`, `solution_code`, `test_cases`, `difficulty`, `language`, `hints`.
+    *   Validates uniqueness of `programming_course_lesson_id`.
+    *   JSONB columns: `test_cases`, `hints`.
+    *   `before_validation :set_language` (defaults to "ruby").
+
+*   **ProgrammingCourseEnrollment (`app/models/programming_course_enrollment.rb`)**
+    *   Represents a user's enrollment in a course.
+    *   `belongs_to :user`
+    *   `belongs_to :programming_course`
+    *   Validates uniqueness scoped to `user_id` and `programming_course_id`.
+    *   Validates presence of `enrolled_at`.
+    *   `before_validation :set_enrolled_at` (defaults to `Time.current`).
+
+## Common Patterns
+
+*   **Cascading Deletes:** Foreign keys often use `on_delete: :cascade` (check migrations like `20250301150707_add_cascade_on_delete.rb`, `20250306213049_programming_courses_cascade_on_delete.rb`, `20250414072610_create_programming_course_chapters.rb`, etc.) or model-level `dependent: :destroy`/`:delete_all`.
+*   **Rich Text:** ActionText (`has_rich_text`) is used for `description` on `ProgrammingCourse` and `content` on `ProgrammingCourseLesson`.
+*   **File Attachments:** ActiveStorage (`has_one_attached`) is used for `cover_image` on `ProgrammingCourse` and `avatar` on `User`.
+*   **Caching:** Model methods sometimes use `Rails.cache.fetch` for performance (e.g., `ProgrammingCourse#approximate_duration_in_hours`).
+*   **FriendlyId:** Used for user-friendly URLs for `ProgrammingCourse`.
+*   **Nested Attributes:** Used in `ProgrammingCourseLesson` to manage the associated `ProgrammingTask`.

@@ -55,3 +55,6 @@ examples.txt
 .env.*.local
 !.env.development
 !.env.test
+
+# source code
+source_code.txt

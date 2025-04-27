@@ -1,0 +1,53 @@
+---
+description: Outlines the testing setup, frameworks, helpers, and conventions used in the project.
+globs:
+alwaysApply: false
+---
+# Testing Setup
+
+## Framework & Tools
+
+*   **Framework:** RSpec (`rspec-rails`)
+*   **Configuration:** `spec/spec_helper.rb` (RSpec core config), `spec/rails_helper.rb` (Rails-specific config)
+*   **Test Data:** FactoryBot (`spec/factories.rb`) for creating model instances.
+*   **Matchers:** Shoulda Matchers for common ActiveRecord/Rails assertions. Pundit::RSpec for policy specs.
+*   **Code Coverage:** SimpleCov (configured in `spec/rails_helper.rb` to exclude spec, config, etc.).
+*   **ViewComponent Testing:** `view_component/test_helpers`, `view_component/system_test_helpers`.
+*   **N+1 Query Detection:** Prosopite (configured in `spec/spec_helper.rb` to run before/after each spec).
+
+## Configuration Highlights (`spec/rails_helper.rb` & `spec/spec_helper.rb`)
+
+*   SimpleCov setup with filters.
+*   `RAILS_ENV` set to `test`.
+*   `use_transactional_fixtures = true`.
+*   `infer_spec_type_from_file_location!` enabled.
+*   Rails and common gem backtraces are filtered.
+*   Includes helpers:
+    *   `Devise::Test::IntegrationHelpers` (for `type: :request`)
+    *   `FactoryBot::Syntax::Methods`
+    *   `ViewComponent::TestHelpers` (for `type: :component`)
+    *   `ViewComponent::SystemTestHelpers` (for `type: :component`)
+*   Shoulda Matchers integration configured.
+*   Prosopite scan enabled around each spec.
+*   Devise route reloading workaround for request specs.
+*   Random order (`config.order = :random`).
+*   Focus filtering enabled (`config.filter_run_when_matching :focus`).
+
+## Test Structure (`spec/`)
+
+*   **`spec/components/`:** Tests for ViewComponents.
+*   **`spec/factories.rb`:** FactoryBot definitions.
+*   **`spec/fixtures/`:** Static fixture files (e.g., images for ActiveStorage tests).
+*   **`spec/interactors/`:** Tests for Interactor service objects.
+*   **`spec/models/`:** Tests for ActiveRecord models.
+*   **`spec/policies/`:** Tests for Pundit policies, often using `pundit/rspec`.
+*   **`spec/requests/`:** Integration tests simulating browser requests (HTTP). Often test controller actions, responses, redirects, and template rendering. Use Devise helpers (`sign_in`).
+
+## Common Testing Patterns
+
+*   **Requests Specs (`type: :request`):** Used for testing controller actions, routing, HTTP status codes, redirects, and template rendering. Authentication is handled using `sign_in user`. Authorization is implicitly tested by controller/policy interactions.
+*   **Model Specs (`type: :model`):** Use Shoulda Matchers for testing associations, validations. Test model methods and scopes.
+*   **Component Specs (`type: :component`):** Use `render_inline` and Capybara matchers (implicitly via `view_component/test_helpers`) to test component rendering and logic.
+*   **Policy Specs (`type: :policy`):** Use `pundit/rspec` matchers (`permit`, `forbid`) to test Pundit policy rules (`permissions` blocks) and scopes (`permissions ".scope"` blocks).
+*   **Interactor Specs:** Test the `call` method of interactors, checking for `success?`, `failure?`, `context.error`, and side effects (e.g., record creation).
+*   **FactoryBot:** Used extensively to create necessary data for tests. Traits are used for variations (e.g., `:admin`, `:instructor` for Role factory).
