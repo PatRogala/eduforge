@@ -7,7 +7,7 @@ require "fileutils"
 SOURCE_EXTENSIONS = %w[
   .rb .js .jsx .ts .tsx .html .css .scss .json .yml .yaml .md
   .mdc .haml .erb
-]
+].freeze
 
 # Directories to exclude based on .gitignore
 EXCLUDED_DIRS = %w[
@@ -21,7 +21,7 @@ EXCLUDED_DIRS = %w[
   app/assets/builds
   vendor
   .git
-]
+].freeze
 
 def should_include?(file_path)
   # Check if file has a source code extension
@@ -37,9 +37,9 @@ end
 
 def process_file(file_path, output_file)
   content = File.read(file_path)
-  output_file.puts "\n" + ("=" * 80)
+  output_file.puts "\n#{'=' * 80}"
   output_file.puts "File: #{file_path}"
-  output_file.puts ("=" * 80) + "\n"
+  output_file.puts "#{'=' * 80}\n"
   output_file.puts content
 rescue StandardError => e
   puts "Error processing #{file_path}: #{e.message}"
