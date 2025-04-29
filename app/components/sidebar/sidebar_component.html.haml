@@ -1,67 +1,36 @@
--# Placeholder variables for role simulation (replace with real logic)
-
-%aside.fixed.top-0.left-0.z-40.w-64.h-screen.bg-white.border-r.border-gray-200.flex.flex-col.transition-transform.duration-300.ease-in-out{ class: "-translate-x-full md:translate-x-0" }
-
-  -# Logo / Brand Area
-  .flex.items-center.justify-center.h-16.border-b.border-gray-200.flex-shrink-0.px-4
-    %a{ href: "/", class: "text-xl font-semibold text-blue-600" }
-      -# Replace with your actual Logo SVG or text
-      %span= t(".logo")
-
-  -# Main Navigation Area (Scrollable if content overflows)
-  .flex-grow.overflow-y-auto.py-4
-    %nav.px-4.space-y-1
-      -# --- General User Links ---
-      - public_links.each do |link|
-        = link_to link[:path], class: "group flex items-center px-2 py-2 text-sm rounded-md #{active_link_class(link[:path])}" do
-          = lucide_icon(link[:icon], class: "mr-3 h-5 w-5 flex-shrink-0")
-          = t(link[:title])
-
-      - if current_user
-        - logged_in_links.each do |link|
-          = link_to link[:path], class: "group flex items-center px-2 py-2 text-sm rounded-md #{active_link_class(link[:path])}" do
-            = lucide_icon(link[:icon], class: "mr-3 h-5 w-5 flex-shrink-0")
-            = t(link[:title])
-
-      -# --- Instructor Links ---
-      - if instructor?
-        .pt-4.mt-4.space-y-1.border-t.border-gray-200
-          %h3.px-2.text-xs.font-semibold.text-gray-500.uppercase.tracking-wider= t('.instructor_links')
-          - instructor_links.each do |link|
-            = link_to link[:path], class: "group flex items-center px-2 py-2 text-sm rounded-md #{active_link_class(link[:path])}" do
-              = lucide_icon(link[:icon], class: "mr-3 h-5 w-5 flex-shrink-0")
-              = t(link[:title])
-
-      -# --- Admin Links ---
-      - if admin?
-        .pt-4.mt-4.space-y-1.border-t.border-gray-200
-          %h3.px-2.text-xs.font-semibold.text-gray-500.uppercase.tracking-wider= t('.admin_links')
-          %a.group.flex.items-center.px-2.py-2.text-sm.rounded-md{ href: "/admin/users", class: "text-gray-600 hover:bg-gray-100 hover:text-gray-900" }
-            -# Lucide Icon: Users
-            %svg{xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round", class: "lucide lucide-users mr-3 h-5 w-5 flex-shrink-0"}
-              %path{d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}
-              %circle{cx: "9", cy: "7", r: "4"}
-              %path{d: "M22 21v-2a4 4 0 0 0-3-3.87"}
-              %path{d: "M16 3.13a4 4 0 0 1 0 7.75"}
-            User Management
-          %a.group.flex.items-center.px-2.py-2.text-sm.rounded-md{ href: "/admin/settings", class: "text-gray-600 hover:bg-gray-100 hover:text-gray-900" }
-            -# Lucide Icon: Settings
-            %svg{xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round", class: "lucide lucide-settings mr-3 h-5 w-5 flex-shrink-0"}
-              %path{d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 .54 1.74l-.01.6a2 2 0 0 1-.54 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-.54-1.74l.01-.6a2 2 0 0 1 .54-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"}
-              %circle{cx: "12", cy: "12", r: "3"}
-            Site Settings
-
-  -# User Account Area (Stays at the bottom)
-  .mt-auto.border-t.border-gray-200.p-4.space-y-2.flex-shrink-0
-    - if current_user
-      = link_to edit_user_registration_path, class: "group flex items-center px-2 py-2 text-sm rounded-md #{active_link_class(edit_user_registration_path)}" do
-        = lucide_icon "user", class: "mr-3 h-5 w-5 flex-shrink-0"
-        = t('.edit_profile')
-      = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "group flex items-center w-full px-2 py-2 text-sm rounded-md text-gray-600 hover:bg-red-100 hover:text-red-700" do
-        -# Lucide Icon: LogOut
-        = lucide_icon "log-out", class: "mr-3 h-5 w-5 flex-shrink-0"
-        = t('.sign_out')
-    - else
-      = link_to new_user_session_path, class: " group flex items-center w-full px-2 py-2 text-sm rounded-md text-gray-600 hover:bg-gray-100 hover:text-gray-900 text-gray-600 hover:bg-gray-100 hover:text-gray-900" do
-        = lucide_icon "log-in", class: "mr-3 h-5 w-5 flex-shrink-0"
-        = t('.sign_in')
+%aside.bg-white.border-r.border-gray-200.transition-all.duration-300.w-64.overflow-hidden.min-h-screen
+  .h-full.flex.flex-col.py-4
+    %nav.flex-1.px-2
+      %ul.space-y-1
+        %li
+          - public_links.each do |link|
+            = link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
+              %span.mr-3
+                = lucide_icon(link[:icon], class: "w-5 h-5")
+              %span.flex-1= t(link[:title])
+              -# %span.bg-indigo-100.text-indigo-600.text-xs.font-medium.px-2.rounded-full{class: "py-0.5", "data-id" => "element-133"} 1 TODO: OPTIONAL BADGE
+        - if logged_in?
+          %li
+            - logged_in_links.each do |link|
+              = link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
+                %span.mr-3
+                  = lucide_icon(link[:icon], class: "w-5 h-5")
+                %span.flex-1= t(link[:title])
+        - if instructor?
+          %li
+            - instructor_links.each do |link|
+              = link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
+                %span.mr-3
+                  = lucide_icon(link[:icon], class: "w-5 h-5")
+                %span.flex-1= t(link[:title])
+      -# TODO: ADD SUPPORT SECTION
+      -# .mt-8.pt-4.border-t.border-gray-200
+      -#   %ul.space-y-1
+      -#     %li
+      -#       %a.flex.items-center.px-3.rounded-lg.text-gray-700.hover:bg-gray-100{class: "py-2.5", href: "#"}
+      -#         %span.mr-3
+      -#           %svg.lucide.lucide-circle-help{fill: "none", height: "20", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "20", xmlns: "http://www.w3.org/2000/svg"}
+      -#             %circle{cx: "12", cy: "12", r: "10"}
+      -#             %path{d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}
+      -#             %path{d: "M12 17h.01"}
+      -#         %span.flex-1 Help Center
