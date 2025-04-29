@@ -14,12 +14,14 @@
       %button.p-2.rounded-full.hover:bg-gray-100
         = lucide_icon("search", class: "text-gray-600 h-5")
       - if logged_in?
-        = link_to edit_user_registration_path, class: "flex items-center" do
-          - if user_avatar.attached?
-            = image_tag user_avatar, class: "w-8 h-8 rounded-full"
-          - else
-            .w-8.h-8.rounded-full.bg-indigo-100.flex.items-center.justify-center
-              = lucide_icon("user", class: "text-indigo-600 h-5")
+        .relative
+          = link_to edit_user_registration_path, class: "flex items-center" do
+            - if user_avatar.attached?
+              = image_tag user_avatar, class: "w-8 h-8 rounded-full"
+            - else
+              .w-8.h-8.rounded-full.bg-indigo-100.flex.items-center.justify-center
+                = lucide_icon("user", class: "text-indigo-600 h-5")
+          = render Layout::HeaderDropdownComponent.new(current_user: current_user)
       - else
         = link_to t(".sign_in"), new_user_session_path, class: "px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
         = link_to t(".sign_up"), new_user_registration_path, class: "px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"

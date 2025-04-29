@@ -1,6 +1,8 @@
 module Layout
   # Header on the top of the page for main layout and navigation
   class HeaderComponent < ViewComponent::Base
+    attr_reader :current_user
+
     def initialize(current_user:)
       super
       @current_user = current_user
