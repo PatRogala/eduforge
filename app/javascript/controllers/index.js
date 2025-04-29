@@ -24,3 +24,6 @@ application.register("mobile-menu", MobileMenuController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
+
+import Dropdown from "@stimulus-components/dropdown"
+application.register("dropdown", Dropdown)

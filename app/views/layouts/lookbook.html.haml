@@ -16,9 +16,4 @@
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body
-    = render Layout::HeaderComponent.new(current_user: current_user)
-    = render Flash::FlashMessageComponent.new(notice: notice, alert: alert)
-    -# = render Sidebar::SidebarComponent.new(current_user: current_user)
-    -# = render MobileMenu::MobileMenuComponent.new(current_user: current_user)
-    %div.mx-auto.p-2.md:p-8{class: "ml-0 md:ml-64"}
-      = yield
+    = yield
