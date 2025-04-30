@@ -54,5 +54,12 @@ module Sidebar
     def logged_in?
       current_user.present?
     end
+
+    def render_link(link)
+      link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
+        concat(content_tag(:span, lucide_icon(link[:icon], class: "w-5 h-5"), class: "mr-3", "data-sidebar-target": "button"))
+        concat(content_tag(:span, t(link[:title]), class: "flex-1 whitespace-nowrap transition-opacity duration-300", "data-sidebar-target": "content"))
+      end
+    end
   end
 end
