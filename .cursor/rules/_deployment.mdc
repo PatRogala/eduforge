@@ -26,7 +26,7 @@ alwaysApply: false
 ## Production Environment (`config/environments/production.rb`)
 
 *   **Caching:** Uses `solid_cache_store` backed by the `cache` database configuration in `config/database.yml`.
-*   **Background Jobs:** Uses `:solid_queue` adapter, connecting to the `queue` database configuration. Solid Queue runs within Puma (`plugin :solid_queue` in `config/puma.rb`, enabled by `SOLID_QUEUE_IN_PUMA: true` in `deploy.yml`).
+*   **Background Jobs:** Uses `:sidekiq` adapter.
 *   **Logging:** Configured with Lograge for structured JSON logging to `log/lograge_production.log`. Includes custom fields and keeps the original Rails log. Log level defaults to `info`.
 *   **SSL:** Assumed (`config.assume_ssl = true`) and enforced (`config.force_ssl = true`).
 *   **Performance:** Code is eager-loaded (`config.eager_load = true`), reloading is disabled. Assets served with far-future expiry headers.
@@ -42,6 +42,4 @@ alwaysApply: false
 
 ## Background Processing (Production)
 
-*   **Solid Queue:** Used as the ActiveJob backend.
-*   **Execution:** Runs within the Puma web server process (configured via `plugin :solid_queue` in `puma.rb` and `SOLID_QUEUE_IN_PUMA` env var).
-*   **Configuration:** `config/queue.yml` defines dispatcher and worker settings (polling intervals, batch sizes, threads, processes). `config/recurring.yml` can define scheduled tasks (currently commented out).
+*   **Sidekiq:** Used as the ActiveJob backend.
