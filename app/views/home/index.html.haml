@@ -1,2 +1,5 @@
-= render MainPage::FeaturedCourseComponent.new
+- content_for :title, t("app.title.home")
+
+= render MainPage::UserWelcomeComponent.new(user: current_user)
+= render MainPage::UserStatsComponent.new(user: current_user)
 = render MainPage::CoursesListComponent.new
