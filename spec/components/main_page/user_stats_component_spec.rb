@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe MainPage::UserStatsComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "renders the component for a user" do
+    render_inline(described_class.new(user: build(:user)))
+    expect(rendered_content).not_to be_empty
+  end
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  it "does not render the component for a guest" do
+    render_inline(described_class.new(user: nil))
+    expect(rendered_content).to be_empty
+  end
 end
