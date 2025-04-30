@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = ["content", "aside", "button"]
   itemCollapsedClass = "hidden"
   asideCollapsedClasses = ["w-0", "md:w-16"]
+  asideExpandedClass = "w-64"
   buttonExpandedClass = "mr-3"
 
   connect() {
@@ -25,6 +26,7 @@ export default class extends Controller {
         target.classList.remove(this.buttonExpandedClass)
       })
       this.asideTarget.classList.add(...this.asideCollapsedClasses)
+      this.asideTarget.classList.remove(this.asideExpandedClass)
     } else {
       this.contentTargets.forEach(target => {
         target.classList.remove(this.itemCollapsedClass)
@@ -33,6 +35,7 @@ export default class extends Controller {
         target.classList.add(this.buttonExpandedClass)
       })
       this.asideTarget.classList.remove(...this.asideCollapsedClasses)
+      this.asideTarget.classList.add(this.asideExpandedClass)
     }
     // Store state in localStorage
     localStorage.setItem("sidebarCollapsed", collapsed)
