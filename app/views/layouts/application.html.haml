@@ -16,10 +16,11 @@
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body{"data-controller": "sidebar"}
-    = render Layout::HeaderComponent.new(current_user: current_user)
     = render Flash::FlashMessageComponent.new(notice: notice, alert: alert)
-    -# = render MobileMenu::MobileMenuComponent.new(current_user: current_user)
-    .flex.flex-1.overflow-hidden
-      = render Sidebar::SidebarComponent.new(current_user: current_user)
-      %main.flex-1.overflow-y-auto.p-4
-        = yield
+    .flex.flex-col.h-screen.bg-gray-50
+      = render Layout::HeaderComponent.new(current_user: current_user)
+      .flex.flex-1.overflow-hidden
+        = render Sidebar::SidebarComponent.new(current_user: current_user)
+        %main.flex-1.overflow-y-auto.p-6
+          .max-w-7xl.mx-auto
+            = yield
