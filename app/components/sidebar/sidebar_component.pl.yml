@@ -1,10 +1,4 @@
 pl:
-  logo: Szkoleo
   dashboard: Nasze kursy
   created_courses: Twórz kursy
-  sign_in: Zaloguj się
-  sign_out: Wyloguj mnie
-  edit_profile: Ustawienia profilu
-  instructor_links: Narzędzia instruktorów
-  admin_links: Narzędzia administratora
   my_courses: "Moje kursy"

@@ -19,9 +19,6 @@ application.register("highlight-code-block", HighlightCodeBlockController)
 import InlineCodeTrixController from "./inline_code_trix_controller"
 application.register("inline-code-trix", InlineCodeTrixController)
 
-import MobileMenuController from "./mobile_menu_controller"
-application.register("mobile-menu", MobileMenuController)
-
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
