@@ -3,6 +3,8 @@ pl:
     name: "EduForge"
     title:
       home: "EduForge - nowoczesna platforma edukacyjna"
+      instructor:
+        new_course: "Wybierz kategorię kursu do stworzenia"
   controllers:
     alerts:
       must_be_instructor: Musisz być instruktorem, aby wykonać tę akcję.
