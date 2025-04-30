@@ -2,42 +2,62 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["content", "aside", "button"]
-  itemCollapsedClass = "hidden"
-  asideCollapsedClasses = ["w-0", "md:w-16"]
-  asideExpandedClass = "w-64"
-  buttonExpandedClass = "mr-3"
+
+  static values = {
+    collapsed: { type: Boolean, default: false }
+  }
+
+  // Class mappings for different states
+  static classes = {
+    content: {
+      collapsed: "hidden",
+    },
+    aside: {
+      collapsed: ["w-0", "md:w-16"],
+      expanded: "w-64"
+    },
+    button: {
+      expanded: "mr-3"
+    }
+  }
 
   connect() {
-    const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true"
-    this.toggleCollapsed(isCollapsed)
+    // Initialize from localStorage or default
+    this.collapsedValue = localStorage.getItem("sidebarCollapsed") === "true"
   }
 
   toggle() {
-    const isCurrentlyCollapsed = this.contentTargets.some(target => target.classList.contains(this.itemCollapsedClass))
-    this.toggleCollapsed(!isCurrentlyCollapsed)
+    this.collapsedValue = !this.collapsedValue
+    localStorage.setItem("sidebarCollapsed", this.collapsedValue)
   }
 
-  toggleCollapsed(collapsed) {
-    if (collapsed) {
-      this.contentTargets.forEach(target => {
-        target.classList.add(this.itemCollapsedClass)
-      })
-      this.buttonTargets.forEach(target => {
-        target.classList.remove(this.buttonExpandedClass)
-      })
-      this.asideTarget.classList.add(...this.asideCollapsedClasses)
-      this.asideTarget.classList.remove(this.asideExpandedClass)
+  collapsedValueChanged() {
+    this.#updateContentVisibility()
+    this.#updateButtonSpacing()
+    this.#updateAsideWidth()
+  }
+
+  // Private methods for updating different parts of the sidebar
+  #updateContentVisibility() {
+    this.contentTargets.forEach(target => {
+      target.classList.toggle(this.constructor.classes.content.collapsed, this.collapsedValue)
+    })
+  }
+
+  #updateButtonSpacing() {
+    this.buttonTargets.forEach(target => {
+      target.classList.toggle(this.constructor.classes.button.expanded, !this.collapsedValue)
+    })
+  }
+
+  #updateAsideWidth() {
+    const { collapsed, expanded } = this.constructor.classes.aside
+    if (this.collapsedValue) {
+      this.asideTarget.classList.add(...collapsed)
+      this.asideTarget.classList.remove(expanded)
     } else {
-      this.contentTargets.forEach(target => {
-        target.classList.remove(this.itemCollapsedClass)
-      })
-      this.buttonTargets.forEach(target => {
-        target.classList.add(this.buttonExpandedClass)
-      })
-      this.asideTarget.classList.remove(...this.asideCollapsedClasses)
-      this.asideTarget.classList.add(this.asideExpandedClass)
+      this.asideTarget.classList.remove(...collapsed)
+      this.asideTarget.classList.add(expanded)
     }
-    // Store state in localStorage
-    localStorage.setItem("sidebarCollapsed", collapsed)
   }
 }
