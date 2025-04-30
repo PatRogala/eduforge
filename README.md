@@ -9,7 +9,6 @@
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/PatRogala/eduforge/actions/workflows/ci.yml/badge.svg)](https://github.com/PatRogala/eduforge/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/PatRogala/eduforge/badge.svg?branch=main)](https://coveralls.io/github/PatRogala/eduforge?branch=main)
 
 </div>
 
