@@ -15,7 +15,7 @@
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
-  %body
+  %body{"data-controller": "sidebar"}
     = render Layout::HeaderComponent.new(current_user: current_user)
     = render Flash::FlashMessageComponent.new(notice: notice, alert: alert)
     -# = render MobileMenu::MobileMenuComponent.new(current_user: current_user)

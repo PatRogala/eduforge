@@ -25,5 +25,10 @@ application.register("mobile-menu", MobileMenuController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
+// Used in header component for avatar dropdown
 import Dropdown from "@stimulus-components/dropdown"
 application.register("dropdown", Dropdown)
+
+// Used in main layout with header and sidebar components
+import Sidebar from "./sidebar_controller"
+application.register("sidebar", Sidebar)
