@@ -12,44 +12,6 @@ alwaysApply: false
 *   **Tailwind CSS:** Utility-first CSS framework. Configured in `tailwind.config.js`, main input `app/assets/tailwind/application.css`, output `app/assets/builds/application.css`.
 *   **Bun:** Used for JavaScript dependency management (`package.json`) and bundling (`bun.config.js`).
 
-## Stimulus Controllers (`app/javascript/controllers/`)
-
-*   **`ace_editor_controller.js`**:
-    *   Integrates the Ace code editor.
-    *   Targets: `editor` (div for Ace), `input` (hidden input to store value).
-    *   Values: `theme` (default 'github'), `mode` (default 'ruby'), `content`.
-    *   Connects Ace editor instance to the `editor` target, sets theme/mode, syncs content with the `input` target on change.
-    *   Used in `_programming_task_form.html.haml`.
-*   **`avatar_preview_controller.js`**:
-    *   Provides live preview for avatar uploads.
-    *   Targets: `input` (file input), `preview` (img tag).
-    *   Reads the selected image file and updates the `preview` target's `src`. Hides placeholder if present.
-    *   Used in `devise/registrations/edit.html.haml`.
-*   **`flash_controller.js`**:
-    *   Animates flash messages (slide in, fade out).
-    *   Targets: `message`.
-    *   Values: `hideAfter` (milliseconds).
-    *   Used in `Flash::FlashMessageComponent`.
-*   **`highlight_code_block_controller.js`**:
-    *   Applies syntax highlighting using `highlight.js` (specifically for Ruby).
-    *   Targets `pre` tags within its scope.
-    *   Configured to use `github-dark.css` theme.
-    *   Used in `layouts/action_text/contents/_content.html.haml` to highlight code within Trix content. Also potentially used in `instructor/programming_courses/edit.html.haml`'s rich text area.
-*   **`inline_code_trix_controller.js`**:
-    *   Modifies the Trix editor toolbar to add support for inline `<code>` tags.
-    *   Adds a new `inlineCode` text attribute to Trix.
-    *   Dynamically shows/hides the block code vs. inline code button based on selection context.
-    *   Likely attached to elements containing `rich_text_area` fields.
-*   **`mobile_menu_controller.js`**:
-    *   Toggles the visibility of the mobile navigation menu.
-    *   Targets: `menu`.
-    *   Adds/removes Tailwind transform classes (`translate-x-full`, `translate-x-0`) to slide the menu. Manages body scroll lock.
-    *   Used in `MobileMenu::MobileMenuComponent`.
-*   **`toggle_controller.js`**:
-    *   Generic controller to toggle the visibility (`hidden` class) of target elements.
-    *   Targets: `element` (one or more elements to toggle).
-    *   Used in `instructor/programming_course_lessons/new.html.haml` and `edit.html.haml` to show/hide the programming task form based on a checkbox.
-
 ## CSS Structure
 
 *   **Tailwind:** Main framework, configured via `tailwind.config.js`. Build process defined in `package.json` (`build:css` script).
