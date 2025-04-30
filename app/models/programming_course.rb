@@ -53,7 +53,7 @@ class ProgrammingCourse < ApplicationRecord
 
   def approximate_duration_in_hours
     Rails.cache.fetch("programming_course_#{id}_approximate_duration_in_hours", expires_in: 1.day) do
-      (approximate_duration_in_minutes / 60.0).round(1)
+      (approximate_duration_in_minutes / 60.0).ceil
     end
   end
 

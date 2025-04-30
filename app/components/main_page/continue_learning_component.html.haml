@@ -1,0 +1,32 @@
+.mt-8
+  .flex.justify-between.items-center.mb-4
+    %h2.text-xl.font-semibold.text-gray-900= t(".title")
+    = link_to my_courses_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-700 flex items-center" do
+      = t(".view_all")
+      = lucide_icon("arrow-right", class: "ml-1 h-4 w-4")
+  .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+    - courses.each do |course|
+      .bg-white.rounded-xl.overflow-hidden.shadow-sm.border.border-gray-100.hover:shadow-md.transition-shadow.duration-200
+        .relative
+          = image_tag course.cover_image, class: "w-full h-40 object-cover"
+          .absolute.top-3.left-3.bg-white.bg-opacity-90.px-2.py-1.rounded-md.text-xs.font-medium Programowanie
+          = link_to course, class: "absolute bottom-3 right-3 bg-white rounded-full p-2 shadow-md hover:bg-indigo-50" do
+            = lucide_icon("circle-play", class: "text-indigo-600 h-6")
+        .p-4
+          %h3.font-medium.text-gray-900.mb-1.line-clamp-2= course.title
+          %p.text-gray-500.text-sm.mb-3= course.instructor.email
+          .mb-3
+            .w-full.bg-gray-100.rounded-full.overflow-hidden{class: "h-1.5"}
+              .h-full.bg-indigo-600.rounded-full{style: "width: 0%;"}
+            .flex.justify-between.mt-1
+              %span.text-xs.font-medium.text-gray-600 0% ukończono
+              %span.text-xs.text-gray-500 0/#{course.programming_course_lessons.count} lekcji
+          .flex.items-center.text-sm.text-gray-500
+            %svg.lucide.lucide-clock.mr-1{fill: "none", height: "14", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "14", xmlns: "http://www.w3.org/2000/svg"}
+              %circle{cx: "12", cy: "12", r: "10"}
+              %polyline{points: "12 6 12 12 16 14"}
+            %span #{course.approximate_duration_in_hours} h
+            %svg.lucide.lucide-book-open.ml-3.mr-1{fill: "none", height: "14", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "14", xmlns: "http://www.w3.org/2000/svg"}
+              %path{d: "M12 7v14"}
+              %path{d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"}
+            %span #{course.programming_course_lessons.count} lekcji
