@@ -1,13 +1,3 @@
-.flex.flex-col.md:flex-row.md:items-center.md:justify-between.mb-6
-  %div
-    %h1.text-2xl.font-bold.text-gray-900 Welcome back, Alex
-    %p.text-gray-600 Continue your learning journey
-  .mt-3.md:mt-0.flex.items-center.space-x-2
-    %span.text-sm.font-medium.text-indigo-600.flex.items-center
-      %svg.lucide.lucide-trending-up.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}>
-        %polyline{points: "22 7 13.5 15.5 8.5 10.5 2 17"}
-        %polyline{points: "16 7 22 7 22 13"}
-      Your learning progress is on track
-
+= render MainPage::UserWelcomeComponent.new(user: current_user)
 = render MainPage::UserStatsComponent.new(user: current_user)
 = render MainPage::CoursesListComponent.new

@@ -1,0 +1,4 @@
+pl:
+  welcome_back: "Witaj ponownie, %{name}!"
+  continue_learning: "Czego chcesz się dziś nauczyć?"
+  learning_progress_on_track: "Dajesz czadu, oby tak dalej!"
