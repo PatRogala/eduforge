@@ -140,7 +140,7 @@ pl:
       title: Odkryj nasze kursy
       view_all: Sprawdź katalog
       courses: kursów
-    my_courses:
+    my:
       my_courses: "Moje kursy"
       no_courses: "Nie jesteś zapisany na żadne kursy"
       browse_courses: "Przeglądaj dostępne kursy"

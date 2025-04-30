@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # Generic routes for courses
   resources :courses, only: %i[index] do
     collection do
-      get :my_courses
+      get :my
     end
   end
 
