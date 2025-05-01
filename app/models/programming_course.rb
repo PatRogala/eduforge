@@ -60,4 +60,8 @@ class ProgrammingCourse < ApplicationRecord
   def first_lesson
     programming_course_lessons.order(:created_at).first
   end
+
+  def enrolled_users_count
+    programming_course_enrollments.count
+  end
 end

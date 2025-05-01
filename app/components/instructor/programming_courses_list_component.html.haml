@@ -1,0 +1,86 @@
+.p-6
+  .flex.flex-col.md:flex-row.md:items-center.md:justify-between.mb-6
+    %div
+      %h1.text-2xl.font-bold.text-gray-900= t(".title")
+      %p.text-gray-600.mt-1= t(".description")
+    = link_to new_instructor_programming_course_path, class: "mt-4 md:mt-0 inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors" do
+      = lucide_icon("circle-plus", class: "mr-2 w-5")
+      = t(".new_course")
+  .grid.grid-cols-1.md:grid-cols-4.gap-6.mb-8
+    .bg-white.p-4.rounded-xl.border.border-gray-100
+      .flex.items-center
+        .p-2.bg-indigo-50.rounded-lg
+          = lucide_icon("book-open", class: "text-indigo-600 w-5 h-5")
+        .ml-3
+          %p.text-sm.text-gray-500= t(".total_courses")
+          %p.font-semibold.text-gray-900= total_courses
+    .bg-white.p-4.rounded-xl.border.border-gray-100
+      .flex.items-center
+        .p-2.bg-green-50.rounded-lg
+          = lucide_icon("users", class: "text-green-600 w-5 h-5")
+        .ml-3
+          %p.text-sm.text-gray-500= t(".total_students")
+          %p.font-semibold.text-gray-900= total_students
+    .bg-white.p-4.rounded-xl.border.border-gray-100
+      .flex.items-center
+        .p-2.bg-yellow-50.rounded-lg
+          = lucide_icon("star", class: "text-yellow-600 w-5 h-5")
+        .ml-3
+          %p.text-sm.text-gray-500= t(".average_rating")
+          %p.font-semibold.text-gray-900= average_rating
+    .bg-white.p-4.rounded-xl.border.border-gray-100
+      .flex.items-center
+        .p-2.bg-purple-50.rounded-lg
+          = lucide_icon("chart-no-axes-column", class: "text-purple-600 w-5 h-5")
+        .ml-3
+          %p.text-sm.text-gray-500= t(".total_revenue")
+          %p.font-semibold.text-gray-900= total_revenue
+  .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+    - courses.each do |course|
+      .bg-white.rounded-xl.border.border-gray-100.overflow-hidden.hover:shadow-md.transition-shadow.duration-200
+        .relative
+          = image_tag course.cover_image, class: "w-full h-48 object-cover"
+          .absolute.top-3.left-3.flex.space-x-2
+            %span.px-2.py-1.rounded-md.text-xs.font-medium.bg-green-100.text-green-700= t(".published")
+          .absolute.top-3.right-3
+            .relative.group
+              %button.p-2.bg-white.rounded-full.shadow-sm.hover:bg-gray-50
+                = lucide_icon("ellipsis-vertical", class: "text-gray-600 w-4 h-4")
+              .absolute.right-0.mt-0.w-48.bg-white.rounded-lg.shadow-lg.border.border-gray-100.py-1.hidden.group-hover:block
+                = link_to instructor_programming_course_path(course), class: "w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center" do
+                  = lucide_icon("square-pen", class: "w-4 h-4 mr-2")
+                  = t(".course_details")
+                %button.w-full.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-50.flex.items-center
+                  = lucide_icon("play", class: "w-4 h-4 mr-2")
+                  = t(".publish")
+        .p-4
+          %h3.font-medium.text-gray-900.text-lg.mb-2.line-clamp-2= course.title
+          %p.text-sm.text-gray-500.mb-4= t(".last_updated", time: course.updated_at.strftime("%d %b %Y"))
+          .grid.grid-cols-2.gap-4.mb-4
+            .flex.items-center
+              .p-2.bg-indigo-50.rounded-lg.mr-3
+                = lucide_icon("users", class: "text-indigo-600 w-4 h-4")
+              %div
+                %p.text-sm.font-medium.text-gray-900= course.enrolled_users_count
+                %p.text-xs.text-gray-500= t(".students")
+            .flex.items-center
+              .p-2.bg-yellow-50.rounded-lg.mr-3
+                %svg.lucide.lucide-star.text-yellow-600{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
+                  %polygon{points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"}
+              %div
+                .flex.items-center
+                  %p.text-sm.font-medium.text-gray-900 5.0
+                  %p.text-xs.text-gray-500.ml-1 (0)
+                %p.text-xs.text-gray-500= t(".rating")
+          .flex.items-center.justify-between.pt-4.border-t.border-gray-100
+            .flex.items-center
+              %svg.lucide.lucide-chart-no-axes-column.text-gray-400.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
+                %line{x1: "18", x2: "18", y1: "20", y2: "10"}
+                %line{x1: "12", x2: "12", y1: "20", y2: "4"}
+                %line{x1: "6", x2: "6", y1: "20", y2: "14"}
+              %span.text-sm.font-medium.text-gray-900 0 PLN
+            %button.text-sm.font-medium.text-indigo-600.hover:text-indigo-700= t(".view_analytics")
+  - if courses.empty?
+    .bg-white.rounded-xl.border.border-gray-100.overflow-hidden
+      .p-4
+        %p.text-lg.text-gray-600= t(".no_courses")

@@ -1,0 +1,16 @@
+pl:
+  title: Stworzone kursy programowania
+  description: Tutaj możesz zarządzać swoimi kursami programowania.
+  new_course: Nowy kurs
+  total_courses: Liczba kursów
+  total_students: Liczba studentów
+  average_rating: Średnia ocena
+  total_revenue: Łączny dochód
+  published: Opublikowany
+  course_details: Szczegóły kursu
+  publish: Opublikuj
+  last_updated: "Ostatnia aktualizacja: %{time}"
+  students: Zapisanych
+  rating: Ocena
+  view_analytics: Wyświetl analizę
+  no_courses: Nie masz jeszcze żadnych kursów. Utwórz nowy kurs, aby rozpocząć.
