@@ -1,0 +1,19 @@
+pl:
+  lessons_count:
+    one: "1 lekcja"
+    other: "%{count} lekcji"
+  already_enrolled: "Jesteś zapisany na ten kurs"
+  enroll_now: "Zapisz się teraz"
+  course_includes: "Ten kurs obejmuje:"
+  hours_of_content: "%{count} godzin kontentu"
+  full_lifetime_access: "Dożywotni dostęp"
+  certificate_of_completion: "Certyfikat ukończenia"
+  course_content: "Treść kursu"
+  chapters_count:
+    one: "1 rozdział"
+    few: "%{count} rozdziały"
+    other: "%{count} rozdziałów"
+  total_length:
+    one: "1 godzina"
+    other: "%{count} godzin"
+

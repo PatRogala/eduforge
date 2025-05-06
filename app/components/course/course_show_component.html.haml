@@ -1,0 +1,100 @@
+.min-h-screen.bg-gray-50
+  .bg-white.border-b.border-gray-200
+    .max-w-7xl.mx-auto.px-4.py-8
+      .grid.grid-cols-1.lg:grid-cols-3.gap-8
+        .lg:col-span-2
+          %h1.text-3xl.font-bold.text-gray-900.mb-4= course.title
+          = image_tag course.cover_image, class: "w-full object-cover rounded-lg mb-6"
+          .my-6
+            = course.description
+          .flex.flex-wrap.items-center.gap-4.text-sm.text-gray-600.mb-6
+            -# .flex.items-center
+              -# TODO: Add rating
+              -# %svg.lucide.lucide-star.text-yellow-400.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
+              -#   %polygon{points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"}
+              -# %span.font-medium.text-gray-900 4.8
+              -# %span.ml-1 (256 reviews)
+            .flex.items-center
+              = lucide_icon("user", class: "mr-1 h-4 w-4")
+              %span= students_count
+            .flex.items-center
+              = lucide_icon("clock", class: "mr-1 h-4 w-4")
+              %span #{approximate_duration_in_hours} h
+            .flex.items-center
+              = lucide_icon("book-open", class: "mr-1 h-4 w-4")
+              %span= t(".lessons_count", count: lessons_count)
+            -# TODO: Add language
+            -# .flex.items-center
+            -#   %svg.lucide.lucide-globe.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
+            -#     %circle{cx: "12", cy: "12", r: "10"}
+            -#     %path{d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"}
+            -#     %path{d: "M2 12h20"}
+            -#   %span English
+            .flex.items-center
+              = lucide_icon("file-text", class: "mr-1 h-4 w-4")
+              %span= course.created_at.strftime("%B %Y")
+          .flex.items-center
+            .w-10.h-10.rounded-full.bg-indigo-100.flex.items-center.justify-center
+              - if course.instructor.avatar.attached?
+                = image_tag course.instructor.avatar, class: "h-full w-full rounded-full"
+              - else
+                = lucide_icon("user", class: "h-5 w-5 text-indigo-600")
+            .ml-3
+              %p.text-sm.font-medium.text-gray-900= course.instructor.email
+              -# %p.text-sm.text-gray-500 Senior Software Engineer TODO: Add instructor title
+        .lg:col-span-1
+          .bg-white.rounded-lg.border.border-gray-200.shadow-sm.sticky.top-4
+            .p-6
+              .flex.items-center.justify-between.mb-4
+                %span.text-3xl.font-bold.text-gray-900 Darmowy
+              - if current_user&.enrolled_in_programming_courses?(@course)
+                .mt-6.block.w-full.rounded-md.bg-green-100.px-4.py-3.text-center.text-base.font-semibold.text-green-800.mb-4
+                  = lucide_icon 'check-circle', class: 'inline-block w-5 h-5 mr-2 -mt-1'
+                  = t('.already_enrolled')
+              - else
+                = button_to programming_course_enrollments_path(id: @course.slug),
+                            class: "w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors mb-4 cursor-pointer" do
+                  = t('.enroll_now')
+              .space-y-4
+                %h4.font-medium.text-gray-900= t(".course_includes")
+                %ul.space-y-3
+                  %li.flex.items-center.text-sm.text-gray-600
+                    = lucide_icon("circle-play", class: "mr-2 h-4 w-4")
+                    = t(".hours_of_content", count: course.approximate_duration_in_hours)
+                  %li.flex.items-center.text-sm.text-gray-600
+                    = lucide_icon("book-open", class: "mr-2 h-4 w-4")
+                    = t(".lessons_count", count: lessons_count)
+                  %li.flex.items-center.text-sm.text-gray-600
+                    = lucide_icon("message-square", class: "mr-2 h-4 w-4")
+                    = t(".full_lifetime_access")
+                  %li.flex.items-center.text-sm.text-gray-600
+                    = lucide_icon("award", class: "mr-2 h-4 w-4")
+                    = t(".certificate_of_completion")
+  .max-w-7xl.mx-auto.px-4.py-8
+    .grid.grid-cols-1.lg:grid-cols-3.gap-8
+      .lg:col-span-2
+        -# TODO: Add what you'll learn
+        -# .bg-white.rounded-lg.border.border-gray-200.p-6.mb-8
+        -#   %h2.text-xl.font-bold.text-gray-900.mb-4 What you'll learn
+        -#   .grid.grid-cols-1.md:grid-cols-2.gap-4
+        -#     .flex.items-start
+        -#       %svg.lucide.lucide-circle-check-big.text-green-500.mr-2.mt-1.flex-shrink-0{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
+        -#         %path{d: "M21.801 10A10 10 0 1 1 17 3.335"}
+        -#         %path{d: "m9 11 3 3L22 4"}
+        -#       %span.text-gray-600 Build enterprise-grade React applications
+        .bg-white.rounded-lg.border.border-gray-200.p-6
+          %h2.text-xl.font-bold.text-gray-900.mb-4= t(".course_content")
+          .mb-4.flex.items-center.justify-between
+            %span.text-sm.text-gray-600
+              = t(".chapters_count", count: chapters_count) + " • "
+              = t(".lessons_count", count: lessons_count) + " • "
+              = t(".total_length", count: approximate_duration_in_hours)
+          .border.border-gray-200.rounded-lg.mb-3
+            - chapters.each do |chapter|
+              %button.w-full.px-4.py-4.flex.items-center.justify-between.hover:bg-gray-50.cursor-pointer
+                .flex.items-center
+                  .mr-3
+                    = lucide_icon "chevron-down", class: "text-gray-500"
+                  .text-left
+                    %h3.font-medium.text-gray-900= chapter.title
+                    %p.text-sm.text-gray-500= t(".lessons_count", count: chapter.programming_course_lessons.count)
