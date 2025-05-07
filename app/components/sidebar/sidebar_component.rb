@@ -36,13 +36,6 @@ module Sidebar
 
     private
 
-    def active_link_class(path)
-      current_path = request.path
-      active_classes = "bg-indigo-50 text-indigo-600"
-      inactive_classes = "hover:bg-gray-100 text-gray-700"
-      current_path == path ? active_classes : inactive_classes
-    end
-
     def instructor?
       current_user&.instructor?
     end
@@ -56,8 +49,22 @@ module Sidebar
     end
 
     def render_link(link)
-      link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
-        concat(content_tag(:span, lucide_icon(link[:icon], class: "w-5 h-5"), class: "mr-3", "data-sidebar-target": "button"))
+      path = link[:path]
+      is_active = current_page?(path)
+
+      base_classes = "flex items-center px-3 py-2 rounded-sm text-sm font-medium transition-colors duration-150 ease-in-out"
+
+      state_classes = if is_active
+                        "bg-sky-100 text-sky-800 font-semibold shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)]"
+                      else
+                        "text-sky-700 hover:bg-sky-100 hover:text-sky-900"
+                      end
+
+      icon_color_class = is_active ? "text-sky-800" : "text-sky-600"
+
+      link_to path, class: "#{base_classes} #{state_classes}" do
+        icon_html = lucide_icon(link[:icon], class: "w-5 h-5 #{icon_color_class}")
+        concat(content_tag(:span, icon_html, class: "mr-3 flex-shrink-0", "data-sidebar-target": "button"))
         concat(content_tag(:span, t(link[:title]), class: "flex-1 whitespace-nowrap transition-opacity duration-300", "data-sidebar-target": "content"))
       end
     end
