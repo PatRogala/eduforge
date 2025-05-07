@@ -2,37 +2,37 @@
 .grid.grid-cols-2.md:grid-cols-4.gap-4
 
   / --- Courses Completed Stat Block ---
-  .bg-white.p-3.rounded-sm.border-2.border-sky-200{class: "shadow-[2px_2px_0_0_theme(colors.sky.300)]"}
+  .bg-white.p-3.rounded-sm.border-2.border-blue-200{class: "shadow-[2px_2px_0_0_theme(colors.blue.300)]"}
     .flex.items-center
       .p-2.rounded-sm.mr-3{class: "bg-green-500 border-2 border-green-700 shadow-[2px_2px_0_0_theme(colors.green.800)]"}
         = lucide_icon("circle-check-big", class: "text-white w-5 h-5")
       %div
-        %p.text-xs.text-sky-700= t(".courses_completed")
-        %p.font-semibold.text-sky-900.text-lg= completed_courses_count
+        %p.text-xs.text-blue-700= t(".courses_completed")
+        %p.font-semibold.text-blue-900.text-lg= completed_courses_count
 
   / --- Hours Learned Stat Block ---
-  .bg-white.p-3.rounded-sm.border-2.border-sky-200{class: "shadow-[2px_2px_0_0_theme(colors.sky.300)]"}
+  .bg-white.p-3.rounded-sm.border-2.border-blue-200{class: "shadow-[2px_2px_0_0_theme(colors.blue.300)]"}
     .flex.items-center
       .p-2.rounded-sm.mr-3{class: "bg-yellow-400 border-2 border-yellow-600 shadow-[2px_2px_0_0_theme(colors.yellow.700)]"}
         = lucide_icon("clock", class: "text-yellow-800 w-5 h-5")
       %div
-        %p.text-xs.text-sky-700= t(".hours_learned")
-        %p.font-semibold.text-sky-900.text-lg= hours_learned_count
+        %p.text-xs.text-blue-700= t(".hours_learned")
+        %p.font-semibold.text-blue-900.text-lg= hours_learned_count
 
   / --- Certificates Earned Stat Block ---
-  .bg-white.p-3.rounded-sm.border-2.border-sky-200{class: "shadow-[2px_2px_0_0_theme(colors.sky.300)]"}
+  .bg-white.p-3.rounded-sm.border-2.border-blue-200{class: "shadow-[2px_2px_0_0_theme(colors.blue.300)]"}
     .flex.items-center
       .p-2.rounded-sm.mr-3{class: "bg-orange-500 border-2 border-orange-700 shadow-[2px_2px_0_0_theme(colors.orange.800)]"}
         = lucide_icon("award", class: "text-white w-5 h-5")
       %div
-        %p.text-xs.text-sky-700= t(".certificates_earned")
-        %p.font-semibold.text-sky-900.text-lg= certificates_earned_count
+        %p.text-xs.text-blue-700= t(".certificates_earned")
+        %p.font-semibold.text-blue-900.text-lg= certificates_earned_count
 
   / --- Current Streak Stat Block ---
-  .bg-white.p-3.rounded-sm.border-2.border-sky-200{class: "shadow-[2px_2px_0_0_theme(colors.sky.300)]"}
+  .bg-white.p-3.rounded-sm.border-2.border-blue-200{class: "shadow-[2px_2px_0_0_theme(colors.blue.300)]"}
     .flex.items-center
-      .p-2.rounded-sm.mr-3{class: "bg-rose-500 border-2 border-sky-700 shadow-[2px_2px_0_0_theme(colors.sky.800)]"}
+      .p-2.rounded-sm.mr-3{class: "bg-rose-500 border-2 border-blue-700 shadow-[2px_2px_0_0_theme(colors.blue.800)]"}
         = lucide_icon("flame", class: "text-white w-5 h-5")
       %div
-        %p.text-xs.text-sky-700= t(".current_streak")
-        %p.font-semibold.text-sky-900.text-lg= current_streak_count
+        %p.text-xs.text-blue-700= t(".current_streak")
+        %p.font-semibold.text-blue-900.text-lg= current_streak_count

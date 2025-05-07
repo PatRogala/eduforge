@@ -1,10 +1,10 @@
 / Main header
-%header{class: "bg-sky-500 text-white py-2 shadow-[0_3px_0_0_theme(colors.sky.700)]"}
+%header{class: "bg-blue-500 text-white py-2 shadow-[0_3px_0_0_theme(colors.blue.700)]"}
   .flex.justify-between.items-center.px-4
     / --- Left Section: Menu Toggle & Logo/App Name ---
     .flex.items-center
       / Sidebar Toggle Button
-      %button.p-2.mr-3.rounded-sm.focus:outline-none.transition-all.duration-100.ease-in-out{class: "bg-sky-600 hover:bg-sky-700 border-2 border-sky-800 shadow-[2px_2px_0_0_theme(colors.sky.900)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.sky.900)]", "data-action": "click->sidebar#toggle"}
+      %button.p-2.mr-3.rounded-sm.focus:outline-none.transition-all.duration-100.ease-in-out{class: "bg-blue-600 hover:bg-blue-700 border-2 border-blue-800 shadow-[2px_2px_0_0_theme(colors.blue.900)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.blue.900)]", "data-action": "click->sidebar#toggle"}
         = lucide_icon("menu", class: "text-white w-5 h-5")
 
       / Logo & App Name
@@ -16,14 +16,14 @@
         %span.font-bold.text-xl.text-white.select-none{class: "drop-shadow-[1.5px_1.5px_0_rgba(0,0,0,0.25)]"}= t("app.name")
 
     / --- Search Bar (Desktop) ---
-    .hidden.md:flex.items-center.px-3.rounded-sm.flex-1.max-w-xl.mx-4.py-1{class: "bg-sky-100 border-2 border-sky-300 shadow-inner-lg"}
-      = lucide_icon("search", class: "text-sky-600 h-5 mr-2")
-      %input.bg-transparent.border-none.outline-none.w-full.text-sm.text-sky-800.placeholder-sky-500{placeholder: t(".search.placeholder"), type: "text"}
+    .hidden.md:flex.items-center.px-3.rounded-sm.flex-1.max-w-xl.mx-4.py-1{class: "bg-blue-100 border-2 border-blue-300 shadow-inner-lg"}
+      = lucide_icon("search", class: "text-blue-600 h-5 mr-2")
+      %input.bg-transparent.border-none.outline-none.w-full.text-sm.text-blue-800.placeholder-blue-500{placeholder: t(".search.placeholder"), type: "text"}
 
     / --- Right Section: Mobile Search & Auth Links/User Avatar ---
     .flex.items-center.space-x-3
       / Mobile Search Button
-      %button.md:hidden.p-2.rounded-sm.focus:outline-none.transition-all.duration-100.ease-in-out{class: "bg-sky-600 hover:bg-sky-700 border-2 border-sky-800 shadow-[2px_2px_0_0_theme(colors.sky.900)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.sky.900)]"}
+      %button.md:hidden.p-2.rounded-sm.focus:outline-none.transition-all.duration-100.ease-in-out{class: "bg-blue-600 hover:bg-blue-700 border-2 border-blue-800 shadow-[2px_2px_0_0_theme(colors.blue.900)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.blue.900)]"}
         = lucide_icon("search", class: "text-white h-5 w-5")
 
       / Authentication Section

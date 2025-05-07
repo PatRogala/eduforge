@@ -55,12 +55,12 @@ module Sidebar
       base_classes = "flex items-center px-3 py-2 rounded-sm text-sm font-medium transition-colors duration-150 ease-in-out"
 
       state_classes = if is_active
-                        "bg-sky-100 text-sky-800 font-semibold shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)]"
+                        "bg-blue-100 text-blue-800 font-semibold shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)]"
                       else
-                        "text-sky-700 hover:bg-sky-100 hover:text-sky-900"
+                        "text-blue-700 hover:bg-blue-100 hover:text-blue-900"
                       end
 
-      icon_color_class = is_active ? "text-sky-800" : "text-sky-600"
+      icon_color_class = is_active ? "text-blue-800" : "text-blue-600"
 
       link_to path, class: "#{base_classes} #{state_classes}" do
         icon_html = lucide_icon(link[:icon], class: "w-5 h-5 #{icon_color_class}")

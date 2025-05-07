@@ -1,54 +1,46 @@
 .mt-8
   / --- Section Header ---
   .flex.justify-between.items-center.mb-4
-    %h2.text-xl.font-bold.text-sky-900{class: "drop-shadow-[1px_1px_0_rgba(0,0,0,0.1)]"}= t(".title")
-    / View All Link: Styled as a subtle button/link
-    = link_to my_courses_path, class: "flex items-center px-2.5 py-1 text-sm font-semibold rounded-sm transition-all duration-100 ease-in-out text-sky-100 bg-sky-500 hover:bg-sky-600 border-2 border-sky-700 shadow-[2px_2px_0_0_theme(colors.sky.800)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.sky.800)]" do
+    %h2.text-xl.font-bold.text-blue-900{class: "drop-shadow-[1px_1px_0_rgba(0,0,0,0.1)]"}= t(".title")
+    / View All Link
+    = link_to my_courses_path, class: "flex items-center px-2.5 py-1 text-sm font-semibold rounded-sm transition-all duration-100 ease-in-out text-blue-100 bg-blue-500 hover:bg-blue-600 border-2 border-blue-700 shadow-[2px_2px_0_0_theme(colors.blue.800)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.blue.800)]" do
       = t(".view_all")
       = lucide_icon("arrow-right", class: "ml-1.5 h-4 w-4")
 
   / --- Course Card Grid ---
   .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
     - courses.each do |course|
-      / Course Card Container: White bg, border, shadow, hover effect
-      .bg-white.rounded-sm.overflow-hidden.border-2.border-sky-200.transition-all.duration-200{class: "shadow-[3px_3px_0_0_theme(colors.sky.300)] hover:shadow-[4px_4px_0_0_theme(colors.sky.400)] hover:-translate-y-0.5 hover:-translate-x-0.5"}
+      / Course Card Container
+      .bg-white.rounded-sm.overflow-hidden.border-2.border-blue-200.transition-all.duration-200{class: "shadow-[3px_3px_0_0_theme(colors.blue.300)] hover:shadow-[4px_4px_0_0_theme(colors.blue.400)] hover:-translate-y-0.5 hover:-translate-x-0.5"}
         .relative
-          / Course Image: Maintain aspect ratio, cover
           = image_tag course.cover_image, class: "w-full h-40 object-cover"
 
-          / Category Tag "Block": Positioned top-left, orange accent
           .absolute.top-2.left-2.px-2.py-0.5.rounded-sm.text-xs.font-bold{class: "bg-orange-500 text-white border border-orange-700 shadow-[1.5px_1.5px_0_0_theme(colors.orange.800)]"}
             Programowanie
 
-          / Play Button "Block": Positioned bottom-right, green accent
           = link_to '#', class: "absolute bottom-2 right-2 flex items-center justify-center p-1.5 rounded-sm transition-all duration-100 ease-in-out text-white bg-green-500 hover:bg-green-600 border-2 border-green-700 shadow-[2px_2px_0_0_theme(colors.green.800)] active:translate-y-[1px] active:shadow-[1px_1px_0_0_theme(colors.green.800)]" do
-            -# Link destination needs updating - should link to the course player/first lesson
+            -# TODO: Link destination needs updating - should link to the course player/first lesson
             = lucide_icon("circle-play", class: "h-5 w-5")
 
         / Card Content Area
         .p-3
-          / Course Title: Dark blue, limit lines
-          %h3.font-semibold.text-sky-900.mb-1.line-clamp-2= course.title
-          / Instructor Name: Lighter blue
-          %p.text-sky-700.text-sm.mb-3= course.instructor.email
+          %h3.font-semibold.text-blue-900.mb-1.line-clamp-2= course.title
+          %p.text-blue-700.text-sm.mb-3= course.instructor.email
 
           / Progress Bar Area
           .mb-3
-            / Progress Bar Background "Trough": Light blue, blocky
-            .w-full.bg-sky-100.rounded-sm.overflow-hidden.border.border-sky-200{class: "h-2 shadow-inner"}
-              / Progress Bar Fill: Green accent, blocky
+            .w-full.bg-blue-100.rounded-sm.overflow-hidden.border.border-blue-200{class: "h-2 shadow-inner"}
               .h-full.bg-green-500.rounded-sm{style: "width: 0%;"}
 
-            / Progress Text: Darker blue text
             .flex.justify-between.mt-1.5
-              %span.text-xs.font-semibold.text-sky-800 0% ukończono
-              %span.text-xs.text-sky-600 0/#{course.programming_course_lessons.count} lekcji
+              %span.text-xs.font-semibold.text-blue-800 0% ukończono
+              %span.text-xs.text-blue-600 0/#{course.programming_course_lessons.count} lekcji
 
           / Meta Info: Duration & Lesson Count
-          .flex.items-center.text-sm.text-sky-700.space-x-3
+          .flex.items-center.text-sm.text-blue-700.space-x-3
             .flex.items-center
-              = lucide_icon("clock", class: "mr-1 h-4 w-4 text-sky-600")
+              = lucide_icon("clock", class: "mr-1 h-4 w-4 text-blue-600")
               %span #{course.approximate_duration_in_hours} h
             .flex.items-center
-              = lucide_icon("book-open", class: "mr-1 h-4 w-4 text-sky-600")
+              = lucide_icon("book-open", class: "mr-1 h-4 w-4 text-blue-600")
               %span #{course.programming_course_lessons.count} lekcji
