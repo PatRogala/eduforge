@@ -1,10 +1,16 @@
+/ Main container for layout
 .flex.flex-col.md:flex-row.md:items-center.md:justify-between.mb-6
+
+  / Left side: Welcome Text
   %div
-    %h1.text-2xl.font-bold.text-gray-900= t(".welcome_back", name: user.email)
-    %p.text-gray-600= t(".continue_learning")
-  .mt-3.md:mt-0.flex.items-center.space-x-2
-    %span.text-sm.font-medium.text-indigo-600.flex.items-center
-      %svg.lucide.lucide-trending-up.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}>
-        %polyline{points: "22 7 13.5 15.5 8.5 10.5 2 17"}
-        %polyline{points: "16 7 22 7 22 13"}
+    / Welcome Heading: Dark blue, bold, subtle text shadow
+    %h1.text-2xl.font-bold.text-sky-900{class: "drop-shadow-[1px_1px_0_rgba(0,0,0,0.15)]"}= t(".welcome_back", name: user.email)
+    / Sub-text: Slightly lighter blue
+    %p.text-sky-700.mt-1= t(".continue_learning")
+
+  / Right side: Learning Progress Indicator
+  .mt-3.md:mt-0
+    / Progress "Block": Green accent, white text, border, shadow
+    %span.inline-flex.items-center.px-3.py-1.rounded-sm.text-sm.font-semibold{class: "bg-green-500 text-white border-2 border-green-700 shadow-[2px_2px_0_0_theme(colors.green.800)]"}
+      = lucide_icon("trending-up", class: "mr-1.5 h-4 w-4 text-white")
       = t(".learning_progress_on_track")
