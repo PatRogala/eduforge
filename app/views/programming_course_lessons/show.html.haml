@@ -1,49 +1,66 @@
-%main.py-8.px-4{ class: "sm:px-6 lg:px-8 bg-gray-50 min-h-screen" }
-  .mx-auto.max-w-7xl
-    .lg:grid.lg:grid-cols-3.lg:gap-x-8.xl:gap-x-12
+%main.min-h-screen
+  .mx-auto.max-w-screen-xl.px-4.py-8{ class: "sm:px-6 lg:px-8" }
+    .lg:grid.lg:grid-cols-12.lg:gap-x-8.xl:gap-x-12
+
       -# Left Column (Main Content)
-      .lg:col-span-2.space-y-8
-        -# Lesson Header
-        %section
-          %h1.text-3xl.font-bold.tracking-tight.text-gray-900{ class: "sm:text-4xl" }= @lesson.title
-          .mt-2.flex.items-center.gap-4.text-sm.text-gray-500
-            %span.flex.items-center.gap-1
-              = lucide_icon 'file-text', class: 'w-4 h-4'
-              = @lesson.programming_course_chapter.title
-            %span.flex.items-center.gap-1
-              = lucide_icon 'clock', class: 'w-4 h-4'
-              = "#{@lesson.approximate_duration_in_minutes.round} min"
+      .lg:col-span-8.xl:col-span-9.space-y-8
+        %section.bg-bg-secondary.p-6.rounded-xl.shadow-lg.border.border-border-primary
+          %nav.flex.mb-4{"aria-label" => "Breadcrumb"}
+            %ol.flex.items-center.space-x-1.text-xs{ class: "sm:text-sm" }
+              %li
+                = link_to @lesson.programming_course.title, programming_course_path(@lesson.programming_course), class: "text-text-secondary hover:text-accent transition-colors"
+              %li
+                %svg.flex-shrink-0.h-3.w-3.text-text-tertiary{ class: "sm:h-4 sm:w-4", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg", "aria-hidden": "true"}
+                  %path{:d => "M5.555 17.776l8-16 .894.448-8 16-.894-.448z"}
+              %li
+                %span.text-text-secondary.truncate= @lesson.programming_course_chapter.title
+
+          %h1.text-3xl.font-bold.tracking-tight.text-text-primary{ class: "sm:text-4xl" }= @lesson.title
+          .mt-3.flex.flex-wrap.items-center.gap-x-4.gap-y-2.text-sm.text-text-secondary
+            %span.flex.items-center.gap-1.5
+              = lucide_icon 'book-copy', class: 'w-4 h-4 text-text-tertiary'
+              %span= @lesson.programming_course_chapter.title
+            %span.text-text-tertiary ·
+            %span.flex.items-center.gap-1.5
+              = lucide_icon 'clock-3', class: 'w-4 h-4 text-text-tertiary'
+              = t("programming_course_lessons.show.duration_minutes", count: @lesson.approximate_duration_in_minutes.round)
+
 
         -# Lesson Content
-        %section.bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-          .prose.prose-sm.sm:prose.max-w-none.text-gray-700
+        %section.bg-bg-secondary.p-6.sm:p-8.rounded-xl.shadow-lg.border.border-border-primary
+          .trix-content.text-text-primary
             = @lesson.content
 
           - if @lesson.next_lesson
-            .mt-8.pt-8.border-t.border-gray-200.flex.justify-end
-              = link_to programming_course_lesson_path(@lesson.next_lesson), class: "inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium" do
-                = t('.next_lesson')
+            .mt-10.pt-6.border-t.border-border-primary.flex.justify-end
+              = link_to programming_course_lesson_path(@lesson.next_lesson), class: "inline-flex items-center gap-2 text-accent-content bg-accent hover:bg-accent-hover font-medium px-5 py-2.5 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+                = t("programming_course_lessons.show.next_lesson")
                 = lucide_icon 'arrow-right', class: 'w-4 h-4'
 
-      -# Right Column (Navigation)
-      .mt-8.lg:mt-0.lg:col-span-1
-        %aside.lg:sticky.lg:top-8.space-y-6
+      -# Right Column (Navigation Sidebar)
+      .mt-8.lg:mt-0.lg:col-span-4.xl:col-span-3
+        %aside.lg:sticky.lg:top-6.space-y-6
           -# Course Navigation
-          .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-            %h3.text-base.font-semibold.text-gray-900.mb-4= t('.course_content')
-            .space-y-2
-              - @lesson.programming_course.programming_course_chapters.each do |chapter|
+          .bg-bg-secondary.p-5.rounded-xl.shadow-lg.border.border-border-primary
+            .flex.justify-between.items-center.mb-4
+              %h3.text-lg.font-semibold.text-text-primary= t("programming_course_lessons.show.course_content")
+              %span.text-xs.text-text-tertiary
+                = t("programming_course_lessons.show.progress_placeholder")
+
+            .space-y-3.overflow-y-auto.custom-scrollbar.pr-2{class: "max-h-[calc(100vh-10rem)]"}
+              - @lesson.programming_course.programming_course_chapters.order(:created_at).each_with_index do |chapter, chapter_index|
                 %div
-                  %h4.font-medium.text-gray-900.flex.items-center.gap-2.mb-2
-                    = lucide_icon 'folder-open', class: 'w-4 h-4 text-gray-400'
+                  %h4.font-semibold.text-text-primary.flex.items-center.gap-2.mb-2.mt-1.text-sm.pt-2.border-t.border-border-primary.first:border-t-0.first:pt-0
+                    %span.bg-bg-tertiary.text-text-secondary.rounded-full.w-5.h-5.flex.items-center.justify-center.text-xs= chapter_index + 1
                     = chapter.title
-                  %ul.space-y-1.pl-6.text-sm.text-gray-600
-                    - chapter.programming_course_lessons.each do |lesson|
-                      %li.flex.items-center.gap-2
-                        - if lesson == @lesson
-                          = lucide_icon 'file-text', class: 'w-4 h-4 text-blue-600'
-                          %span.font-medium.text-blue-600= lesson.title
-                        - else
-                          = link_to programming_course_lesson_path(lesson), class: 'flex items-center gap-2 hover:text-blue-600' do
-                            = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-400'
-                            = lesson.title
+                  %ul.space-y-1.pl-4.text-sm
+                    - chapter.programming_course_lessons.order(:created_at).each do |nav_lesson|
+                      %li
+                        = link_to programming_course_lesson_path(nav_lesson), class: "flex items-center gap-2.5 py-1.5 px-2.5 rounded-md transition-colors duration-150 #{nav_lesson == @lesson ? 'bg-accent/10 text-accent font-medium' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'}" do
+                          - if nav_lesson == @lesson
+                            = lucide_icon 'play-circle', class: 'w-4 h-4 flex-shrink-0'
+                          - else
+                            -# Placeholder for completion status icon - TODO
+                            -# %span.w-4.h-4.flex-shrink-0.border.border-text-tertiary.rounded-full
+                            = lucide_icon 'file-text', class: 'w-4 h-4 text-text-tertiary flex-shrink-0'
+                          %span.truncate= nav_lesson.title

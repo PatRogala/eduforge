@@ -172,8 +172,14 @@ pl:
       already_enrolled: "Jesteś już zapisany"
   programming_course_lessons:
     show:
-      course_content: "Kontent"
+      course_content: "Zawartość kursu"
       next_lesson: "Następna lekcja"
+      progress_placeholder: "0% ukończono" # TODO: Update when progress is implemented
+      duration_minutes:
+        one: "%{count} minuta"
+        few: "%{count} minuty"
+        many: "%{count} minut"
+        other: "%{count} minut"
   shared:
     cancel: Anuluj
     save_changes: Zapisz zmiany
