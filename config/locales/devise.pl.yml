@@ -11,3 +11,27 @@ pl:
         profile_picture_description: Dodaj zdjęcie profilowe. Zdjęcie powinno mieć proporcje 1:1.
         change: Zmień
         avatar_requirements: JPG, PNG, GIF. Maksymalny rozmiar 1MB.
+      new:
+        create_your_account: "Stwórz swoje konto"
+        sign_up_button: "Zarejestruj się"
+        already_have_account_prompt: "Masz już konto"
+        sign_in_link: "Zaloguj się"
+      shared:
+        minimum_password_length: "(minimum %{count} znaków)"
+    sessions:
+      new:
+        sign_in_to_your_account: "Zaloguj się na swoje konto"
+        forgot_your_password_link: "Nie pamiętasz hasła?"
+        remember_me: "Zapamiętaj mnie"
+        sign_in_button: "Zaloguj się"
+        no_account_prompt: "Nie masz jeszcze konta"
+        sign_up_link: "Zarejestruj się"
+    passwords:
+      new:
+        forgot_your_password_title: "Zapomniałeś hasła?"
+        forgot_password_instructions: "Wprowadź swój adres e-mail, a wyślemy Ci instrukcje dotyczące resetowania hasła."
+        send_me_reset_password_instructions_button: "Wyślij instrukcje resetowania hasła"
+        remembered_password_prompt: "Przypomniałeś sobie hasło?"
+        sign_in_link: "Zaloguj się"
+        or: "lub"
+        sign_up_link: "Zarejestruj się"

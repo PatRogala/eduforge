@@ -1,18 +1,45 @@
-%div.flex.flex-col.items-center.justify-center{class: "min-h-[90vh]"}
-  .bg-white.p-8.rounded-lg.shadow-lg.border-2.border-blue-600.w-full.max-w-md
-    %h2.text-2xl.font-bold.text-center.mb-6.text-gray-800= t('.sign_in')
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'space-y-4 w-full' }) do |f|
-      .field
-        = f.label :email, class: 'block text-sm font-medium text-gray-700 mb-1'
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent'
-      .field
-        = f.label :password, class: 'block text-sm font-medium text-gray-700 mb-1'
-        = f.password_field :password, autocomplete: "current-password", class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent'
-      - if devise_mapping.rememberable?
-        .field.flex.items-center
-          = f.check_box :remember_me, class: 'h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300 rounded'
-          = f.label :remember_me, class: 'ml-2 block text-sm text-gray-700'
-      .actions
-        = f.submit t('.sign_in'), class: 'w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-colors duration-200'
-    .mt-4.text-center
-      = render "devise/shared/links"
+%div.flex.flex-col.items-center.justify-center.px-4.py-12{class: "sm:px-6 lg:px-8"}
+  .w-full.max-w-md.space-y-8
+    %div.text-center
+      -# Optional: Add your logo here
+      -# = link_to root_path do
+      -#   = image_tag "logo_dark_theme.svg", class: "mx-auto h-12 w-auto", alt: t("app.name")
+      .mx-auto.h-12.w-12.bg-accent.rounded-lg.flex.items-center.justify-center
+        %span.text-2xl.font-bold.text-accent-content= t("app.name")[0]
+      %h2.mt-6.text-3xl.font-bold.tracking-tight.text-text-primary= t('.sign_in_to_your_account')
+
+    .bg-bg-secondary.shadow-2xl.rounded-xl.p-8.sm:p-10.border.border-border-primary
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'space-y-6' }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+
+        %div
+          = f.label :email, class: 'block text-sm font-medium text-text-secondary mb-1'
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'appearance-none block w-full px-3 py-2.5 bg-bg-tertiary border border-border-primary rounded-md shadow-sm placeholder-text-secondary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm'
+
+        %div
+          .flex.items-center.justify-between
+            = f.label :password, class: 'block text-sm font-medium text-text-secondary mb-1'
+            - if devise_mapping.recoverable? && controller_name != 'passwords'
+              .text-sm
+                = link_to t(".forgot_your_password_link"), new_password_path(resource_name), class: "font-medium text-accent hover:text-accent-hover"
+          = f.password_field :password, autocomplete: "current-password", class: 'appearance-none block w-full px-3 py-2.5 bg-bg-tertiary border border-border-primary rounded-md shadow-sm placeholder-text-secondary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm'
+
+        - if devise_mapping.rememberable?
+          .flex.items-center.justify-between
+            .flex.items-center
+              = f.check_box :remember_me, class: 'h-4 w-4 text-accent bg-bg-tertiary border-border-secondary rounded focus:ring-accent focus:ring-offset-bg-secondary'
+              = f.label :remember_me, class: 'ml-2 block text-sm text-text-secondary'
+
+        %div
+          = f.submit t('.sign_in_button'), class: 'w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary transition-colors duration-150'
+
+      - if devise_mapping.registerable? && controller_name != 'registrations'
+        %p.mt-8.text-center.text-sm.text-text-secondary
+          = t('.no_account_prompt')
+          = succeed "?" do
+            %br.sm:hidden
+          = link_to t('.sign_up_link'), new_registration_path(resource_name), class: "font-medium text-accent hover:text-accent-hover ml-1"
+
+    - unless (devise_mapping.recoverable? && controller_name != 'passwords') && (devise_mapping.registerable? && controller_name != 'registrations')
+      .mt-6.text-center.text-sm
+        = render "devise/shared/links"
