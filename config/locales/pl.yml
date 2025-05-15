@@ -11,8 +11,13 @@ pl:
   instructor:
     programming_courses:
       new:
-        title: Nowy kurs programowania
-        submit: Utwórz
+        title: "Rozpocznij Tworzenie Nowego Kursu" # Main page title
+        subtitle_html: "Nadaj swojemu kursowi chwytliwy tytuł. Możesz go później zmienić." # Subtitle
+        course_title_label: "Tytuł Kursu"
+        title_placeholder: "np. Kompletny Kurs Ruby on Rails dla Początkujących"
+        title_hint: "Dobry tytuł przyciąga uwagę i jasno komunikuje treść kursu."
+        submit_button: "Utwórz Kurs i Kontynuuj"
+        back_to_categories_link: "Wróć do wyboru kategorii"
       create:
         success: Kurs został utworzony.
       index:

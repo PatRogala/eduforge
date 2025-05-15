@@ -1,9 +1,26 @@
-%div.flex.flex-col.items-center.justify-center{class: "min-h-[80vh]"}
-  .bg-white.p-8.rounded-lg.shadow-lg.w-full.max-w-md.border-2.border-blue-600
-    %h1.text-2xl.font-bold.text-center.mb-6.text-gray-800= t('.title')
-    = form_with(model: [:instructor, @course], class: 'space-y-6 w-full') do |f|
-      .field
-        = f.text_field :title, placeholder: "Wprowadź tytuł kursu", class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors duration-200'
-        %p.text-xs.text-gray-500.mt-2 Tytuł można zmienić w dowolnym momencie.
-      .actions.mt-8
-        = f.submit t('.submit'), class: 'w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-[1.02]'
+%div.flex.flex-col.items-center.justify-center.px-4.py-12{class: "sm:px-6 lg:px-8"}
+  .w-full.max-w-lg.space-y-8{ class: "lg:max-w-xl" }
+    %div.text-center
+      .mx-auto.h-14.w-14.bg-accent.rounded-xl.flex.items-center.justify-center.shadow-lg
+        = lucide_icon("book-plus", class: "text-accent-content w-8 h-8")
+      %h1.mt-6.text-3xl.font-bold.tracking-tight.text-text-primary= t("instructor.programming_courses.new.title")
+      %p.mt-2.text-md.text-text-secondary= t("instructor.programming_courses.new.subtitle_html")
+
+    .bg-bg-secondary.shadow-2xl.rounded-xl.p-8.sm:p-10.border.border-border-primary
+      = form_with(model: [:instructor, @course], class: 'space-y-6 w-full') do |f|
+        = render "devise/shared/error_messages", resource: @course
+
+        %div
+          = f.label :title, t("instructor.programming_courses.new.course_title_label"), class: 'block text-sm font-medium text-text-secondary mb-1.5'
+          = f.text_field :title,
+                          placeholder: t("instructor.programming_courses.new.title_placeholder"),
+                          class: 'appearance-none block w-full px-4 py-3 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm',
+                          autofocus: true
+          %p.mt-2.text-xs.text-text-tertiary= t("instructor.programming_courses.new.title_hint")
+
+        .pt-2
+          = f.submit t("instructor.programming_courses.new.submit_button"),
+                      class: 'w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary transition-all duration-150 ease-in-out transform hover:scale-[1.03]'
+
+      .mt-6.text-center
+        = link_to t("instructor.programming_courses.new.back_to_categories_link"), new_instructor_course_path, class: "text-sm font-medium text-accent hover:text-accent-hover"
