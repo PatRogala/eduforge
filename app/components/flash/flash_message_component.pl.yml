@@ -1,3 +1,4 @@
 pl:
   success: "Pomyślnie zapisano zmiany"
   alert: "Wystąpił problem 😱"
+  close_notification: "Zamknij powiadomienie"
