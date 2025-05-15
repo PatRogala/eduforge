@@ -1,104 +1,100 @@
--# app/views/courses/show.html.haml (Public Course Show Page)
-
--# --- Sample Data (Replace with @course variable later) ---
-- course_price = "Darmowy"
-
-
--# --- Main Page Container ---
-%main.py-8.px-4{ class: "sm:px-6 lg:px-8 bg-gray-50 min-h-screen rounded-lg" }
-  .mx-auto.max-w-7xl
-
-    -# --- Layout Grid ---
-    .lg:grid.lg:grid-cols-3.lg:gap-x-8.xl:gap-x-12
+%main.min-h-screen
+  .mx-auto.max-w-screen-xl.px-4.py-8{ class: "sm:px-6 lg:px-8" }
+    .lg:grid.lg:grid-cols-12.lg:gap-x-8.xl:gap-x-12
 
       -# --- Left Column (Main Content) ---
-      .lg:col-span-2.space-y-8
-
-        -# Course Header: Image & Title
+      .lg:col-span-8.xl:col-span-8.space-y-8
         %section
-          %div.aspect-video.overflow-hidden.rounded-lg.shadow-lg.mb-6
+          .overflow-hidden.rounded-xl.shadow-xl.mb-6.border.border-border-primary{class: "aspect-[16/9]"}
             = image_tag @course.cover_image, class: "w-full h-full object-cover"
-          %h1.text-3xl.font-bold.tracking-tight.text-gray-900{ class: "sm:text-4xl" }= @course.title
+          %h1.text-3xl.font-bold.tracking-tight.text-text-primary{ class: "sm:text-4xl lg:text-5xl" }= @course.title
 
-        -# Description Section
-        %section.bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-          %h2.text-xl.font-semibold.text-gray-800.mb-4.flex.items-center.gap-2
-            = lucide_icon 'file-text', class: 'w-5 h-5 text-blue-600'
-            = t('.about_this_course')
-          .prose.prose-sm.sm:prose.max-w-none.text-gray-700= @course.description
+        %section.bg-bg-secondary.p-6.sm:p-8.rounded-xl.shadow-lg.border.border-border-primary
+          %h2.text-2xl.font-semibold.text-text-primary.mb-5.flex.items-center.gap-2.5
+            = lucide_icon 'file-text', class: 'w-6 h-6 text-accent flex-shrink-0'
+            = t("programming_courses.show.about_this_course")
+          .prose.prose-invert.max-w-none.text-text-secondary.prose-headings:text-text-primary.prose-a:text-accent.hover:prose-a:text-accent-hover.prose-strong:text-text-primary
+            = @course.description
 
-        -# Syllabus / Course Content Section
-        %section.bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-          %h2.text-xl.font-semibold.text-gray-800.mb-5.flex.items-center.gap-2
-            = lucide_icon 'list-checks', class: 'w-5 h-5 text-blue-600'
-            = t('.what_will_you_learn')
+        -# Syllabus
+        %section.bg-bg-secondary.p-6.sm:p-8.rounded-xl.shadow-lg.border.border-border-primary
+          %h2.text-2xl.font-semibold.text-text-primary.mb-6.flex.items-center.gap-2.5
+            = lucide_icon 'list-checks', class: 'w-6 h-6 text-accent flex-shrink-0'
+            = t("programming_courses.show.what_will_you_learn")
 
-          -# Chapters/Lessons Structure
-          .space-y-5
-            -# Example Chapter 1 (Placeholder)
-            - @course.programming_course_chapters.each do |chapter|
-              %div.border.border-gray-200.rounded-md.p-4
-                %h3.font-medium.text-gray-900.flex.items-center.gap-2.mb-3
-                  = lucide_icon 'folder-open', class: 'w-4 h-4 text-gray-400'
-                  = chapter.title
-                %ul.space-y-2.pl-6.text-sm.text-gray-600
-                  - chapter.programming_course_lessons.each do |lesson|
-                    %li.flex.items-center.gap-2
-                      = lucide_icon 'file-text', class: 'w-4 h-4 text-green-500'
-                      = lesson.title
+          .space-y-4
+            - @course.programming_course_chapters.order(:created_at).each_with_index do |chapter, index|
+              .border.border-border-primary.rounded-lg.overflow-hidden
+                %details.group{open: index == 0}
+                  %summary.flex.items-center.justify-between.p-4.cursor-pointer.hover:bg-bg-hover.transition-colors.duration-150
+                    .flex.items-center.gap-3
+                      %span.bg-bg-tertiary.text-text-secondary.rounded-full.w-6.h-6.flex.items-center.justify-center.text-xs.font-medium= index + 1
+                      %h3.font-semibold.text-md.text-text-primary= chapter.title
+                    = lucide_icon 'chevron-down', class: 'w-5 h-5 text-text-secondary group-open:rotate-180 transition-transform'
+                  .p-4.border-t.border-border-primary{class: "bg-bg-primary/30"}
+                    - if chapter.programming_course_lessons.any?
+                      %ul.space-y-2.pl-2.text-sm
+                        - chapter.programming_course_lessons.order(:created_at).each do |lesson|
+                          %li.flex.items-center.gap-2.text-text-secondary
+                            = lucide_icon 'play-circle', class: 'w-4 h-4 text-accent/70 flex-shrink-0'
+                            %span= lesson.title
+                    - else
+                      %p.text-sm.text-text-tertiary.italic= t("programming_courses.show.no_lessons_in_chapter")
+
 
       -# --- Right Column (Sticky Info Box) ---
-      .mt-8.lg:mt-0.lg:col-span-1
-        %aside.lg:sticky.lg:top-8.space-y-6
+      .mt-10.lg:mt-0.lg:col-span-4.xl:col-span-4
+        %aside.lg:sticky.lg:top-6.space-y-6
 
           -# Enroll / Buy Box
-          .bg-white.p-6.rounded-lg.shadow-lg.ring-1.text-center{class: "ring-gray-900/5"}
-            - if course_price
-              %p.text-3xl.font-bold.text-gray-900.mb-4= course_price
-            - else
-              %p.text-xl.font-semibold.text-gray-900.mb-4 Get Started Now!
+          .bg-bg-secondary.p-6.rounded-xl.shadow-xl.border.border-border-primary.text-center
+            -# TODO: Add price display
+            - course_price_display = @course.try(:price).to_i > 0 ? number_to_currency(@course.price) : t("programming_courses.show.free_course")
+            %p.text-3xl.font-bold.text-text-primary.mb-1= course_price_display
+
 
             - if current_user&.enrolled_in_programming_courses?(@course)
-              .mt-6.block.w-full.rounded-md.bg-green-100.px-4.py-3.text-center.text-base.font-semibold.text-green-800
-                = lucide_icon 'check-circle', class: 'inline-block w-5 h-5 mr-2 -mt-1'
-                = t('.already_enrolled')
+              .mt-4.block.w-full.rounded-lg.px-4.py-3.text-center.text-base.font-semibold.text-success.ring-1.ring-inset{class: "bg-success/10 ring-success/30"}
+                = lucide_icon 'check-circle-2', class: 'inline-block w-5 h-5 mr-1.5 -mt-0.5'
+                = t("programming_courses.show.already_enrolled")
             - else
               = button_to programming_course_enrollments_path(id: @course.slug),
-                          class: "mt-6 block w-full rounded-md bg-blue-600 px-4 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" do
-                = lucide_icon 'play-circle', class: 'inline-block w-5 h-5 mr-2 -mt-1'
-                = t('.enroll_now')
-
-            -# %p.mt-4.text-xs.text-gray-500 Lifetime access. 30-day money-back guarantee.
+                          class: "mt-4 block w-full rounded-lg bg-accent px-4 py-3 text-center text-base font-semibold text-accent-content shadow-md hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition-colors duration-150" do
+                = lucide_icon 'graduation-cap', class: 'inline-block w-5 h-5 mr-1.5 -mt-0.5' # Changed icon
+                = t("programming_courses.show.enroll_now")
 
           -# Course Details Box
-          .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-            %h3.text-base.font-semibold.text-gray-900.mb-4= t('.course_details')
+          .bg-bg-secondary.p-6.rounded-xl.shadow-lg.border.border-border-primary
+            %h3.text-lg.font-semibold.text-text-primary.mb-4= t("programming_courses.show.course_details")
             %dl.space-y-3
               .flex.items-center.gap-2.text-sm
-                %dt= lucide_icon 'layers', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-                %dd.text-gray-600 #{@course.programming_course_lessons.count} Lekcji
+                = lucide_icon 'layers-3', class: 'w-5 h-5 text-text-tertiary flex-shrink-0'
+                %dd.text-text-secondary= t("programming_courses.show.lessons_count_full", count: @course.programming_course_lessons.count)
 
               .flex.items-center.gap-2.text-sm
-                %dt= lucide_icon 'clock', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-                %dd.text-gray-600 #{@course.approximate_duration_in_hours} godzin materiałów
+                = lucide_icon 'clock-3', class: 'w-5 h-5 text-text-tertiary flex-shrink-0'
+                %dd.text-text-secondary= t("programming_courses.show.duration_full", count: @course.approximate_duration_in_hours)
 
-              -# .flex.items-center.gap-2.text-sm
-              -#   %dt= lucide_icon 'bar-chart', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-              -#   %dd.text-gray-600= course_level
+              -# TODO: Add difficulty level
+              -# - if @course.difficulty_level.present?
+              -#   .flex.items-center.gap-2.text-sm
+              -#     = lucide_icon 'bar-chart-big', class: 'w-5 h-5 text-text-tertiary flex-shrink-0'
+              -#     %dd.text-text-secondary= t("programming_courses.show.difficulty_level_value", level: @course.difficulty_level.capitalize)
 
               .flex.items-center.gap-2.text-sm
-                %dt= lucide_icon 'shield-check', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-                %dd.text-gray-600 Dożywotni dostęp
+                = lucide_icon 'shield-check', class: 'w-5 h-5 text-text-tertiary flex-shrink-0'
+                %dd.text-text-secondary= t("programming_courses.show.lifetime_access")
+
 
           -# Instructor Box
-          .bg-white.p-6.rounded-lg.shadow-sm.ring-1{class: "ring-gray-900/5"}
-            %h3.text-base.font-semibold.text-gray-900.mb-4= t('.instructor')
+          .bg-bg-secondary.p-6.rounded-xl.shadow-lg.border.border-border-primary
+            %h3.text-lg.font-semibold.text-text-primary.mb-4= t("programming_courses.show.instructor")
             .flex.items-center.gap-4
               - if @course.instructor.avatar.attached?
-                = image_tag @course.instructor.avatar, class: "h-12 w-12 rounded-full bg-gray-100"
+                = image_tag @course.instructor.avatar.variant(resize_to_fill: [48, 48]), class: "h-12 w-12 rounded-full bg-bg-tertiary ring-1 ring-border-secondary"
               - else
-                .h-12.w-12.rounded-full.bg-gray-100.flex.items-center.justify-center
-                  %span.text-gray-500.text-xl= @course.instructor.email[0].upcase
+                .h-12.w-12.rounded-full.bg-bg-tertiary.ring-1.ring-border-secondary.flex.items-center.justify-center
+                  %span.text-accent.text-xl.font-medium= @course.instructor.email[0].upcase
               %div
-                %p.text-sm.font-medium.text-gray-800= @course.instructor.email
-                %a.text-xs.text-blue-600.hover:underline{ href: "#"}= t('.view_profile')
+                %p.text-sm.font-semibold.text-text-primary= @course.instructor.email
+                %a.text-xs.text-accent.hover:text-accent-hover.hover:underline{ href: "#"}= t("programming_courses.show.view_profile")

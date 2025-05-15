@@ -163,13 +163,26 @@ pl:
       browse_courses_button: "Przeglądaj kursy"
   programming_courses:
     show:
-      about_this_course: "O kursie"
-      what_will_you_learn: "Czego się nauczysz"
+      about_this_course: "O tym kursie"
+      what_will_you_learn: "Czego się nauczysz?"
       course_details: "Szczegóły kursu"
       instructor: "Instruktor"
       view_profile: "Zobacz profil"
-      enroll_now: "Zapisz się teraz"
-      already_enrolled: "Jesteś już zapisany"
+      enroll_now: "Zapisz się teraz!"
+      already_enrolled: "Już jesteś zapisany"
+      free_course: "Darmowy kurs"
+      lifetime_access: "Dożywotni dostęp"
+      no_lessons_in_chapter: "Brak lekcji w tym rozdziale."
+      lessons_count_full:
+        one: "%{count} lekcja"
+        few: "%{count} lekcje"
+        many: "%{count} lekcji"
+        other: "%{count} lekcji"
+      duration_full:
+        one: "%{count} godzina materiału"
+        few: "%{count} godziny materiału"
+        many: "%{count} godzin materiału"
+        other: "%{count} godzin materiału"
   programming_course_lessons:
     show:
       course_content: "Zawartość kursu"
