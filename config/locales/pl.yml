@@ -28,24 +28,30 @@ pl:
         no_courses_description: Kliknij przycisk poniżej, aby stworzyć nowy kurs.
         create_your_first_course: Stwórz swój pierwszy kurs
       show:
-        back_to_list: Powrót
-        edit_details: Edytuj szczegóły
-        course_details: Szczegóły kursu
-        instructor: Instruktor
-        created_at: Stworzono
-        description: Opis
-        course_content: Kontent
-        edit_content: Edytuj kontent
-        add_content: Dodaj nową lekcję
-        no_content_yet: Nie masz jeszcze żadnego kontentu.
-        course_settings: Ustawienia
-        edit_settings: Edytuj ustawienia
-        no_settings_configured: Brak ustawien
-        course_details: Informacje ogólne
-        course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
-        edit_lesson_title: Edytuj lekcję
-        edit_lesson: Edytuj lekcję
-        use_add_button_to_start: Użyj przycisku powyżej, aby dodać nową lekcję.
+        back_to_list: "Powrót do listy kursów"
+        cover_image_alt: "Okładka kursu: %{title}"
+        course_details_title: "Szczegóły Kursu"
+        course_details_description: "Podstawowe informacje o Twoim kursie."
+        edit_details_button: "Edytuj Szczegóły"
+        instructor_label: "Instruktor"
+        created_at_label: "Data Utworzenia"
+        slug_label: "Identyfikator URL (Slug)"
+        description_label: "Opis Kursu"
+        no_description_yet_message: "Nie dodano jeszcze opisu dla tego kursu."
+        course_content_title: "Zawartość Kursu"
+        course_content_description: "Zarządzaj modułami, lekcjami i zadaniami."
+        add_lesson_button: "Dodaj Nową Lekcję"
+        edit_lesson_title: "Edytuj lekcję: %{lesson_title}"
+        edit_lesson_button_sr: "Edytuj lekcję %{title}" # For screen readers
+        no_lessons_in_chapter_message: "Brak lekcji w tym rozdziale."
+        no_content_yet_message: "Ten kurs nie ma jeszcze żadnej zawartości."
+        use_add_lesson_button_to_start: "Użyj przycisku 'Dodaj Nową Lekcję', aby rozpocząć."
+
+        course_settings_title: "Ustawienia Kursu"
+        course_settings_description: "Skonfiguruj widoczność, cenę i inne opcje."
+        edit_settings_button: "Edytuj Ustawienia"
+        no_settings_configured_message: "Ustawienia kursu nie zostały jeszcze skonfigurowane."
+        use_edit_settings_button_to_configure: "Użyj przycisku 'Edytuj Ustawienia', aby dostosować opcje."
       edit:
         edit_course: Edytuj kurs
         back_to_course: Powrót
@@ -217,4 +223,5 @@ pl:
     my_courses: "Moje kursy"
   time:
     formats:
+      long_date_with_time: "%d %B %Y, %H:%M"
       short_date_with_time: "%d %b %Y, %H:%M"
