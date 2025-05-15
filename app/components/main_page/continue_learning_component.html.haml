@@ -1,32 +1,46 @@
-.mt-8
-  .flex.justify-between.items-center.mb-4
-    %h2.text-xl.font-semibold.text-gray-900= t(".title")
-    = link_to my_courses_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-700 flex items-center" do
+.mt-10.mb-8
+  .flex.justify-between.items-center.mb-5
+    %h2.text-2xl.font-semibold.text-text-primary= t(".title")
+    = link_to my_courses_path, class: "text-sm font-medium text-accent hover:text-accent-hover flex items-center group transition-colors duration-150" do
       = t(".view_all")
-      = lucide_icon("arrow-right", class: "ml-1 h-4 w-4")
-  .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+      = lucide_icon("arrow-right", class: "ml-1.5 h-4 w-4 group-hover:translate-x-0.5 transition-transform")
+
+  .grid.grid-cols-1.gap-6{ class: "md:grid-cols-2 lg:grid-cols-3" }
     - courses.each do |course|
-      .bg-white.rounded-xl.overflow-hidden.shadow-sm.border.border-gray-100.hover:shadow-md.transition-shadow.duration-200
+      -# Individual Course Card
+      .bg-bg-secondary.rounded-xl.overflow-hidden.shadow-lg.border.border-border-primary.transition-all.duration-200.ease-in-out.hover:shadow-2xl.hover:border-border-secondary.flex.flex-col
         .relative
-          = image_tag course.cover_image, class: "w-full h-40 object-cover"
-          .absolute.top-3.left-3.bg-white.bg-opacity-90.px-2.py-1.rounded-md.text-xs.font-medium Programowanie
-          = link_to course, class: "absolute bottom-3 right-3 bg-white rounded-full p-2 shadow-md hover:bg-indigo-50" do
-            = lucide_icon("circle-play", class: "text-indigo-600 h-6")
-        .p-4
-          %h3.font-medium.text-gray-900.mb-1.line-clamp-2= course.title
-          %p.text-gray-500.text-sm.mb-3= course.instructor.email
-          .mb-3
-            .w-full.bg-gray-100.rounded-full.overflow-hidden{class: "h-1.5"}
-              .h-full.bg-indigo-600.rounded-full{style: "width: 0%;"}
-            .flex.justify-between.mt-1
-              %span.text-xs.font-medium.text-gray-600 0% ukończono
-              %span.text-xs.text-gray-500 0/#{course.programming_course_lessons.count} lekcji
-          .flex.items-center.text-sm.text-gray-500
-            %svg.lucide.lucide-clock.mr-1{fill: "none", height: "14", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "14", xmlns: "http://www.w3.org/2000/svg"}
-              %circle{cx: "12", cy: "12", r: "10"}
-              %polyline{points: "12 6 12 12 16 14"}
-            %span #{course.approximate_duration_in_hours} h
-            %svg.lucide.lucide-book-open.ml-3.mr-1{fill: "none", height: "14", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "14", xmlns: "http://www.w3.org/2000/svg"}
-              %path{d: "M12 7v14"}
-              %path{d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"}
-            %span #{course.programming_course_lessons.count} lekcji
+          = image_tag course.cover_image, class: "w-full h-44 object-cover aspect-[16/9]"
+          .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
+            = t(".category_programming")
+
+          -# Play Button
+          = link_to programming_course_lesson_path(course.first_lesson || course), class: "absolute bottom-3 right-3 bg-bg-primary p-2.5 rounded-full shadow-md hover:bg-accent group focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-secondary transition-colors duration-150" do
+            = lucide_icon("play", class: "text-accent h-5 w-5 group-hover:text-accent-content")
+
+
+        .p-5.flex.flex-col.flex-grow
+          %h3.font-semibold.text-lg.text-text-primary.mb-1.line-clamp-2.hover:text-accent.transition-colors.duration-150= link_to course.title, (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course))
+          %p.text-text-tertiary.text-xs.mb-3.flex.items-center.gap-1.5
+            = lucide_icon("user", class: "w-3.5 h-3.5")
+            = course.instructor.email
+
+          -# Progress Bar Area
+          .mb-4.mt-auto
+            - progress_percentage = 0 # TODO: Replace with actual progress calculation
+            - lessons_completed = 0 # TODO: Replace with actual completed lessons
+            .w-full.bg-bg-tertiary.rounded-full.h-2.overflow-hidden.mb-1
+              .h-full.bg-accent.rounded-full{style: "width: #{progress_percentage}%;", role: "progressbar", "aria-valuenow" => progress_percentage, "aria-valuemin" => "0", "aria-valuemax" => "100"}
+            .flex.justify-between.text-xs
+              %span.font-medium.text-text-secondary= t(".progress_percentage", percent: progress_percentage)
+              %span.text-text-tertiary= t(".lessons_status", completed: lessons_completed, total: course.programming_course_lessons.count)
+
+          -# Course Stats (Duration & Lesson Count)
+          .flex.items-center.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3
+            .flex.items-center.gap-1
+              = lucide_icon("clock-3", class: "w-3.5 h-3.5")
+              %span= t(".duration_hours", count: course.approximate_duration_in_hours)
+            .mx-2 ·
+            .flex.items-center.gap-1
+              = lucide_icon("layers-3", class: "w-3.5 h-3.5")
+              %span= t(".lessons_count", count: course.programming_course_lessons.count)
