@@ -1,16 +1,27 @@
 pl:
-  title: Stworzone kursy programowania
-  description: Tutaj możesz zarządzać swoimi kursami programowania.
-  new_course: Nowy kurs
-  total_courses: Liczba kursów
-  total_students: Liczba studentów
-  average_rating: Średnia ocena
-  total_revenue: Łączny dochód
-  published: Opublikowany
-  course_details: Szczegóły kursu
-  publish: Opublikuj
-  last_updated: "Ostatnia aktualizacja: %{time}"
-  students: Zapisanych
-  rating: Ocena
-  view_analytics: Wyświetl analizę
-  no_courses: Nie masz jeszcze żadnych kursów. Utwórz nowy kurs, aby rozpocząć.
+  title: "Twoje Stworzone Kursy"
+  description: "Zarządzaj swoimi kursami programowania, edytuj treści i śledź postępy studentów."
+  new_course: "Stwórz Nowy Kurs"
+  total_courses: "Wszystkie Kursy"
+  total_students: "Wszyscy Studenci"
+  average_rating: "Średnia Ocena (Globalnie)" # Clarified it's global for the top stats
+  total_revenue: "Całkowity Przychód"
+
+  status_published: "Opublikowany"
+  status_draft: "Szkic" # Example for another status
+
+  manage_course: "Zarządzaj Kursem"
+  publish_course: "Opublikuj"
+  unpublish_course: "Cofnij publikację" # Example
+  view_as_student: "Zobacz jako student" # Example
+  delete_course: "Usuń kurs" # Example
+
+  last_updated: "Aktualizacja: %{time}"
+  students_enrolled: "Zapisanych studentów"
+  course_rating: "Ocena kursu"
+
+  view_details_and_edit: "Szczegóły i Edycja"
+
+  no_courses_created_title: "Nie Stworzyłeś Jeszcze Żadnych Kursów"
+  no_courses_created_description: "Zacznij dzielić się swoją wiedzą! Kliknij poniżej, aby stworzyć swój pierwszy kurs."
+  create_first_course_button: "Stwórz Swój Pierwszy Kurs"
