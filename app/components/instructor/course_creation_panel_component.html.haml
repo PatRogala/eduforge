@@ -1,48 +1,60 @@
-.p-6
-  .mb-8
-    %h1.text-2xl.font-bold.text-gray-900= t(".new_course")
-    %p.mt-2.text-gray-600= t(".choose_category")
-  .grid.grid-cols-1.md:grid-cols-2.gap-6
-    = link_to instructor_programming_courses_path, class: "relative bg-white p-6 rounded-xl border border-gray-100 transition-all duration-200 hover:shadow-md hover:border-indigo-100" do
-      .flex.items-start.space-x-4
-        .flex-shrink-0
-          .p-3.bg-indigo-50.rounded-lg
-            = lucide_icon("code", class: "text-indigo-600")
-        .flex-1
-          .flex.items-center.space-x-2
-            %h3.text-lg.font-medium.text-gray-900= t(".programming")
-          %p.mt-1.text-sm.text-gray-500= t(".programming_description")
-    .relative.bg-white.p-6.rounded-xl.border.border-gray-100.transition-all.duration-200.opacity-75.cursor-not-allowed
-      .flex.items-start.space-x-4
-        .flex-shrink-0
-          .p-3.bg-indigo-50.rounded-lg
-            = lucide_icon("brain", class: "text-gray-400")
-        .flex-1
-          .flex.items-center.space-x-2
-            %h3.text-lg.font-medium.text-gray-900= t(".artificial_intelligence")
-            %span.inline-flex.items-center.rounded-full.text-xs.font-medium.bg-gray-100.text-gray-800{class: "px-2.5 py-0.5"}= t(".coming_soon")
-          %p.mt-1.text-sm.text-gray-500= t(".artificial_intelligence_description")
-      .absolute.inset-0.rounded-xl.flex.items-center.justify-center{class: "bg-white/50"}
-        .p-2.rounded-full{class: "bg-gray-100/80"}
-          = lucide_icon("lock", class: "text-gray-400")
-    .relative.bg-white.p-6.rounded-xl.border.border-gray-100.transition-all.duration-200.opacity-75.cursor-not-allowed
-      .flex.items-start.space-x-4
-        .flex-shrink-0
-          .p-3.bg-indigo-50.rounded-lg
-            = lucide_icon("shapes", class: "text-gray-400")
-        .flex-1
-          .flex.items-center.space-x-2
-            %h3.text-lg.font-medium.text-gray-900= t(".three_d_animation")
-            %span.inline-flex.items-center.rounded-full.text-xs.font-medium.bg-gray-100.text-gray-800{class: "px-2.5 py-0.5"}= t(".coming_soon")
-          %p.mt-1.text-sm.text-gray-500= t(".three_d_animation_description")
-      .absolute.inset-0.rounded-xl.flex.items-center.justify-center{class: "bg-white/50"}
-        .p-2.rounded-full{class: "bg-gray-100/80"}
-          = lucide_icon("lock", class: "text-gray-400")
-  .mt-8.bg-indigo-50.rounded-xl.p-6
+.mb-10.text-center{ class: "md:text-left" }
+  %h1.text-3xl.font-bold.text-text-primary.tracking-tight= t("instructor.course_creation_panel_component.new_course")
+  %p.mt-2.text-text-secondary{ class: "md:text-lg" }= t("instructor.course_creation_panel_component.choose_category")
+
+.grid.grid-cols-1.gap-6{ class: "md:grid-cols-2 lg:grid-cols-3" }
+
+  = link_to new_instructor_programming_course_path, class: "group relative bg-bg-secondary p-6 rounded-xl border border-border-primary transition-all duration-200 hover:shadow-xl hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-primary" do
     .flex.items-start.space-x-4
-      .p-3.bg-indigo-100.rounded-lg
-        = lucide_icon("graduation-cap", class: "text-indigo-600")
-      %div
-        %h3.text-lg.font-medium.text-gray-900= t(".course_creation_guide")
-        %p.mt-1.text-sm.text-gray-600= t(".course_creation_guide_description")
-        %button.mt-3.inline-flex.items-center.text-sm.font-medium.text-indigo-600.hover:text-indigo-700.cursor-pointer= t(".view_course_creation_guide")
+      .flex-shrink-0
+        .p-3.rounded-lg.ring-1.ring-inset{class: "bg-accent/10 ring-accent/30"}
+          = lucide_icon("code-xml", class: "text-accent w-7 h-7")
+      .flex-1
+        %h3.text-lg.font-semibold.text-text-primary.mb-0.5.group-hover:text-accent.transition-colors= t("instructor.course_creation_panel_component.programming")
+        %p.text-sm.text-text-secondary= t("instructor.course_creation_panel_component.programming_description")
+    .absolute.top-4.right-4.opacity-0.group-hover:opacity-100.transition-opacity.duration-200
+      = lucide_icon("arrow-right-circle", class: "text-accent w-5 h-5")
+
+  -# Artificial Intelligence Category Card (Disabled)
+  .relative.bg-bg-secondary.p-6.rounded-xl.border.border-border-primary.opacity-60.cursor-not-allowed
+    .flex.items-start.space-x-4
+      .flex-shrink-0
+        .p-3.bg-bg-tertiary.rounded-lg.ring-1.ring-inset.ring-border-secondary
+          = lucide_icon("brain-circuit", class: "text-text-tertiary w-7 h-7")
+      .flex-1
+        .flex.items-center.justify-between.mb-0.5
+          %h3.text-lg.font-semibold.text-text-primary= t("instructor.course_creation_panel_component.artificial_intelligence")
+          %span.inline-flex.items-center.rounded-full.text-xs.font-medium.bg-bg-tertiary.text-text-secondary.ring-1.ring-inset.ring-border-secondary{class: "px-2.5 py-0.5"}= t("instructor.course_creation_panel_component.coming_soon")
+        %p.text-sm.text-text-secondary= t("instructor.course_creation_panel_component.artificial_intelligence_description")
+    .absolute.inset-0.rounded-xl.flex.items-center.justify-center{class: "bg-bg-secondary/50"}
+      .p-2.5.rounded-full.ring-1.ring-border-secondary{class: "bg-bg-tertiary/80"}
+        = lucide_icon("lock-keyhole", class: "text-text-tertiary w-6 h-6")
+
+  -# 3D & Animation Category Card (Disabled)
+  .relative.bg-bg-secondary.p-6.rounded-xl.border.border-border-primary.opacity-60.cursor-not-allowed
+    .flex.items-start.space-x-4
+      .flex-shrink-0
+        .p-3.bg-bg-tertiary.rounded-lg.ring-1.ring-inset.ring-border-secondary
+          = lucide_icon("cuboid", class: "text-text-tertiary w-7 h-7")
+      .flex-1
+        .flex.items-center.justify-between.mb-0.5
+          %h3.text-lg.font-semibold.text-text-primary= t("instructor.course_creation_panel_component.three_d_animation")
+          %span.inline-flex.items-center.rounded-full.text-xs.font-medium.bg-bg-tertiary.text-text-secondary.ring-1.ring-inset.ring-border-secondary{class: "px-2.5 py-0.5"}= t("instructor.course_creation_panel_component.coming_soon")
+        %p.text-sm.text-text-secondary= t("instructor.course_creation_panel_component.three_d_animation_description")
+    .absolute.inset-0.rounded-xl.flex.items-center.justify-center{class: "bg-bg-secondary/50"}
+      .p-2.5.rounded-full.ring-1.ring-border-secondary{class: "bg-bg-tertiary/80"}
+        = lucide_icon("lock-keyhole", class: "text-text-tertiary w-6 h-6")
+
+
+-# Course Creation Guide Callout
+.mt-12.bg-bg-tertiary.rounded-xl.p-6.border.border-border-secondary.shadow-sm
+  .flex.flex-col.items-center.text-center{ class: "sm:flex-row sm:items-start sm:text-left sm:space-x-5" }
+    .flex-shrink-0.mb-4{ class: "sm:mb-0" }
+      .p-3.rounded-lg.inline-flex.ring-1.ring-inset{class: "ring-accent/30"}
+        = lucide_icon("graduation-cap", class: "text-accent w-8 h-8")
+    %div
+      %h3.text-lg.font-semibold.text-text-primary= t("instructor.course_creation_panel_component.course_creation_guide")
+      %p.mt-1.text-sm.text-text-secondary= t("instructor.course_creation_panel_component.course_creation_guide_description")
+      %button.mt-4.inline-flex.items-center.gap-1.5.text-sm.font-medium.text-accent.hover:text-accent-hover.transition-colors.duration-150.focus:outline-none.focus:ring-2.focus:ring-accent.focus:ring-offset-2.focus:ring-offset-bg-tertiary.px-3.py-1.5.rounded-md{class: "hover:bg-accent/10"}
+        = lucide_icon("book-open-text", class: "w-4 h-4")
+        = t("instructor.course_creation_panel_component.view_course_creation_guide")

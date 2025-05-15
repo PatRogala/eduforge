@@ -25,5 +25,5 @@
       .flex.flex-1.overflow-hidden
         = render Sidebar::SidebarComponent.new(current_user: current_user)
         %main.flex-1.overflow-y-auto.p-6
-          .max-w-7xl.mx-auto
+          .max-w-7xl.mx-auto.py-6
             = yield
