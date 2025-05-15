@@ -8,19 +8,14 @@
   .grid.grid-cols-1.gap-6{ class: "md:grid-cols-2 lg:grid-cols-3" }
     - courses.each do |course|
       -# Individual Course Card
-      .bg-bg-secondary.rounded-xl.overflow-hidden.shadow-lg.border.border-border-primary.transition-all.duration-200.ease-in-out.hover:shadow-2xl.hover:border-border-secondary.flex.flex-col
+      = link_to (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course)), class: "group block bg-bg-secondary rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1.5 border border-border-primary hover:border-border-secondary" do
         .relative
-          = image_tag course.cover_image, class: "w-full h-44 object-cover aspect-[16/9]"
+          = image_tag course.cover_image, class: "w-full object-cover aspect-[16/9]"
           .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
             = t(".category_programming")
-
-          -# Play Button
-          = link_to programming_course_lesson_path(course.first_lesson || course), class: "absolute bottom-3 right-3 bg-bg-primary p-2.5 rounded-full shadow-md hover:bg-accent group focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-secondary transition-colors duration-150" do
-            = lucide_icon("play", class: "text-accent h-5 w-5 group-hover:text-accent-content")
-
-
-        .p-5.flex.flex-col.flex-grow
-          %h3.font-semibold.text-lg.text-text-primary.mb-1.line-clamp-2.hover:text-accent.transition-colors.duration-150= link_to course.title, (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course))
+          .absolute.inset-0.bg-black.opacity-0.group-hover:opacity-10.transition-opacity.duration-300
+        .p-5
+          %h3.text-lg.font-semibold.text-text-primary.line-clamp-2.mb-1.group-hover:text-accent.transition-colors.duration-150= course.title
           %p.text-text-tertiary.text-xs.mb-3.flex.items-center.gap-1.5
             = lucide_icon("user", class: "w-3.5 h-3.5")
             = course.instructor.email
@@ -36,11 +31,10 @@
               %span.text-text-tertiary= t(".lessons_status", completed: lessons_completed, total: course.programming_course_lessons.count)
 
           -# Course Stats (Duration & Lesson Count)
-          .flex.items-center.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3
-            .flex.items-center.gap-1
-              = lucide_icon("clock-3", class: "w-3.5 h-3.5")
-              %span= t(".duration_hours", count: course.approximate_duration_in_hours)
-            .mx-2 ·
-            .flex.items-center.gap-1
-              = lucide_icon("layers-3", class: "w-3.5 h-3.5")
-              %span= t(".lessons_count", count: course.programming_course_lessons.count)
+          .flex.items-center.justify-between.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3.mt-auto
+            .flex.items-center.gap-1.5
+              = lucide_icon("clock-3", class: "w-4 h-4")
+              %span= t("courses.my.duration_hours", count: course.approximate_duration_in_hours)
+            .flex.items-center.gap-1.5
+              = lucide_icon("layers-3", class: "w-4 h-4")
+              %span= t("courses.my.lessons_count", count: course.programming_course_lessons.count)

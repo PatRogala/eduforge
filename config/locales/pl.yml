@@ -143,9 +143,24 @@ pl:
       view_all: Sprawdź katalog
       courses: kursów
     my:
-      my_courses: "Moje kursy"
-      no_courses: "Nie jesteś zapisany na żadne kursy"
-      browse_courses: "Przeglądaj dostępne kursy"
+      my_courses: "Moje Kursy"
+      category_programming: "Programowanie"
+      progress_percentage: "%{percent}% ukończono"
+      lessons_status: "%{completed}/%{total} lekcji"
+      duration_hours:
+        one: "%{count} godz."
+        few: "%{count} godz."
+        many: "%{count} godz."
+        other: "%{count} godz."
+      lessons_count:
+        one: "%{count} lekcja"
+        few: "%{count} lekcje"
+        many: "%{count} lekcji"
+        other: "%{count} lekcji"
+      no_courses_enrolled_title: "Nie jesteś jeszcze zapisany na żaden kurs"
+      no_courses_enrolled_description: "Wygląda na to, że Twoja biblioteka kursów jest pusta. Czas zacząć naukę!"
+      browse_courses: "Przeglądaj Dostępne Kursy"
+      browse_courses_button: "Przeglądaj kursy"
   programming_courses:
     show:
       about_this_course: "O kursie"
