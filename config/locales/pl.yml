@@ -53,32 +53,21 @@ pl:
         no_settings_configured_message: "Ustawienia kursu nie zostały jeszcze skonfigurowane."
         use_edit_settings_button_to_configure: "Użyj przycisku 'Edytuj Ustawienia', aby dostosować opcje."
       edit:
-        edit_course: Edytuj kurs
-        back_to_course: Powrót
-        edit_course_details: Edytuj szczegoly
-        title: tytuł
-        save: Zapisz
-        cancel: Anuluj
-        course_content: Kontent
-        edit_content: Edytuj kontent
-        no_content_yet: Nie masz jeszcze żadnego kontentu.
-        course_settings: Ustawienia
-        edit_settings: Edytuj ustawienia
-        no_settings_configured: Brak ustawien
-        course_details: szzcegoly
-        edit: Edytuj
-        created_at: Stworzono
-        instructor: Instruktor
-        edit_course_content: Edytuj kontent
-        content_editor_coming_soon: Edytor kontentu wkrótce.
-        edit_course_settings: Edytuj ustawienia
-        settings_editor_coming_soon: Edytor ustawien wkrótce.
-        description: Opis
-        description_placeholder: Opis kursu
-        content: Kontent
-        settings: Ustawienia
-        view_course: Zobacz kurs
-        details: Szczegóły
+        form_titles:
+          details: "Edytuj Szczegóły Kursu"
+          content: "Edytuj Zawartość Kursu"
+          settings: "Edytuj Ustawienia Kursu"
+        form_descriptions:
+          details: "Zaktualizuj tytuł, opis i okładkę kursu."
+          content: "Zarządzaj rozdziałami i lekcjami w swoim kursie."
+          settings: "Skonfiguruj opcje publikacji, cenę i inne zaawansowane ustawienia."
+        current_cover_image_alt: "Obecna okładka kursu"
+        cover_image_hint: "JPG, PNG, GIF do 5MB. Zalecane proporcje 16:9."
+        content_editor_placeholder_title: "Edytor Zawartości (Wkrótce)"
+        content_editor_placeholder_desc_html: "Tutaj będziesz mógł dodawać, edytować i reorganizować rozdziały oraz lekcje. %{new_lesson_link}."
+        add_new_lesson_link_text: "Dodaj nową lekcję teraz"
+        settings_editor_placeholder_title: "Ustawienia Zaawansowane (Wkrótce)"
+        settings_editor_placeholder_desc: "Dostosuj opcje takie jak status publikacji, kategoria, poziom trudności, cena itp."
       update:
         success: Kurs został zaktualizowany.
     programming_course_lessons:
@@ -206,9 +195,9 @@ pl:
         other: "%{count} minut"
   shared:
     cancel: Anuluj
-    save_changes: Zapisz zmiany
-    save_content: Zapisz kontent
-    save_settings: Zapisz ustawienia
+    save_changes: Zapisz Zmiany
+    save_content: Zapisz Zawartość
+    save_settings: Zapisz Ustawienia
   common:
     back: "Cofnij"
     save: "Zapisz"

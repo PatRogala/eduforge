@@ -1,84 +1,68 @@
--# app/views/instructor/programming_courses/edit.html.haml
--# This template now ONLY renders the form for the requested section within its frame.
--# The surrounding page structure (header, tabs) is NOT needed here when responding to a frame request.
-
-- section = params[:section] || 'details' # Determine which section's form to render
+- section = params[:section] || 'details'
 
 -# --- Details Section FORM ---
-= turbo_frame_tag dom_id(@course, :details) do # ID must match the show page frame
+= turbo_frame_tag dom_id(@course, :details) do
   - if section == 'details'
-    = form_with(model: [:instructor, @course], url: instructor_programming_course_path(@course), method: :patch, html: { class: "bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl p-6 md:p-8" }) do |f|
-      %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2.mb-6
-        = lucide_icon 'edit-3', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-        = t('.edit_course_details')
+    = form_with(model: [:instructor, @course], url: instructor_programming_course_path(@course), method: :patch, html: { class: "bg-bg-secondary shadow-xl ring-1 ring-border-primary rounded-xl p-6 md:p-8" }) do |f|
+      = render "devise/shared/error_messages", resource: @course
+
+      %div.flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
+        %div
+          %h2.text-xl.font-semibold.text-text-primary.flex.items-center.gap-2.5
+            = lucide_icon 'file-sliders', class: 'w-5 h-5 text-accent flex-shrink-0'
+            = t("instructor.programming_courses.edit.form_titles.details")
+          %p.mt-1.text-sm.text-text-secondary= t("instructor.programming_courses.edit.form_descriptions.details")
 
       .space-y-6
-        -# Title Field
         %div
-          = f.label :title, class: 'block text-sm font-medium leading-6 text-gray-900'
-          .mt-2
-            = f.text_field :title, class: 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6'
+          = f.label :title, class: 'block text-sm font-medium text-text-secondary mb-1.5'
+          = f.text_field :title, class: 'appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm'
 
-        -# Description Field (Rich Text)
-        %div{data: {controller: 'inline-code-trix highlight-code-block'}}
-          = f.label :description, class: 'block text-sm font-medium leading-6 text-gray-900 mb-2'
-          = f.rich_text_area :description, class: 'trix-content block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6' # Add trix-content or specific styling class
+        %div{"data-controller": "inline-code-trix highlight-code-block"}
+          = f.label :description, class: 'block text-sm font-medium text-text-secondary mb-1.5'
+          .mt-1.bg-bg-tertiary.border.border-border-primary.rounded-lg.focus-within:ring-2.focus-within:ring-accent.focus-within:border-accent.overflow-hidden
+            = f.rich_text_area :description
 
-        -# Cover Image Field
         %div
-          = f.label :cover_image, class: 'block text-sm font-medium leading-6 text-gray-900'
-          .mt-2.flex.items-center.gap-x-3
+          = f.label :cover_image, class: 'block text-sm font-medium text-text-secondary mb-1.5'
+          .mt-2.flex.items-center.gap-x-4
             - if @course.cover_image.attached?
-              = image_tag @course.cover_image.variant(resize_to_limit: [64, 64]), class: "h-16 w-16 rounded-md bg-gray-100 object-cover", alt: "Current cover image"
+              = image_tag @course.cover_image.variant(resize_to_fill: [80, 45]), class: "h-[45px] w-[80px] rounded-md bg-bg-tertiary object-cover ring-1 ring-border-secondary", alt: t("instructor.programming_courses.edit.current_cover_image_alt")
             - else
-              .h-16.w-16.flex.items-center.justify-center.rounded-md.bg-gray-100.text-gray-400
-                = lucide_icon 'image', class: 'w-8 h-8'
-            %div
-              = f.file_field :cover_image, class: 'block w-full text-sm text-gray-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 cursor-pointer'
-              -# %p.mt-1.text-xs.text-gray-500 JPG, PNG, GIF up to 5MB. Recommended aspect ratio 16:9.
+              .flex.items-center.justify-center.rounded-md.bg-bg-tertiary.text-text-tertiary.ring-1.ring-border-secondary{class: "h-[45px] w-[80px]"}
+                = lucide_icon 'image-off', class: 'w-6 h-6'
+            %div.flex-1
+              = f.file_field :cover_image, class: 'block w-full text-sm text-text-secondary file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent/10 file:text-accent hover:file:bg-accent/20 file:ring-1 file:ring-inset file:ring-accent/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent'
+              %p.mt-1.text-xs.text-text-tertiary= t("instructor.programming_courses.edit.cover_image_hint")
 
-      -# Actions for this form
-      .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-gray-200.pt-6
-        -# Cancel button should link back to the show page (or potentially reload the original frame content, harder)
-        = link_to t('shared.cancel'), instructor_programming_course_path(@course), class: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
-        = f.submit t('shared.save_changes'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600', data: { turbo: false }
+      .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-border-primary.pt-6
+        = link_to t("shared.cancel"), instructor_programming_course_path(@course), class: 'rounded-lg bg-bg-tertiary px-4 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-inset ring-border-secondary hover:bg-bg-hover hover:ring-border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary'
+        = f.submit t("shared.save_changes"), class: 'inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-content shadow-md hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:ring-offset-bg-secondary', data: { turbo: "false" }
 
--# --- Content Section FORM ---
-= turbo_frame_tag dom_id(@course, :content) do # ID must match the show page frame
-  - if section == 'content'
-    -# You might have a different form/model for content or use JS interactions
-    = form_with(model: [:instructor, @course], url: instructor_programming_course_path(@course), method: :patch, html: { class: "bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl p-6 md:p-8" }) do |f| # Adjust model/url if content is handled differently
-      %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2.mb-6
-        = lucide_icon 'book-open', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-        = t('.edit_course_content')
-
-      -# Placeholder for Content Editor UI
-      .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
-        = lucide_icon 'construction', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
-        %p.text-gray-600.font-medium= t('.content_editor_coming_soon')
-        %p.text-sm.text-gray-500 Build your course structure here.
-
-      -# Actions for this form
-      .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-gray-200.pt-6
-        = link_to t('shared.cancel'), instructor_programming_course_path(@course), class: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
-        = f.submit t('shared.save_content'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600' # May need adjustments
-
--# --- Settings Section FORM ---
-= turbo_frame_tag dom_id(@course, :settings) do # ID must match the show page frame
+-# --- Settings Section FORM (Placeholder) ---
+= turbo_frame_tag dom_id(@course, :settings) do
   - if section == 'settings'
-    = form_with(model: [:instructor, @course], url: instructor_programming_course_path(@course), method: :patch, html: { class: "bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl p-6 md:p-8" }) do |f| # Assumes settings are fields on @course
-      %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2.mb-6
-        = lucide_icon 'settings', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-        = t('.edit_course_settings')
+    = form_with(model: [:instructor, @course], url: instructor_programming_course_path(@course), method: :patch, html: { class: "bg-bg-secondary shadow-xl ring-1 ring-border-primary rounded-xl p-6 md:p-8" }) do |f| # Assumes settings are fields on @course
+      = render "devise/shared/error_messages", resource: @course
 
-      -# Placeholder for Settings Form Fields
+      .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
+        %div
+          %h2.text-xl.font-semibold.text-text-primary.flex.items-center.gap-2.5
+            = lucide_icon 'sliders-horizontal', class: 'w-5 h-5 text-accent flex-shrink-0'
+            = t("instructor.programming_courses.edit.form_titles.settings") # "Edit Course Settings"
+          %p.mt-1.text-sm.text-text-secondary= t("instructor.programming_courses.edit.form_descriptions.settings")
+
       .space-y-6
-        %div.p-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
-          %p.text-gray-600.font-medium= t('.settings_editor_coming_soon')
-          %p.text-sm.text-gray-500 Configure course visibility, pricing, etc.
-          -# Add actual form fields here, e.g., f.check_box :published, f.number_field :price
+        -# Placeholder for actual settings fields (e.g., visibility, price, etc.)
+        .text-center.py-16.px-6.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary
+          = lucide_icon 'wrench', class: 'w-12 h-12 text-text-tertiary mx-auto mb-4' # Changed icon
+          %p.text-text-primary.font-medium= t("instructor.programming_courses.edit.settings_editor_placeholder_title")
+          %p.text-sm.text-text-secondary= t("instructor.programming_courses.edit.settings_editor_placeholder_desc")
+          -# Example:
+          -# .flex.items-center.justify-between.p-4.bg-bg-primary.rounded-md.ring-1.ring-border-primary
+          -#   %span.text-sm.text-text-secondary= t("instructor.programming_courses.edit.published_label")
+          -#   = f.check_box :published, class: "h-4 w-4 text-accent bg-bg-tertiary border-border-secondary rounded focus:ring-accent focus:ring-offset-bg-primary"
 
-      -# Actions for this form
-      .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-gray-200.pt-6
-        = link_to t('shared.cancel'), instructor_programming_course_path(@course), class: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
-        = f.submit t('shared.save_settings'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+      .mt-8.flex.items-center.justify-end.gap-x-3.border-t.border-border-primary.pt-6
+        = link_to t("shared.cancel"), instructor_programming_course_path(@course), class: 'rounded-lg bg-bg-tertiary px-4 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-inset ring-border-secondary hover:bg-bg-hover hover:ring-border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary'
+        = f.submit t("shared.save_settings"), class: 'inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-content shadow-md hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:ring-offset-bg-secondary'
