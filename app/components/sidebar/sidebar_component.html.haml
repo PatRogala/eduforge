@@ -1,26 +1,18 @@
-%aside.bg-white.border-r.border-gray-200.transition-all.duration-300.overflow-hidden.min-h-screen{"data-sidebar-target": "aside"}
+%aside.bg-bg-secondary.border-r.border-border-primary.transition-all.duration-300.overflow-hidden.min-h-screen{"data-sidebar-target": "aside"}
   .h-full.flex.flex-col.py-4
     %nav.flex-1.px-2
       %ul.space-y-1
         %li
+          %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.main")
           - public_links.each do |link|
             = render_link(link)
         - if logged_in?
-          %li
+          %li.pt-2
+            %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.personal")
             - logged_in_links.each do |link|
               = render_link(link)
         - if instructor?
-          %li
+          %li.pt-2
+            %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.instructor")
             - instructor_links.each do |link|
               = render_link(link)
-      -# TODO: ADD SUPPORT SECTION
-      -# .mt-8.pt-4.border-t.border-gray-200
-      -#   %ul.space-y-1
-      -#     %li
-      -#       %a.flex.items-center.px-3.rounded-lg.text-gray-700.hover:bg-gray-100{class: "py-2.5", href: "#"}
-      -#         %span.mr-3
-      -#           %svg.lucide.lucide-circle-help{fill: "none", height: "20", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "20", xmlns: "http://www.w3.org/2000/svg"}
-      -#             %circle{cx: "12", cy: "12", r: "10"}
-      -#             %path{d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}
-      -#             %path{d: "M12 17h.01"}
-      -#         %span.flex-1 Help Center
