@@ -1,10 +1,9 @@
-.flex.flex-col.md:flex-row.md:items-center.md:justify-between.mb-6
+.flex.flex-col.gap-2.mb-8{ class: "md:flex-row md:items-center md:justify-between md:gap-4" }
   %div
-    %h1.text-2xl.font-bold.text-gray-900= t(".welcome_back", name: user.email)
-    %p.text-gray-600= t(".continue_learning")
-  .mt-3.md:mt-0.flex.items-center.space-x-2
-    %span.text-sm.font-medium.text-indigo-600.flex.items-center
-      %svg.lucide.lucide-trending-up.mr-1{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}>
-        %polyline{points: "22 7 13.5 15.5 8.5 10.5 2 17"}
-        %polyline{points: "16 7 22 7 22 13"}
+    %h1.text-3xl.font-bold.text-text-primary.tracking-tight= t(".welcome_back", name: user_display_name)
+    %p.text-text-secondary.mt-1{ class: "md:text-lg" }= t(".continue_learning")
+
+  .mt-2{ class: "md:mt-0" }
+    %span.inline-flex.items-center.gap-1.5.px-3.py-1.rounded-full.text-sm.font-medium{class: "bg-accent/10 text-accent ring-1 ring-inset ring-accent/30"}
+      = lucide_icon("trending-up", class: "w-4 h-4")
       = t(".learning_progress_on_track")
