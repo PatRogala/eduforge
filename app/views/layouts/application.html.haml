@@ -20,7 +20,7 @@
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body{"data-controller": "sidebar"}
     = render Flash::FlashMessageComponent.new(notice: notice, alert: alert)
-    .flex.flex-col.h-screen.bg-gray-50
+    .flex.flex-col.h-screen
       = render Layout::HeaderComponent.new(current_user: current_user)
       .flex.flex-1.overflow-hidden
         = render Sidebar::SidebarComponent.new(current_user: current_user)

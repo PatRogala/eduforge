@@ -15,9 +15,9 @@
   --color-text-tertiary: #80848E;  /* Even more muted, like some icons or less important text */
 
   /* Accent / Brand (the blue/purpleish color) */
-  --color-accent: #7B68EE;         /* MediumSlateBlue - a good approximation from the image */
-  --color-accent-hover: #6A5ACD;   /* Slightly darker for hover (SlateBlue) */
-  --color-accent-content: #FFFFFF; /* Text color when on an accent background */
+  --color-accent: var(--color-red-500);
+  --color-accent-hover: var(--color-red-600);
+  --color-accent-content: #FFFFFF;
 
   /* Borders and Dividers */
   --color-border-primary: #3A3C41;   /* Subtle borders and dividers */
@@ -28,12 +28,29 @@
   --color-interactive-hover: #5D6269;
 
   /* Specific UI Colors */
-  --color-notification: #f87171; /* red-400 */
-  --color-success: #22c55e;      /* green-500 */
-  --color-warning: #eab308;      /* yellow-500 */
-  --color-info: #0ea5e9;         /* sky-500 */
+  --color-notification: #f87171;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-info: #0ea5e9;
+
+  /* Animations */
+  --animate-fadeIn: fadeIn 0.2s ease-out forwards;
 }
 
 body {
   @apply bg-bg-primary text-text-primary antialiased;
 }
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
