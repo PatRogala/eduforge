@@ -4,11 +4,6 @@ class CompletedProgrammingLesson < ApplicationRecord
   belongs_to :programming_course_lesson
 
   validates :programming_course_lesson, uniqueness: { scope: :user }
-  validate :user_is_enrolled_in_course
 
-  private
-
-  def user_is_enrolled_in_course
-    errors.add(:base, "User is not enrolled in the course") unless user.enrolled_programming_courses.include?(programming_course_lesson.programming_course)
-  end
+  delegate :programming_course, to: :programming_course_lesson
 end

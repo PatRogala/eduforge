@@ -1,5 +1,5 @@
 # Tracks user completion of programming lessons
-class CompletedProgrammingLessonController < ApplicationController
+class CompletedProgrammingLessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_programming_course_lesson
 
@@ -17,7 +17,7 @@ class CompletedProgrammingLessonController < ApplicationController
   private
 
   def set_programming_course_lesson
-    @programming_course_lesson = ProgrammingCourseLesson.find(params[:programming_course_lesson_id])
+    @programming_course_lesson = ProgrammingCourseLesson.find(completed_programming_lesson_params[:programming_course_lesson_id])
   end
 
   def completed_programming_lesson_params
