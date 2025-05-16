@@ -21,6 +21,6 @@ class CompletedProgrammingLessonsController < ApplicationController
   end
 
   def completed_programming_lesson_params
-    params.require(:completed_programming_lesson).permit(:user_id, :programming_course_lesson_id)
+    params.expect(completed_programming_lesson: %i[user_id programming_course_lesson_id])
   end
 end
