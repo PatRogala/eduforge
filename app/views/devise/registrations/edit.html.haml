@@ -1,77 +1,71 @@
-.py-8.px-4{ class: "sm:px-6 lg:px-8 max-w-3xl mx-auto" }
-  %h1.text-2xl.font-bold.text-gray-900.mb-6{ class: "md:text-3xl" }= t(".title")
+.px-4{ class: "sm:px-6 lg:px-8 max-w-3xl mx-auto" }
+  %h1.text-3xl.font-bold.text-text-primary.mb-8.tracking-tight{ class: "md:text-4xl" }= t("devise.registrations.edit.title")
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "space-y-8") do |f|
+    = render "devise/shared/error_messages", resource: resource
+
     -# --- Profile Information Section ---
-    .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4
+    .bg-bg-secondary.shadow-xl.sm:rounded-xl.overflow-hidden.border.border-border-primary.mb-4
       .px-4.py-5{ class: "sm:p-6" }
-        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".profile_information")
-        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".profile_information_description")
+        %h3.text-xl.leading-6.font-semibold.text-text-primary= t("devise.registrations.edit.profile_information")
+        %p.mt-1.max-w-2xl.text-sm.text-text-secondary= t("devise.registrations.edit.profile_information_description")
 
-        = render "devise/shared/error_messages", resource: resource
         .mt-6.grid.grid-cols-1.gap-y-6.gap-x-4{ class: "sm:grid-cols-6" }
-          -# .sm:col-span-3
-          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_first_name" } First name
-          -#   .mt-1
-          -#     %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "text", name: "user[first_name]", id: "user_first_name", value: "Amelia", autocomplete: "given-name" }
-
-          -# .sm:col-span-3
-          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_last_name" } Last name
-          -#   .mt-1
-          -#     %input.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ type: "text", name: "user[last_name]", id: "user_last_name", value: "Earhart", autocomplete: "family-name" }
-
           .sm:col-span-4
-            = f.label :email, class: "block text-sm font-medium text-gray-700"
+            = f.label :email, class: "block text-sm font-medium text-text-secondary mb-1.5"
             .mt-1
-              = f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm"
 
-          -# .sm:col-span-6
-          -#   %label.block.text-sm.font-medium.text-gray-700{ for: "user_bio" } Bio
+          -# Add other profile fields here if you have them (e.g., name, bio)
+          -# Example: Name Field
+          -# .sm:col-span-3
+          -#   = f.label :name, class: "block text-sm font-medium text-text-secondary mb-1.5"
           -#   .mt-1
-          -#     %textarea.block.w-full.border.border-gray-300.rounded-md.shadow-sm.py-2.px-3.focus:outline-none.focus:ring-blue-500.focus:border-blue-500{ name: "user[bio]", id: "user_bio", rows: "3" } Pilot and aviation enthusiast. Learning web development on the side!
-          -#   %p.mt-2.text-sm.text-gray-500 Brief description for your profile.
+          -#     = f.text_field :name, autocomplete: "name", class: "appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm"
+
 
     -# --- Profile Picture Section ---
-    .bg-white.shadow.sm:rounded-lg.overflow-hidden.mb-4{ data: { controller: "avatar-preview" } }
+    .bg-bg-secondary.shadow-xl.sm:rounded-xl.overflow-hidden.border.border-border-primary.mb-4{ data: { controller: "avatar-preview" } }
       .px-4.py-5{ class: "sm:p-6" }
-        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".profile_picture")
-        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".profile_picture_description")
-        .mt-6.flex.items-center.gap-x-4
+        %h3.text-xl.leading-6.font-semibold.text-text-primary= t("devise.registrations.edit.profile_picture")
+        %p.mt-1.max-w-2xl.text-sm.text-text-secondary= t("devise.registrations.edit.profile_picture_description")
+        .mt-6.flex.items-center.gap-x-5
           - if resource.avatar.attached?
-            = image_tag resource.avatar.variant(resize_to_fill: [128, 128]), class: "h-16 w-16 rounded-full bg-gray-100", alt: "Current profile photo", data: { avatar_preview_target: "preview" }
+            = image_tag resource.avatar.variant(resize_to_fill: [80, 80]), class: "h-20 w-20 rounded-full bg-bg-tertiary ring-2 ring-border-secondary object-cover", alt: t("devise.registrations.edit.current_avatar_alt"), data: { avatar_preview_target: "preview" }
           - else
-            .h-16.w-16.rounded-full.bg-gray-100.flex.items-center.justify-center.avatar-placeholder
-              %span.text-gray-500.text-xl= resource.email[0].upcase
-            %img.h-16.w-16.rounded-full.bg-gray-100.hidden{ alt: "Preview profile photo", data: { avatar_preview_target: "preview" } }
+            .h-20.w-20.rounded-full.bg-bg-tertiary.ring-2.ring-border-secondary.flex.items-center.justify-center.avatar-placeholder
+              %span.text-accent.text-3xl.font-medium= resource.email[0].upcase
+            %img.h-20.w-20.rounded-full.bg-bg-tertiary.ring-2.ring-border-secondary.object-cover.hidden{ alt: t("devise.registrations.edit.preview_avatar_alt"), data: { avatar_preview_target: "preview" } }
           %div
-            = f.label :avatar, class: "cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" do
-              %span= t(".change")
-              = f.file_field :avatar, class: "sr-only", accept: "image/*", data: { avatar_preview_target: "input", action: "change->avatar-preview#preview" }
-            %p.mt-1.text-xs.leading-5.text-gray-500= t(".avatar_requirements")
+            = f.label :avatar, class: "cursor-pointer rounded-lg bg-bg-tertiary py-2 px-3.5 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-inset ring-border-secondary hover:bg-bg-hover hover:ring-border-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-accent" do
+              = lucide_icon("upload-cloud", class: "w-4 h-4 mr-1.5 inline-block -mt-0.5") # Added icon
+              %span= t("devise.registrations.edit.change_avatar_button")
+              = f.file_field :avatar, class: "sr-only", accept: "image/jpeg,image/png,image/gif,image/webp", data: { avatar_preview_target: "input", action: "change->avatar-preview#preview" }
+            %p.mt-1.5.text-xs.leading-5.text-text-tertiary= t("devise.registrations.edit.avatar_requirements")
 
     -# --- Password Change Section ---
-    .bg-white.shadow.sm:rounded-lg.overflow-hidden
+    .bg-bg-secondary.shadow-xl.sm:rounded-xl.overflow-hidden.border.border-border-primary
       .px-4.py-5{ class: "sm:p-6" }
-        %h3.text-lg.leading-6.font-medium.text-gray-900= t(".password_change")
-        %p.mt-1.max-w-2xl.text-sm.text-gray-500= t(".password_change_description")
+        %h3.text-xl.leading-6.font-semibold.text-text-primary= t("devise.registrations.edit.password_change")
+        %p.mt-1.max-w-2xl.text-sm.text-text-secondary= t("devise.registrations.edit.password_change_description")
 
         .mt-6.grid.grid-cols-1.gap-y-6{ class: "sm:grid-cols-6" }
           .sm:col-span-4
-            = f.label :current_password, class: "block text-sm font-medium text-gray-700"
-            %p.mt-1.max-w-2xl.text-sm.text-gray-500 (#{t('.we_need_your_current_password_to_confirm_your_changes')})
-            .mt-1
-              = f.password_field :current_password, autocomplete: "current-password", class: " block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            = f.label :current_password, class: "block text-sm font-medium text-text-secondary mb-1.5"
+            %p.mt-1.text-xs.text-text-tertiary= t("devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes") # Made this smaller
+            .mt-1.5
+              = f.password_field :current_password, autocomplete: "current-password", class: "appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm"
 
           .sm:col-span-4
-            = f.label :password, class: "block text-sm font-medium text-gray-700"
+            = f.label :password, t("devise.registrations.edit.new_password_label"), class: "block text-sm font-medium text-text-secondary mb-1.5"
             .mt-1
-              = f.password_field :password, autocomplete: "new-password", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              = f.password_field :password, autocomplete: "new-password", class: "appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm"
 
           .sm:col-span-4
-            = f.label :password_confirmation, class: "block text-sm font-medium text-gray-700"
+            = f.label :password_confirmation, t("devise.registrations.edit.confirm_new_password_label"), class: "block text-sm font-medium text-text-secondary mb-1.5"
             .mt-1
-              = f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              = f.password_field :password_confirmation, autocomplete: "new-password", class: "appearance-none block w-full px-3.5 py-2.5 bg-bg-tertiary border border-border-primary rounded-lg shadow-sm placeholder-text-tertiary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent sm:text-sm"
 
     -# --- Form Actions ---
-    .flex.justify-end.pt-5
-      = f.submit t('.update'), class: "inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    .flex.justify-end.pt-4.border-t.border-border-primary
+      = f.submit t("devise.registrations.edit.update_button"), class: "inline-flex justify-center rounded-lg border border-transparent bg-accent py-2.5 px-6 text-sm font-medium text-accent-content shadow-md hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-primary transition-colors duration-150"
