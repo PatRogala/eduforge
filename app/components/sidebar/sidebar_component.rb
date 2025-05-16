@@ -20,7 +20,7 @@ module Sidebar
       @instructor_links = [
         {
           title: ".created_courses",
-          path: new_instructor_course_path,
+          path: instructor_programming_courses_path,
           icon: "square-plus"
         }
       ]
