@@ -788,13 +788,6 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
--- Name: index_completed_programming_lessons_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_completed_programming_lessons_on_user_id ON public.completed_programming_lessons USING btree (user_id);
-
-
---
 -- Name: index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -995,6 +988,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250516170436'),
 ('20250516162302'),
 ('20250422203748'),
 ('20250422202823'),
