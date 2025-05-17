@@ -5,7 +5,7 @@ RSpec.describe "CompletedProgrammingLessons" do
   let(:course) { create(:programming_course, instructor: user) }
   let(:chapter) { create(:programming_course_chapter, programming_course: course) }
   let(:lesson) { create(:programming_course_lesson, programming_course_chapter: chapter) }
-  let(:valid_params) { { completed_programming_lesson: { programming_course_lesson_id: lesson.id, user_id: user.id } } }
+  let(:valid_params) { { completed_programming_lesson: { programming_course_lesson_id: lesson.id } } }
 
   before do
     sign_in user

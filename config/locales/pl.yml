@@ -193,6 +193,11 @@ pl:
         few: "%{count} minuty"
         many: "%{count} minut"
         other: "%{count} minut"
+      next_lesson: "Następna Lekcja"
+      next_lesson_after_complete: "Przejdź do Następnej Lekcji"
+      lesson_completed_no_next: "Lekcja Ukończona!"
+      complete_and_next_lesson: "Ukończ i Przejdź Dalej"
+      complete_lesson_finish_course: "Ukończ Lekcję (Koniec Kursu)"
   shared:
     cancel: Anuluj
     save_changes: Zapisz Zmiany
@@ -214,3 +219,7 @@ pl:
     formats:
       long_date_with_time: "%d %B %Y, %H:%M"
       short_date_with_time: "%d %b %Y, %H:%M"
+  completed_programming_lessons:
+    create:
+      success: "Lekcja została ukończona."
+      error: "Nie udało się ukończyć lekcji."
