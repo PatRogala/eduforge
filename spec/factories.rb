@@ -56,4 +56,9 @@ FactoryBot.define do
     test_cases { Faker::Lorem.sentence }
     hints { Faker::Lorem.sentence }
   end
+
+  factory :completed_programming_lesson do
+    user
+    programming_course_lesson
+  end
 end

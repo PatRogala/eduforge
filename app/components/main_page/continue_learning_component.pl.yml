@@ -1,3 +1,16 @@
 pl:
-  title: "Kontynuuj rozpoczęte kursy"
-  view_all: "Pokaż wszystkie kursy"
+  title: "Kontynuuj naukę"
+  view_all: "Zobacz wszystkie"
+  category_programming: "Programowanie"
+  progress_percentage: "%{percent}% ukończono"
+  lessons_status: "%{completed}/%{total} lekcji"
+  duration_hours:
+    one: "%{count} godzina"
+    few: "%{count} godziny"
+    many: "%{count} godzin"
+    other: "%{count} godzin"
+  lessons_count:
+    one: "%{count} lekcja"
+    few: "%{count} lekcje"
+    many: "%{count} lekcji"
+    other: "%{count} lekcji"

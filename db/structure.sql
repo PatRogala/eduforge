@@ -160,6 +160,38 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: completed_programming_lessons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.completed_programming_lessons (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    programming_course_lesson_id bigint NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: completed_programming_lessons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.completed_programming_lessons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: completed_programming_lessons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.completed_programming_lessons_id_seq OWNED BY public.completed_programming_lessons.id;
+
+
+--
 -- Name: friendly_id_slugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -495,6 +527,13 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 
 
 --
+-- Name: completed_programming_lessons id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.completed_programming_lessons ALTER COLUMN id SET DEFAULT nextval('public.completed_programming_lessons_id_seq'::regclass);
+
+
+--
 -- Name: friendly_id_slugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -598,6 +637,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: completed_programming_lessons completed_programming_lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.completed_programming_lessons
+    ADD CONSTRAINT completed_programming_lessons_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: friendly_id_slugs friendly_id_slugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -685,10 +732,24 @@ CREATE INDEX idx_on_programming_course_chapter_id_190b893302 ON public.programmi
 
 
 --
+-- Name: idx_on_programming_course_lesson_id_a6c6ad69ca; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_on_programming_course_lesson_id_a6c6ad69ca ON public.completed_programming_lessons USING btree (programming_course_lesson_id);
+
+
+--
 -- Name: idx_on_user_id_programming_course_id_dcb9194487; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX idx_on_user_id_programming_course_id_dcb9194487 ON public.programming_course_enrollments USING btree (user_id, programming_course_id);
+
+
+--
+-- Name: idx_on_user_id_programming_course_lesson_id_cb47b01299; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_on_user_id_programming_course_lesson_id_cb47b01299 ON public.completed_programming_lessons USING btree (user_id, programming_course_lesson_id);
 
 
 --
@@ -841,6 +902,14 @@ ALTER TABLE ONLY public.programming_course_chapters
 
 
 --
+-- Name: completed_programming_lessons fk_rails_12c53b1df9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.completed_programming_lessons
+    ADD CONSTRAINT fk_rails_12c53b1df9 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: programming_course_enrollments fk_rails_1dd12344ca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -881,6 +950,14 @@ ALTER TABLE ONLY public.user_roles
 
 
 --
+-- Name: completed_programming_lessons fk_rails_8fa52c8070; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.completed_programming_lessons
+    ADD CONSTRAINT fk_rails_8fa52c8070 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id);
+
+
+--
 -- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -911,6 +988,8 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250516170436'),
+('20250516162302'),
 ('20250422203748'),
 ('20250422202823'),
 ('20250419164743'),

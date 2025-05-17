@@ -2,12 +2,42 @@ pl:
   devise:
     registrations:
       edit:
-        title: Edytuj profil
-        profile_information: Informacje o profilu
-        profile_information_description: Opcjonalnie możesz dodać krótki opis o sobie.
-        password_change: Zaktualizuj hasło
-        password_change_description: Zostaw puste pole, jeśli nie chcesz zmienić hasła.
-        profile_picture: Zdjęcie profilowe
-        profile_picture_description: Dodaj zdjęcie profilowe. Zdjęcie powinno mieć proporcje 1:1.
-        change: Zmień
-        avatar_requirements: JPG, PNG, GIF. Maksymalny rozmiar 1MB.
+        title: "Edytuj Swój Profil"
+        profile_information: "Informacje Profilowe"
+        profile_information_description: "Zaktualizuj informacje o swoim koncie."
+        profile_picture: "Zdjęcie Profilowe"
+        profile_picture_description: "Prześlij nowe zdjęcie profilowe. Zalecane proporcje 1:1."
+        current_avatar_alt: "Obecne zdjęcie profilowe"
+        preview_avatar_alt: "Podgląd nowego zdjęcia profilowego"
+        change_avatar_button: "Zmień Zdjęcie"
+        avatar_requirements: "JPG, PNG, GIF, WEBP. Max 2MB."
+        password_change: "Zmiana Hasła"
+        password_change_description: "Pozostaw puste, jeśli nie chcesz zmieniać obecnego hasła."
+        we_need_your_current_password_to_confirm_your_changes: "(wymagane do potwierdzenia zmian)"
+        new_password_label: "Nowe hasło"
+        confirm_new_password_label: "Potwierdź nowe hasło"
+        update_button: "Zaktualizuj Profil"
+      new:
+        create_your_account: "Stwórz swoje konto"
+        sign_up_button: "Zarejestruj się"
+        already_have_account_prompt: "Masz już konto"
+        sign_in_link: "Zaloguj się"
+      shared:
+        minimum_password_length: "(minimum %{count} znaków)"
+    sessions:
+      new:
+        sign_in_to_your_account: "Zaloguj się na swoje konto"
+        forgot_your_password_link: "Nie pamiętasz hasła?"
+        remember_me: "Zapamiętaj mnie"
+        sign_in_button: "Zaloguj się"
+        no_account_prompt: "Nie masz jeszcze konta"
+        sign_up_link: "Zarejestruj się"
+    passwords:
+      new:
+        forgot_your_password_title: "Zapomniałeś hasła?"
+        forgot_password_instructions: "Wprowadź swój adres e-mail, a wyślemy Ci instrukcje dotyczące resetowania hasła."
+        send_me_reset_password_instructions_button: "Wyślij instrukcje resetowania hasła"
+        remembered_password_prompt: "Przypomniałeś sobie hasło?"
+        sign_in_link: "Zaloguj się"
+        or: "lub"
+        sign_up_link: "Zarejestruj się"

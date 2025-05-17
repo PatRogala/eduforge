@@ -11,5 +11,11 @@ module MainPage
     def render?
       user.present?
     end
+
+    private
+
+    def user_display_name
+      user.email.split("@").first
+    end
   end
 end

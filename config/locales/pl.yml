@@ -11,8 +11,13 @@ pl:
   instructor:
     programming_courses:
       new:
-        title: Nowy kurs programowania
-        submit: Utwórz
+        title: "Rozpocznij Tworzenie Nowego Kursu" # Main page title
+        subtitle_html: "Nadaj swojemu kursowi chwytliwy tytuł. Możesz go później zmienić." # Subtitle
+        course_title_label: "Tytuł Kursu"
+        title_placeholder: "np. Kompletny Kurs Ruby on Rails dla Początkujących"
+        title_hint: "Dobry tytuł przyciąga uwagę i jasno komunikuje treść kursu."
+        submit_button: "Utwórz Kurs i Kontynuuj"
+        back_to_categories_link: "Wróć do wyboru kategorii"
       create:
         success: Kurs został utworzony.
       index:
@@ -23,51 +28,46 @@ pl:
         no_courses_description: Kliknij przycisk poniżej, aby stworzyć nowy kurs.
         create_your_first_course: Stwórz swój pierwszy kurs
       show:
-        back_to_list: Powrót
-        edit_details: Edytuj szczegóły
-        course_details: Szczegóły kursu
-        instructor: Instruktor
-        created_at: Stworzono
-        description: Opis
-        course_content: Kontent
-        edit_content: Edytuj kontent
-        add_content: Dodaj nową lekcję
-        no_content_yet: Nie masz jeszcze żadnego kontentu.
-        course_settings: Ustawienia
-        edit_settings: Edytuj ustawienia
-        no_settings_configured: Brak ustawien
-        course_details: Informacje ogólne
-        course_details_description: Tutaj możesz edytować podstawowe informację o kursie.
-        edit_lesson_title: Edytuj lekcję
-        edit_lesson: Edytuj lekcję
-        use_add_button_to_start: Użyj przycisku powyżej, aby dodać nową lekcję.
+        back_to_list: "Powrót do listy kursów"
+        cover_image_alt: "Okładka kursu: %{title}"
+        course_details_title: "Szczegóły Kursu"
+        course_details_description: "Podstawowe informacje o Twoim kursie."
+        edit_details_button: "Edytuj Szczegóły"
+        instructor_label: "Instruktor"
+        created_at_label: "Data Utworzenia"
+        slug_label: "Identyfikator URL (Slug)"
+        description_label: "Opis Kursu"
+        no_description_yet_message: "Nie dodano jeszcze opisu dla tego kursu."
+        course_content_title: "Zawartość Kursu"
+        course_content_description: "Zarządzaj modułami, lekcjami i zadaniami."
+        add_lesson_button: "Dodaj Nową Lekcję"
+        edit_lesson_title: "Edytuj lekcję: %{lesson_title}"
+        edit_lesson_button_sr: "Edytuj lekcję %{title}" # For screen readers
+        no_lessons_in_chapter_message: "Brak lekcji w tym rozdziale."
+        no_content_yet_message: "Ten kurs nie ma jeszcze żadnej zawartości."
+        use_add_lesson_button_to_start: "Użyj przycisku 'Dodaj Nową Lekcję', aby rozpocząć."
+
+        course_settings_title: "Ustawienia Kursu"
+        course_settings_description: "Skonfiguruj widoczność, cenę i inne opcje."
+        edit_settings_button: "Edytuj Ustawienia"
+        no_settings_configured_message: "Ustawienia kursu nie zostały jeszcze skonfigurowane."
+        use_edit_settings_button_to_configure: "Użyj przycisku 'Edytuj Ustawienia', aby dostosować opcje."
       edit:
-        edit_course: Edytuj kurs
-        back_to_course: Powrót
-        edit_course_details: Edytuj szczegoly
-        title: tytuł
-        save: Zapisz
-        cancel: Anuluj
-        course_content: Kontent
-        edit_content: Edytuj kontent
-        no_content_yet: Nie masz jeszcze żadnego kontentu.
-        course_settings: Ustawienia
-        edit_settings: Edytuj ustawienia
-        no_settings_configured: Brak ustawien
-        course_details: szzcegoly
-        edit: Edytuj
-        created_at: Stworzono
-        instructor: Instruktor
-        edit_course_content: Edytuj kontent
-        content_editor_coming_soon: Edytor kontentu wkrótce.
-        edit_course_settings: Edytuj ustawienia
-        settings_editor_coming_soon: Edytor ustawien wkrótce.
-        description: Opis
-        description_placeholder: Opis kursu
-        content: Kontent
-        settings: Ustawienia
-        view_course: Zobacz kurs
-        details: Szczegóły
+        form_titles:
+          details: "Edytuj Szczegóły Kursu"
+          content: "Edytuj Zawartość Kursu"
+          settings: "Edytuj Ustawienia Kursu"
+        form_descriptions:
+          details: "Zaktualizuj tytuł, opis i okładkę kursu."
+          content: "Zarządzaj rozdziałami i lekcjami w swoim kursie."
+          settings: "Skonfiguruj opcje publikacji, cenę i inne zaawansowane ustawienia."
+        current_cover_image_alt: "Obecna okładka kursu"
+        cover_image_hint: "JPG, PNG, GIF do 5MB. Zalecane proporcje 16:9."
+        content_editor_placeholder_title: "Edytor Zawartości (Wkrótce)"
+        content_editor_placeholder_desc_html: "Tutaj będziesz mógł dodawać, edytować i reorganizować rozdziały oraz lekcje. %{new_lesson_link}."
+        add_new_lesson_link_text: "Dodaj nową lekcję teraz"
+        settings_editor_placeholder_title: "Ustawienia Zaawansowane (Wkrótce)"
+        settings_editor_placeholder_desc: "Dostosuj opcje takie jak status publikacji, kategoria, poziom trudności, cena itp."
       update:
         success: Kurs został zaktualizowany.
     programming_course_lessons:
@@ -143,27 +143,61 @@ pl:
       view_all: Sprawdź katalog
       courses: kursów
     my:
-      my_courses: "Moje kursy"
-      no_courses: "Nie jesteś zapisany na żadne kursy"
-      browse_courses: "Przeglądaj dostępne kursy"
+      my_courses: "Moje Kursy"
+      category_programming: "Programowanie"
+      progress_percentage: "%{percent}% ukończono"
+      lessons_status: "%{completed}/%{total} lekcji"
+      duration_hours:
+        one: "%{count} godz."
+        few: "%{count} godz."
+        many: "%{count} godz."
+        other: "%{count} godz."
+      lessons_count:
+        one: "%{count} lekcja"
+        few: "%{count} lekcje"
+        many: "%{count} lekcji"
+        other: "%{count} lekcji"
+      no_courses_enrolled_title: "Nie jesteś jeszcze zapisany na żaden kurs"
+      no_courses_enrolled_description: "Wygląda na to, że Twoja biblioteka kursów jest pusta. Czas zacząć naukę!"
+      browse_courses: "Przeglądaj Dostępne Kursy"
+      browse_courses_button: "Przeglądaj kursy"
   programming_courses:
     show:
-      about_this_course: "O kursie"
-      what_will_you_learn: "Czego się nauczysz"
+      about_this_course: "O tym kursie"
+      what_will_you_learn: "Czego się nauczysz?"
       course_details: "Szczegóły kursu"
       instructor: "Instruktor"
       view_profile: "Zobacz profil"
-      enroll_now: "Zapisz się teraz"
-      already_enrolled: "Jesteś już zapisany"
+      enroll_now: "Zapisz się teraz!"
+      already_enrolled: "Już jesteś zapisany"
+      free_course: "Darmowy kurs"
+      lifetime_access: "Dożywotni dostęp"
+      no_lessons_in_chapter: "Brak lekcji w tym rozdziale."
+      lessons_count_full:
+        one: "%{count} lekcja"
+        few: "%{count} lekcje"
+        many: "%{count} lekcji"
+        other: "%{count} lekcji"
+      duration_full:
+        one: "%{count} godzina materiału"
+        few: "%{count} godziny materiału"
+        many: "%{count} godzin materiału"
+        other: "%{count} godzin materiału"
   programming_course_lessons:
     show:
-      course_content: "Kontent"
+      course_content: "Zawartość kursu"
       next_lesson: "Następna lekcja"
+      progress_placeholder: "0% ukończono" # TODO: Update when progress is implemented
+      duration_minutes:
+        one: "%{count} minuta"
+        few: "%{count} minuty"
+        many: "%{count} minut"
+        other: "%{count} minut"
   shared:
     cancel: Anuluj
-    save_changes: Zapisz zmiany
-    save_content: Zapisz kontent
-    save_settings: Zapisz ustawienia
+    save_changes: Zapisz Zmiany
+    save_content: Zapisz Zawartość
+    save_settings: Zapisz Ustawienia
   common:
     back: "Cofnij"
     save: "Zapisz"
@@ -176,3 +210,7 @@ pl:
       success: "Zapisano Cię na ten kurs"
   sidebar:
     my_courses: "Moje kursy"
+  time:
+    formats:
+      long_date_with_time: "%d %B %Y, %H:%M"
+      short_date_with_time: "%d %b %Y, %H:%M"

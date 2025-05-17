@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["content", "aside", "button"]
+  static targets = ["content", "aside", "button", "category"]
 
   static values = {
     collapsed: { type: Boolean, default: false }
@@ -18,6 +18,10 @@ export default class extends Controller {
     },
     button: {
       expanded: "mr-3"
+    },
+    category: {
+      collapsed: "hidden",
+      expanded: "block"
     }
   }
 
@@ -35,6 +39,7 @@ export default class extends Controller {
     this.#updateContentVisibility()
     this.#updateButtonSpacing()
     this.#updateAsideWidth()
+    this.#updateCategoryVisibility()
   }
 
   // Private methods for updating different parts of the sidebar
@@ -59,5 +64,12 @@ export default class extends Controller {
       this.asideTarget.classList.remove(...collapsed)
       this.asideTarget.classList.add(expanded)
     }
+  }
+
+  #updateCategoryVisibility() {
+    this.categoryTargets.forEach(target => {
+      target.classList.toggle(this.constructor.classes.category.collapsed, this.collapsedValue)
+      target.classList.toggle(this.constructor.classes.category.expanded, !this.collapsedValue)
+    })
   }
 }

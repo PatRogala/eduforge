@@ -1,131 +1,117 @@
--# app/views/instructor/programming_courses/show.html.haml
+.mx-auto.max-w-screen-xl.px-4.py-8{ class: "sm:px-6 lg:px-8" }
 
-.mx-auto.max-w-7xl.px-4.py-8{ class: "sm:px-6 lg:px-8" }
-  -# Header
+  -# Page Header
   .flex.flex-col.gap-4.mb-8{ class: "sm:flex-row sm:justify-between sm:items-center" }
-    %h1.text-3xl.font-bold.leading-tight.tracking-tight.text-gray-900= @course.title
-    = link_to instructor_programming_courses_path, class: 'inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do
-      = lucide_icon 'arrow-left', class: 'w-4 h-4'
-      = t('.back_to_list')
+    %div
+      %h1.text-3xl.font-bold.leading-tight.tracking-tight.text-text-primary= @course.title
+    .flex.items-center.gap-3
+      = link_to instructor_programming_courses_path, class: 'inline-flex items-center gap-2 rounded-md bg-bg-secondary px-3 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-inset ring-border-primary hover:bg-bg-tertiary' do
+        = lucide_icon 'arrow-left', class: 'w-4 h-4'
+        = t("instructor.programming_courses.show.back_to_list")
 
-  -# Main Content Area - Grid for potential side-by-side layout later, or just stack sections
+  -# Main Content Area - Tabs and Frames
   .flex.flex-col.gap-8
-    
-    -# --- Course Details Frame ---
     = turbo_frame_tag dom_id(@course, :details) do
-      .bg-white.shadow-sm.ring-1.rounded-xl.overflow-hidden{class: "ring-gray-900/5"}
-        -# Optional Cover Image Header
+      .bg-bg-secondary.shadow-xl.ring-1.ring-border-primary.rounded-xl.overflow-hidden
         - if @course.cover_image.attached?
-          %div.h-48.bg-gray-200{ class: 'md:h-64' }
-            = image_tag @course.cover_image, class: "w-full h-full object-cover", alt: "Cover image for #{@course.title}"
-        
+          %div.h-56.bg-bg-tertiary{ class: 'md:h-72' }
+            = image_tag @course.cover_image, class: "w-full h-full object-cover", alt: t("instructor.programming_courses.show.cover_image_alt", title: @course.title)
+
         .p-6{ class: "md:p-8" }
           .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
             %div
-              %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
-                = lucide_icon 'info', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-                = t('.course_details')
-              %p.mt-1.text-sm.text-gray-500= t('.course_details_description')
-            
-            = link_to edit_instructor_programming_course_path(@course, section: 'details'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+              %h2.text-xl.font-semibold.text-text-primary.flex.items-center.gap-2.5
+                = lucide_icon 'file-sliders', class: 'w-5 h-5 text-accent flex-shrink-0'
+                = t("instructor.programming_courses.show.course_details_title")
+              %p.mt-1.text-sm.text-text-secondary= t("instructor.programming_courses.show.course_details_description")
+
+            = link_to edit_instructor_programming_course_path(@course, section: 'details'), class: 'inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-3 py-2 text-sm font-semibold text-accent shadow-sm hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent self-start sm:self-center ring-1 ring-inset ring-accent/30' do
               = lucide_icon 'edit-3', class: 'w-4 h-4'
-              = t('.edit_details')
+              = t("instructor.programming_courses.show.edit_details_button")
 
-          -# Details Grid
-          .grid.grid-cols-1.gap-x-6.gap-y-4.mb-6{ class: "sm:grid-cols-2" }
-            .flex.items-center.gap-3.p-3.rounded-lg.ring-1.ring-gray-100{class: "bg-gray-50/80"}
-              = lucide_icon 'user', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-              %div
-                %dt.text-xs.font-medium.text-gray-500= t('.instructor')
-                %dd.text-sm.font-semibold.text-gray-800= @course.instructor.email
-            
-            .flex.items-center.gap-3.p-3.rounded-lg.ring-1.ring-gray-100{class: "bg-gray-50/80"}
-              = lucide_icon 'calendar', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-              %div
-                %dt.text-xs.font-medium.text-gray-500= t('.created_at')
-                %dd.text-sm.font-semibold.text-gray-800= @course.created_time_ago
+          .grid.grid-cols-1.gap-x-6.gap-y-4.mb-6{ class: "sm:grid-cols-2 lg:grid-cols-3" }
+            .bg-bg-tertiary.p-4.rounded-lg.ring-1.ring-border-secondary
+              %dt.text-xs.font-medium.text-text-tertiary.flex.items-center.gap-1.mb-0.5
+                = lucide_icon 'user-cog', class: 'w-3.5 h-3.5'
+                = t("instructor.programming_courses.show.instructor_label")
+              %dd.text-sm.font-semibold.text-text-primary.truncate= @course.instructor.email
 
-            -# Optional: Show Slug if needed for instructors
-            .flex.items-center.gap-3.p-3.rounded-lg.ring-1.ring-gray-100{class: "bg-gray-50/80"}
-              = lucide_icon 'link', class: 'w-5 h-5 text-gray-400 flex-shrink-0'
-              %div
-                %dt.text-xs.font-medium.text-gray-500 Slug
-                %dd.text-sm.font-semibold.text-gray-800.truncate= @course.slug
+            .bg-bg-tertiary.p-4.rounded-lg.ring-1.ring-border-secondary
+              %dt.text-xs.font-medium.text-text-tertiary.flex.items-center.gap-1.mb-0.5
+                = lucide_icon 'calendar-plus', class: 'w-3.5 h-3.5'
+                = t("instructor.programming_courses.show.created_at_label")
+              %dd.text-sm.font-semibold.text-text-primary= l(@course.created_at, format: :long_date_with_time)
 
-          -# Description
+            .bg-bg-tertiary.p-4.rounded-lg.ring-1.ring-border-secondary
+              %dt.text-xs.font-medium.text-text-tertiary.flex.items-center.gap-1.mb-0.5
+                = lucide_icon 'link-2', class: 'w-3.5 h-3.5'
+                = t("instructor.programming_courses.show.slug_label")
+              %dd.text-sm.font-semibold.text-text-primary.truncate= @course.slug
+
           %div
-            %h3.text-base.font-medium.text-gray-900.flex.items-center.gap-2.mb-2
-              = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-500'
-              = t('.description')
+            %h3.text-md.font-semibold.text-text-primary.flex.items-center.gap-2.mb-2
+              = lucide_icon 'file-text', class: 'w-4 h-4 text-text-tertiary'
+              = t("instructor.programming_courses.show.description_label")
             - if @course.description.present?
-              -# Apply prose styles for rich text rendering
-              .prose.prose-sm.max-w-none.text-gray-700.p-4.bg-gray-50.rounded-md.ring-1.ring-gray-100= @course.description
+              .prose.prose-sm.prose-invert.max-w-none.text-text-secondary.p-4.bg-bg-tertiary.rounded-md.ring-1.ring-border-secondary.prose-headings:text-text-primary.prose-a:text-accent.hover:prose-a:text-accent-hover.prose-strong:text-text-primary
+                = @course.description
             - else
-              %p.text-sm.text-gray-500.italic.p-4.bg-gray-50.rounded-md.ring-1.ring-gray-100= t('.no_description_yet')
+              .italic.p-4.bg-bg-tertiary.text-text-tertiary.rounded-md.ring-1.ring-border-secondary.text-sm= t("instructor.programming_courses.show.no_description_yet_message")
 
-    -# --- Course Content Frame ---
-    .bg-white.shadow-sm.ring-1.rounded-xl.p-6{ class: "md:p-8 ring-gray-900/5" }
+    -# --- Course Content Frame (Display State) ---
+    .bg-bg-secondary.shadow-xl.ring-1.ring-border-primary.rounded-xl.p-6{ class: "md:p-8" }
       .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
         %div
-          %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
-            = lucide_icon 'book-open', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-            = t('.course_content')
-          %p.mt-1.text-sm.text-gray-500 Modules, lessons, and assignments.
-        
-        = link_to new_instructor_programming_course_lesson_path(@course), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
-          = lucide_icon 'edit-3', class: 'w-4 h-4'
-          = t('.add_content')
+          %h2.text-xl.font-semibold.text-text-primary.flex.items-center.gap-2.5
+            = lucide_icon 'book-open-text', class: 'w-5 h-5 text-accent flex-shrink-0'
+            = t("instructor.programming_courses.show.course_content_title")
+          %p.mt-1.text-sm.text-text-secondary= t("instructor.programming_courses.show.course_content_description")
 
-      -# List of Chapters and Lessons or Placeholder
-      - if @course.programming_course_chapters.any?
-        -# Scrollable container for chapters/lessons
-        .max-h-96.overflow-y-auto.pr-2.space-y-6.bg-gray-50.p-4.rounded-lg.ring-1.ring-gray-200{ class: "lg:max-h-[32rem]" }
-          -# Iterate over chapters
-          - @course.programming_course_chapters.each do |chapter|
-            %div
-              .flex.items-center.justify-between.mb-2.pb-1.border-b.border-gray-200
-                %h3.text-base.font-semibold.text-gray-800.flex.items-center.gap-2
-                  = lucide_icon 'folder-open', class: 'w-4 h-4 text-gray-500 flex-shrink-0'
+        = link_to new_instructor_programming_course_lesson_path(@course), class: 'inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-3 py-2 text-sm font-semibold text-accent shadow-sm hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent self-start sm:self-center ring-1 ring-inset ring-accent/30' do
+          = lucide_icon 'plus-circle', class: 'w-4 h-4'
+          = t("instructor.programming_courses.show.add_lesson_button")
+
+      - if @course.programming_course_chapters.order(:created_at).any?
+        .space-y-4.overflow-y-auto.custom-scrollbar.pr-1{class: "max-h-[70vh]"}
+          - @course.programming_course_chapters.order(:created_at).each_with_index do |chapter, index|
+            .bg-bg-tertiary.p-4.rounded-lg.ring-1.ring-border-secondary
+              .flex.items-center.justify-between.mb-3
+                %h3.text-md.font-semibold.text-text-primary.flex.items-center.gap-2
+                  %span.bg-bg-primary.text-text-secondary.rounded-full.w-6.h-6.flex.items-center.justify-center.text-xs.ring-1.ring-border-primary= index + 1
                   = chapter.title
 
-              - if chapter.programming_course_lessons.any?
+              - if chapter.programming_course_lessons.order(:created_at).any?
                 %ul.space-y-1.pl-1
-                  - chapter.programming_course_lessons.each do |lesson|
-                    %li.flex.items-center.justify-between.gap-3.py-1.px-2.rounded.group.hover:bg-gray-100
+                  - chapter.programming_course_lessons.order(:created_at).each do |lesson|
+                    %li.flex.items-center.justify-between.gap-3.py-1.5.px-2.rounded-md.group.hover:bg-bg-hover
                       .flex.items-center.gap-2.min-w-0
-                        = lucide_icon 'file-text', class: 'w-4 h-4 text-gray-400 flex-shrink-0'
-                        %span.text-sm.text-gray-700.truncate= lesson.title
-
-                      -# Edit Lesson Link (appears on hover via group-hover potentially, or always visible)
-                      = link_to edit_instructor_programming_course_lesson_path(@course, lesson), class: 'flex-shrink-0 rounded p-1 text-blue-600 hover:bg-blue-100 hover:text-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-1', title: t('.edit_lesson_title', lesson_title: lesson.title) do
-                        = lucide_icon 'edit-3', class: 'w-3.5 h-3.5'
-                        %span.sr-only= t('.edit_lesson', title: lesson.title)
-
+                        = lucide_icon 'file-text', class: 'w-4 h-4 text-text-tertiary flex-shrink-0'
+                        %span.text-sm.text-text-secondary.truncate.group-hover:text-text-primary= lesson.title
+                      = link_to edit_instructor_programming_course_lesson_path(@course, lesson), class: 'flex-shrink-0 rounded p-1 text-accent/70 hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent focus:ring-offset-1 focus:ring-offset-bg-hover', title: t("instructor.programming_courses.show.edit_lesson_title", lesson_title: lesson.title) do
+                        = lucide_icon 'edit-3', class: 'w-4 h-4'
+                        %span.sr-only= t("instructor.programming_courses.show.edit_lesson_button_sr", title: lesson.title)
               - else
-                %p.text-sm.text-gray-500.italic.pl-7.py-1= t('.no_lessons_in_chapter')
+                %p.text-sm.text-text-tertiary.italic.pl-8.py-1= t("instructor.programming_courses.show.no_lessons_in_chapter_message")
       - else
-        -# Original Placeholder (when no chapters exist yet)
-        .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
-          = lucide_icon 'construction', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
-          %p.text-gray-600.font-medium= t('.no_content_yet')
-          %p.text-sm.text-gray-500= t('.use_add_button_to_start') # Updated placeholder text slightly
+        .text-center.py-12.px-6.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary
+          = lucide_icon 'book-dashed', class: 'w-12 h-12 text-text-tertiary mx-auto mb-4' # Changed icon
+          %p.text-text-primary.font-medium= t("instructor.programming_courses.show.no_content_yet_message")
+          %p.text-sm.text-text-secondary= t("instructor.programming_courses.show.use_add_lesson_button_to_start")
 
-    -# --- Course Settings Frame ---
+    -# --- Course Settings Frame (Display State) ---
     = turbo_frame_tag dom_id(@course, :settings) do
-      .bg-white.shadow-sm.ring-1.rounded-xl.p-6{ class: "md:p-8 ring-gray-900/5" }
+      .bg-bg-secondary.shadow-xl.ring-1.ring-border-primary.rounded-xl.p-6{ class: "md:p-8" }
         .flex.flex-col.gap-4.mb-6{ class: "sm:flex-row sm:justify-between sm:items-start" }
           %div
-            %h2.text-xl.font-semibold.text-gray-900.flex.items-center.gap-2
-              = lucide_icon 'settings', class: 'w-5 h-5 text-blue-600 flex-shrink-0'
-              = t('.course_settings')
-            %p.mt-1.text-sm.text-gray-500 Visibility, enrollment, etc.
-
-          = link_to edit_instructor_programming_course_path(@course, section: 'settings'), class: 'inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 self-start sm:self-center' do
+            %h2.text-xl.font-semibold.text-text-primary.flex.items-center.gap-2.5
+              = lucide_icon 'sliders-horizontal', class: 'w-5 h-5 text-accent flex-shrink-0'
+              = t("instructor.programming_courses.show.course_settings_title")
+            %p.mt-1.text-sm.text-text-secondary= t("instructor.programming_courses.show.course_settings_description")
+          = link_to edit_instructor_programming_course_path(@course, section: 'settings'), class: 'inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-3 py-2 text-sm font-semibold text-accent shadow-sm hover:bg-accent/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent self-start sm:self-center ring-1 ring-inset ring-accent/30' do
             = lucide_icon 'edit-3', class: 'w-4 h-4'
-            = t('.edit_settings')
+            = t("instructor.programming_courses.show.edit_settings_button")
 
-        -# Placeholder for displaying settings
-        .text-center.py-12.px-6.bg-gray-50.rounded-lg.ring-1.ring-gray-100
-          = lucide_icon 'sliders', class: 'w-12 h-12 text-gray-400 mx-auto mb-4'
-          %p.text-gray-600.font-medium= t('.no_settings_configured')
-          %p.text-sm.text-gray-500 Use the 'Edit Settings' button to configure the course.
+        .text-center.py-12.px-6.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary
+          = lucide_icon 'settings-2', class: 'w-12 h-12 text-text-tertiary mx-auto mb-4'
+          %p.text-text-primary.font-medium= t("instructor.programming_courses.show.no_settings_configured_message")
+          %p.text-sm.text-text-secondary= t("instructor.programming_courses.show.use_edit_settings_button_to_configure")

@@ -2,7 +2,7 @@ module Instructor
   # Policy for Programming Course Lessons
   class ProgrammingCourseLessonPolicy < ApplicationPolicy
     # Scope for Programming Course Lessons
-    class Scope < Scope
+    class Scope < ApplicationPolicy::Scope
       def resolve
         scope.joins(programming_course_chapter: { programming_course: :instructor })
              .where(programming_course_chapters: { programming_courses: { instructor: user } })

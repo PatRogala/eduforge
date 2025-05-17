@@ -1,29 +1,37 @@
-.grid.grid-cols-2.md:grid-cols-4.gap-4
-  .bg-green-50.p-4.rounded-xl.border.border-gray-100
+.grid.grid-cols-2.gap-4{class: "md:grid-cols-4"}
+  -# Courses Completed
+  .bg-bg-secondary.p-4.rounded-xl.border.border-border-primary.shadow-md
     .flex.items-center
-      .p-2.bg-white.rounded-lg
-        = lucide_icon("circle-check-big", class: "text-green-500 w-5 h-5")
-      .ml-3
-        %p.text-xs.text-gray-500= t(".courses_completed")
-        %p.font-semibold.text-gray-900= completed_courses_count
-  .bg-blue-50.p-4.rounded-xl.border.border-gray-100
+      .p-2.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary.mr-3
+        = lucide_icon("circle-check-big", class: "text-success w-5 h-5")
+      .flex-1
+        %p.text-xs.text-text-secondary.truncate= t(".courses_completed")
+        %p.font-semibold.text-lg.text-text-primary= completed_courses_count
+
+  -# Hours Learned
+  .bg-bg-secondary.p-4.rounded-xl.border.border-border-primary.shadow-md
     .flex.items-center
-      .p-2.bg-white.rounded-lg
-        = lucide_icon("clock", class: "text-blue-500 w-5 h-5")
-      .ml-3
-        %p.text-xs.text-gray-500= t(".hours_learned")
-        %p.font-semibold.text-gray-900= hours_learned_count
-  .bg-purple-50.p-4.rounded-xl.border.border-gray-100
+      .p-2.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary.mr-3
+        = lucide_icon("clock", class: "text-info w-5 h-5")
+      .flex-1
+        %p.text-xs.text-text-secondary.truncate= t(".hours_learned")
+        %p.font-semibold.text-lg.text-text-primary= hours_learned_count
+
+  -# Certificates Earned
+  .bg-bg-secondary.p-4.rounded-xl.border.border-border-primary.shadow-md
     .flex.items-center
-      .p-2.bg-white.rounded-lg
-        = lucide_icon("award", class: "text-purple-500 w-5 h-5")
-      .ml-3
-        %p.text-xs.text-gray-500= t(".certificates_earned")
-        %p.font-semibold.text-gray-900= certificates_earned_count
-  .bg-orange-50.p-4.rounded-xl.border.border-gray-100
+      .p-2.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary.mr-3
+        = lucide_icon("award", class: "text-warning w-5 h-5")
+      .flex-1
+        %p.text-xs.text-text-secondary.truncate= t(".certificates_earned")
+        %p.font-semibold.text-lg.text-text-primary= certificates_earned_count
+
+  -# Current Streak
+  .bg-bg-secondary.p-4.rounded-xl.border.border-border-primary.shadow-md
     .flex.items-center
-      .p-2.bg-white.rounded-lg
-        = lucide_icon("flame", class: "text-orange-500 w-5 h-5")
-      .ml-3
-        %p.text-xs.text-gray-500= t(".current_streak")
-        %p.font-semibold.text-gray-900= current_streak_count
+      .p-2.bg-bg-tertiary.rounded-lg.ring-1.ring-border-secondary.mr-3
+        = lucide_icon("flame", class: "text-accent w-5 h-5")
+      .flex-1
+        %p.text-xs.text-text-secondary.truncate= t(".current_streak")
+        %p.font-semibold.text-lg.text-text-primary
+          = current_streak_count

@@ -1,4 +1,9 @@
 pl:
-  dashboard: Nasze kursy
-  created_courses: Twórz kursy
+  dashboard: "Przeglądaj kursy"
+  created_courses: "Utwórz / Zarządzaj"
   my_courses: "Moje kursy"
+
+  navigation:
+    main: "Nawigacja"
+    personal: "Moje konto"
+    instructor: "Panel Instruktora"

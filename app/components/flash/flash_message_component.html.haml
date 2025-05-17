@@ -1,21 +1,21 @@
 - if notice
-  .fixed.top-4.right-4.z-50.transform.transition-all.duration-500.ease-in-out.translate-x-full.opacity-0{"data-controller": "flash", "data-flash-target": "message", "data-flash-hide-after-value": "3000"}
-    .flex.items-center.gap-3.bg-white.border.border-green-100.text-green-700.px-4.py-3.rounded-lg.shadow-lg
-      .flex-shrink-0.bg-green-100.p-2.rounded-full
-        %svg.lucide.lucide-circle-check-big.text-green-600{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
-          %path{d: "M21.801 10A10 10 0 1 1 17 3.335"}
-          %path{d: "m9 11 3 3L22 4"}
-      .flex-1
-        %p.font-medium.text-sm= t(".success")
-        %p.text-xs{class: "text-green-600/80"}= notice
+  .fixed.top-5.right-5.transform.transition-all.duration-500.ease-in-out.translate-x-full.opacity-0{"data-controller": "flash", "data-flash-target": "message", "data-flash-hide-after-value": "3000", class: "z-[100]"}
+    .flex.items-start.gap-3.bg-bg-secondary.border.border-border-primary.text-text-primary.px-4.py-3.rounded-lg.shadow-xl.max-w-md{class: "min-w-[300px]"}
+      .flex-shrink-0{class: "bg-success/10 p-2 rounded-full ring-1 ring-success/30"}
+        = lucide_icon("circle-check-big", class: "text-success w-5 h-5")
+      .flex-1.pt-0.5
+        %p.font-medium.text-sm.text-text-primary= t(".success")
+        %p.text-xs.text-text-secondary= notice
+      %button.ml-auto.-mx-1.-my-1.p-1.rounded-md.text-text-tertiary.hover:bg-bg-hover.hover:text-text-primary.focus:outline-none.focus:ring-2.focus:ring-accent{"data-action": "click->flash#close", "aria-label" => t("flash.flash_message_component.close_notification")}
+        = lucide_icon("x", class: "w-4 h-4")
+
 - if alert
-  .fixed.top-4.right-4.z-50.transform.transition-all.duration-500.ease-in-out.translate-x-full.opacity-0{"data-controller": "flash", "data-flash-target": "message", "data-flash-hide-after-value": "3000"}
-    .flex.items-center.gap-3.bg-white.border.border-red-100.text-red-700.px-4.py-3.rounded-lg.shadow-lg
-      .flex-shrink-0.bg-red-100.p-2.rounded-full
-        %svg.lucide.lucide-circle-alert.text-red-600{fill: "none", height: "16", stroke: "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", viewbox: "0 0 24 24", width: "16", xmlns: "http://www.w3.org/2000/svg"}
-          %circle{cx: "12", cy: "12", r: "10"}
-          %line{x1: "12", x2: "12", y1: "8", y2: "12"}
-          %line{x1: "12", x2: "12.01", y1: "16", y2: "16"}
-      .flex-1
-        %p.font-medium.text-sm= t(".alert")
-        %p.text-xs{class: "text-red-600/80"}= alert
+  .fixed.top-5.right-5.transform.transition-all.duration-500.ease-in-out.translate-x-full.opacity-0{"data-controller": "flash", "data-flash-target": "message", "data-flash-hide-after-value": "3000", class: "z-[100]"}
+    .flex.items-start.gap-3.bg-bg-secondary.border.border-border-primary.text-text-primary.px-4.py-3.rounded-lg.shadow-xl.max-w-md{class: "min-w-[300px]"}
+      .flex-shrink-0{class: "bg-notification/10 p-2 rounded-full ring-1 ring-notification/30"}
+        = lucide_icon("circle-alert", class: "text-notification w-5 h-5")
+      .flex-1.pt-0.5
+        %p.font-medium.text-sm.text-text-primary= t(".alert")
+        %p.text-xs.text-text-secondary= alert
+      %button.ml-auto.-mx-1.-my-1.p-1.rounded-md.text-text-tertiary.hover:bg-bg-hover.hover:text-text-primary.focus:outline-none.focus:ring-2.focus:ring-accent{"data-action": "click->flash#close", "aria-label" => t("flash.flash_message_component.close_notification")}
+        = lucide_icon("x", class: "w-4 h-4")

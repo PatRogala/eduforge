@@ -1,7 +1,7 @@
 # Policy for programming course lessons to check if the user has access to them
 class ProgrammingCourseLessonPolicy < ApplicationPolicy
   # Scope for programming course lessons to only take into account the lessons that the user has access to
-  class Scope < Scope
+  class Scope < ApplicationPolicy::Scope
     def resolve
       scope.joins(programming_course_chapter: { programming_course: :programming_course_enrollments })
            .where(programming_course_chapters: { programming_courses:

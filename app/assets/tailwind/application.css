@@ -1,1 +1,56 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: InterVariable, sans-serif;
+
+  /* Custom Colors */
+  --color-bg-primary: #1A1B1E;    /* Deep dark - main content background */
+  --color-bg-secondary: #25262A;  /* Slightly lighter dark - sidebars, panels, cards */
+  --color-bg-tertiary: #313338;   /* Elements within panels, input fields, some hover states */
+  --color-bg-hover: #383A3F;      /* Subtle hover for list items or interactive elements */
+
+  /* Text */
+  --color-text-primary: #F0F2F5;   /* Main text (very light gray / off-white) */
+  --color-text-secondary: #B5BAC1; /* Muted text, placeholders, secondary info */
+  --color-text-tertiary: #80848E;  /* Even more muted, like some icons or less important text */
+
+  /* Accent / Brand (the blue/purpleish color) */
+  --color-accent: var(--color-red-500);
+  --color-accent-hover: var(--color-red-600);
+  --color-accent-content: #FFFFFF;
+
+  /* Borders and Dividers */
+  --color-border-primary: #3A3C41;   /* Subtle borders and dividers */
+  --color-border-secondary: #4E5058; /* Slightly more prominent borders */
+
+  /* Interactive elements (generic, can be overridden by accent) */
+  --color-interactive: #4F545C;         /* Default for non-accented interactive elements */
+  --color-interactive-hover: #5D6269;
+
+  /* Specific UI Colors */
+  --color-notification: #f87171;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-info: #0ea5e9;
+
+  /* Animations */
+  --animate-fadeIn: fadeIn 0.2s ease-out forwards;
+}
+
+body {
+  @apply bg-bg-primary text-text-primary antialiased;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

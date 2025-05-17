@@ -1,27 +1,49 @@
-- content_for :title, t(".my_courses")
+- content_for :title, t("courses.my.my_courses")
 
-.py-8.px-4{ class: "md:px-6 lg:px-8" }
-  .flex.justify-between.items-center.mb-6
-    %h2.text-2xl.font-bold.text-gray-900{ class: "md:text-3xl" }= t(".my_courses")
+.mb-8
+  .flex.justify-between.items-center.mb-8
+    %h1.text-3xl.font-bold.text-text-primary.tracking-tight= t("courses.my.my_courses")
 
   - if @courses.any?
-    .grid.grid-cols-1.gap-6{ class: "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" }
+    .grid.grid-cols-1.gap-x-6.gap-y-8{ class: "md:grid-cols-2 lg:grid-cols-3" }
       - @courses.each do |course|
-        = link_to programming_course_lesson_path(course.first_lesson), class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
-          %div
-            = image_tag course.cover_image, class: "w-full aspect-video object-cover"
-          .p-4
-            %span.inline-block.bg-red-100.text-red-800.text-xs.font-medium.px-2.5.py-0.5.rounded-full.mb-2 Programowanie
-            %h3.text-lg.font-semibold.text-gray-900.line-clamp-2.group-hover:text-blue-600= course.title
-            .mt-3.flex.items-center.space-x-3.text-sm.text-gray-500
-              .flex.items-center
-                = lucide_icon('clock', class: "w-4 h-4 mr-1")
-                %span #{course.approximate_duration_in_hours} h
-              .flex.items-center
-                = lucide_icon('layers', class: "w-4 h-4 mr-1")
-                %span #{course.programming_course_lessons.count} Lekcji
+        = link_to (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course)), class: "group block bg-bg-secondary rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1.5 border border-border-primary hover:border-border-secondary" do
+          .relative
+            = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
+            .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
+              = t("courses.my.category_programming")
+
+            .absolute.inset-0.bg-black.opacity-0.group-hover:opacity-10.transition-opacity.duration-300
+
+          .p-5
+            %h3.text-lg.font-semibold.text-text-primary.line-clamp-2.mb-1.group-hover:text-accent.transition-colors.duration-150= course.title
+
+            %p.text-xs.text-text-tertiary.mb-3.flex.items-center.gap-1
+              = lucide_icon("user", class: "w-3.5 h-3.5 flex-shrink-0")
+              %span.truncate= course.instructor.email
+
+            - progress_percentage = 0 # TODO: Replace with actual progress
+            - lessons_completed = 0 # TODO: Replace with actual progress
+            .mb-3
+              .w-full.bg-bg-tertiary.rounded-full.h-1.5.overflow-hidden.mb-1
+                .h-full.bg-accent.rounded-full{style: "width: #{progress_percentage}%;"}
+              .flex.justify-between.text-xs
+                %span.font-medium.text-text-secondary= t("courses.my.progress_percentage", percent: progress_percentage)
+                %span.text-text-tertiary= t("courses.my.lessons_status", completed: lessons_completed, total: course.programming_course_lessons.count)
+
+            -# Course Stats: Duration & Lessons
+            .flex.items-center.justify-between.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3.mt-auto
+              .flex.items-center.gap-1.5
+                = lucide_icon("clock-3", class: "w-4 h-4")
+                %span= t("courses.my.duration_hours", count: course.approximate_duration_in_hours)
+              .flex.items-center.gap-1.5
+                = lucide_icon("layers-3", class: "w-4 h-4")
+                %span= t("courses.my.lessons_count", count: course.programming_course_lessons.count)
   - else
-    .text-center.py-12
-      .text-gray-500.mb-4
-        = t(".no_courses")
-      = link_to t(".browse_courses"), courses_path, class: "text-blue-600 hover:text-blue-800"
+    .text-center.py-16.bg-bg-secondary.rounded-xl.border.border-border-primary.shadow-lg
+      = lucide_icon("book-dashed", class: "w-16 h-16 text-text-tertiary mx-auto mb-5")
+      %h3.text-xl.font-semibold.text-text-primary.mb-2= t("courses.my.no_courses_enrolled_title")
+      %p.text-text-secondary.mb-6= t("courses.my.no_courses_enrolled_description")
+      = link_to t("courses.my.browse_courses"), courses_path, class: "inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+        = lucide_icon("search", class: "w-4 h-4 mr-2")
+        = t("courses.my.browse_courses_button")

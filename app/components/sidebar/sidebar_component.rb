@@ -20,8 +20,8 @@ module Sidebar
       @instructor_links = [
         {
           title: ".created_courses",
-          path: new_instructor_course_path,
-          icon: "book-plus"
+          path: instructor_programming_courses_path,
+          icon: "square-plus"
         }
       ]
 
@@ -38,8 +38,8 @@ module Sidebar
 
     def active_link_class(path)
       current_path = request.path
-      active_classes = "bg-indigo-50 text-indigo-600"
-      inactive_classes = "hover:bg-gray-100 text-gray-700"
+      active_classes = "bg-bg-tertiary text-accent font-medium"
+      inactive_classes = "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
       current_path == path ? active_classes : inactive_classes
     end
 
@@ -56,8 +56,8 @@ module Sidebar
     end
 
     def render_link(link)
-      link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 #{active_link_class(link[:path])}" do
-        concat(content_tag(:span, lucide_icon(link[:icon], class: "w-5 h-5"), class: "mr-3", "data-sidebar-target": "button"))
+      link_to link[:path], class: "flex items-center px-3 rounded-lg py-2.5 transition-colors duration-150 #{active_link_class(link[:path])}" do
+        concat(content_tag(:span, lucide_icon(link[:icon], class: "w-5 h-5"), class: "mr-3 flex-shrink-0", "data-sidebar-target": "button"))
         concat(content_tag(:span, t(link[:title]), class: "flex-1 whitespace-nowrap transition-opacity duration-300", "data-sidebar-target": "content"))
       end
     end
