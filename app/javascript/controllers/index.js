@@ -13,6 +13,9 @@ application.register("avatar-preview", AvatarPreviewController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
+import Dropdown from "@stimulus-components/dropdown"
+application.register("dropdown", Dropdown)
+
 import HighlightCodeBlockController from "./highlight_code_block_controller"
 application.register("highlight-code-block", HighlightCodeBlockController)
 
