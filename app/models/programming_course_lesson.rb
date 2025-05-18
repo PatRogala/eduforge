@@ -21,6 +21,7 @@ class ProgrammingCourseLesson < ApplicationRecord
   belongs_to :programming_course_chapter
   has_rich_text :content
   has_one :programming_task, dependent: :delete
+  has_many :completed_programming_lessons, dependent: :delete_all
 
   validates :title, presence: true
 

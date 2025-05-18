@@ -22,14 +22,12 @@
               = lucide_icon("user", class: "w-3.5 h-3.5 flex-shrink-0")
               %span.truncate= course.instructor.email
 
-            - progress_percentage = 0 # TODO: Replace with actual progress
-            - lessons_completed = 0 # TODO: Replace with actual progress
-            .mb-3
-              .w-full.bg-bg-tertiary.rounded-full.h-1.5.overflow-hidden.mb-1
-                .h-full.bg-accent.rounded-full{style: "width: #{progress_percentage}%;"}
+            .mb-4.mt-auto
+              .w-full.bg-bg-tertiary.rounded-full.h-2.overflow-hidden.mb-1
+                .h-full.bg-accent.rounded-full{style: "width: #{course.completed_percentage_for(current_user)}%;", role: "progressbar", "aria-valuenow" => course.completed_percentage_for(current_user), "aria-valuemin" => "0", "aria-valuemax" => "100"}
               .flex.justify-between.text-xs
-                %span.font-medium.text-text-secondary= t("courses.my.progress_percentage", percent: progress_percentage)
-                %span.text-text-tertiary= t("courses.my.lessons_status", completed: lessons_completed, total: course.programming_course_lessons.count)
+                %span.font-medium.text-text-secondary= t(".progress_percentage", percent: course.completed_percentage_for(current_user))
+                %span.text-text-tertiary= t(".lessons_status", completed: course.completed_lessons_count_for(current_user), total: course.programming_course_lessons.count)
 
             -# Course Stats: Duration & Lessons
             .flex.items-center.justify-between.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3.mt-auto
