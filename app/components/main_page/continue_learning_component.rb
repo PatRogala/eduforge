@@ -13,7 +13,7 @@ module MainPage
     end
 
     def courses
-      @courses ||= user.enrolled_programming_courses.limit(3)
+      @courses ||= user.enrolled_programming_courses.includes(:programming_course_lessons).limit(3)
     end
   end
 end

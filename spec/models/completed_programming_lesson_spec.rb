@@ -15,8 +15,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (programming_course_lesson_id => programming_course_lessons.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (programming_course_lesson_id => programming_course_lessons.id) ON DELETE => cascade
+#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 require "rails_helper"
 

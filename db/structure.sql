@@ -906,7 +906,7 @@ ALTER TABLE ONLY public.programming_course_chapters
 --
 
 ALTER TABLE ONLY public.completed_programming_lessons
-    ADD CONSTRAINT fk_rails_12c53b1df9 FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT fk_rails_12c53b1df9 FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 
 --
@@ -954,7 +954,7 @@ ALTER TABLE ONLY public.user_roles
 --
 
 ALTER TABLE ONLY public.completed_programming_lessons
-    ADD CONSTRAINT fk_rails_8fa52c8070 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id);
+    ADD CONSTRAINT fk_rails_8fa52c8070 FOREIGN KEY (programming_course_lesson_id) REFERENCES public.programming_course_lessons(id) ON DELETE CASCADE;
 
 
 --
@@ -988,6 +988,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250518065644'),
 ('20250516170436'),
 ('20250516162302'),
 ('20250422203748'),
