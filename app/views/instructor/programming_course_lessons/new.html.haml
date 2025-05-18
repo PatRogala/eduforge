@@ -55,23 +55,6 @@
             = form.rich_text_area :content
           %p.mt-2.text-sm.text-gray-500= t('.content_hint')
 
-        -# Programming Task Section
-        %div{ data: { controller: "toggle" }}
-          .flex.items-center.justify-between.mb-4
-            %h2.text-lg.font-semibold.text-gray-900= t('.programming_task_section')
-            .flex.items-center.gap-2
-              = form.hidden_field :has_programming_task, value: '0'
-              = form.check_box :has_programming_task,
-                  class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600",
-                  data: { action: "change->toggle#toggle" },
-                  checked: @lesson.programming_task.present?
-              = form.label :has_programming_task, t('.add_programming_task'), class: "text-sm text-gray-700"
-
-          #programming_task_form{ class: ("hidden" unless @lesson.programming_task.present? || params.dig(:programming_course_lesson, :has_programming_task) == '1'), data: { toggle_target: "element" } }
-            = form.fields_for :programming_task do |task_form|
-              = render "programming_task_form", task_form: task_form
-
-
       .mt-8.pt-6.border-t.flex.items-center.justify-end.gap-x-3{:class => "border-gray-900/10"}
         = link_to t('.cancel'), instructor_programming_course_path(@programming_course), class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         = form.submit t('.submit'), class: "cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
