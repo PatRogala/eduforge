@@ -22,13 +22,11 @@
 
           -# Progress Bar Area
           .mb-4.mt-auto
-            - progress_percentage = 0 # TODO: Replace with actual progress calculation
-            - lessons_completed = 0 # TODO: Replace with actual completed lessons
             .w-full.bg-bg-tertiary.rounded-full.h-2.overflow-hidden.mb-1
-              .h-full.bg-accent.rounded-full{style: "width: #{progress_percentage}%;", role: "progressbar", "aria-valuenow" => progress_percentage, "aria-valuemin" => "0", "aria-valuemax" => "100"}
+              .h-full.bg-accent.rounded-full{style: "width: #{course.completed_percentage_for(user)}%;", role: "progressbar", "aria-valuenow" => course.completed_percentage_for(user), "aria-valuemin" => "0", "aria-valuemax" => "100"}
             .flex.justify-between.text-xs
-              %span.font-medium.text-text-secondary= t(".progress_percentage", percent: progress_percentage)
-              %span.text-text-tertiary= t(".lessons_status", completed: lessons_completed, total: course.programming_course_lessons.count)
+              %span.font-medium.text-text-secondary= t(".progress_percentage", percent: course.completed_percentage_for(user))
+              %span.text-text-tertiary= t(".lessons_status", completed: course.completed_lessons_count_for(user), total: course.programming_course_lessons.count)
 
           -# Course Stats (Duration & Lesson Count)
           .flex.items-center.justify-between.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3.mt-auto

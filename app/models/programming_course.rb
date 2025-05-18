@@ -64,4 +64,16 @@ class ProgrammingCourse < ApplicationRecord
   def enrolled_users_count
     programming_course_enrollments.count
   end
+
+  def completed_lessons_count_for(user)
+    programming_course_lessons.joins(:completed_programming_lessons).where(completed_programming_lessons: { user: user }).count
+  end
+
+  def completed_percentage_for(user)
+    return 0 unless programming_course_lessons.any?
+    return 0 unless enrolled_users.include?(user)
+
+    completed_lessons = completed_lessons_count_for(user)
+    ((completed_lessons.to_f / programming_course_lessons.count) * 100).floor
+  end
 end

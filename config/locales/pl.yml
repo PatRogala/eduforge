@@ -72,50 +72,39 @@ pl:
         success: Kurs został zaktualizowany.
     programming_course_lessons:
       edit:
-        back_to_course: "Wróć do kursu"
-        content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
-        cancel: "Anuluj"
-        submit: "Zapisz"
-        title: "Edytuj lekcję"
-        course: "Kurs"
-        chapter: "Rozdział"
-        select_chapter: "Wybierz rozdział"
-        new_chapter_placeholder: "Nazwa nowego rozdziału"
-        new_chapter_hint: "Pozostaw puste, aby nie tworzyć nowego rozdziału"
-        programming_task_section: "Zadanie programistyczne"
-        add_programming_task: "Dodaj zadanie programistyczne"
-        programming_task:
-          title: "Zadanie programistyczne"
-          initial_code: "Kod początkowy"
-          solution_code: "Kod rozwiązania"
-          test_cases: "Przypadki testowe"
-          hints: "Podpowiedzi"
-          difficulty_level: "Poziom trudności"
-          points: "Punkty"
-          select_difficulty: "Wybierz poziom trudności"
-          hints_placeholder: "Wpisz podpowiedzi, każdą w nowej linii"
-          easy: "Łatwy"
-          medium: "Średni"
-          hard: "Trudny"
+        title: "Edytuj Lekcję"
+        breadcrumb_new_lesson: "Edycja Lekcji"
+        back_to_course_button: "Wróć do Kursu"
+        title_placeholder: "np. Wprowadzenie do Pętli For"
+        chapter_label: "Rozdział Kursu"
+        select_chapter_placeholder: "Wybierz istniejący rozdział..."
+        create_new_chapter_button: "Lub stwórz nowy rozdział"
+        new_chapter_button_select_existing: "Lub wybierz istniejący rozdział" # For dynamic button text
+        new_chapter_label: "Nazwa Nowego Rozdziału"
+        new_chapter_placeholder: "np. Moduł 1: Podstawy"
+        new_chapter_hint: "Jeśli pole pozostanie puste, a rozdział nie zostanie wybrany, lekcja nie zostanie przypisana."
+        content_hint: "Użyj edytora, aby dodać tekst, obrazy, filmy i formatowanie."
+        programming_task_section_title: "Zadanie Programistyczne (Opcjonalne)"
+        add_programming_task_checkbox_label: "Dołącz zadanie programistyczne do tej lekcji"
+        submit_button: "Utwórz Lekcję"
       update:
         success: "Lekcja została zaktualizowana."
       new:
-        title: "Dodaj nową lekcję"
-        new_lesson: "Nowa lekcja"
-        course: "Kurs"
-        back_to_course: "Wróć do kursu"
-        title_label: "Tytuł lekcji" # Implicitly used by form.label :title
-        content_label: "Zawartość lekcji" # Implicitly used by form.label :content
-        title_placeholder: "n.p. Wprowadzenie do ...."
-        content_hint: "Użyj edytor aby dodać tekst, obrazy, formatowanie."
-        submit: "Utwórz lekcję"
-        cancel: "Anuluj"
-        chapter: "Rozdział"
-        select_chapter: "Wybierz rozdział"
-        new_chapter_placeholder: "Nowy rozdział"
-        new_chapter_hint: "Użyj tego pola, aby dodać nowy rozdział do kursu."
-        programming_task_section: "Zadanie programistyczne"
-        add_programming_task: "Dodaj zadanie programistyczne"
+        title: "Dodaj Nową Lekcję do Kursu"
+        breadcrumb_new_lesson: "Nowa Lekcja"
+        back_to_course_button: "Wróć do Kursu"
+        title_placeholder: "np. Wprowadzenie do Pętli For"
+        chapter_label: "Rozdział Kursu"
+        select_chapter_placeholder: "Wybierz istniejący rozdział..."
+        create_new_chapter_button: "Lub stwórz nowy rozdział"
+        new_chapter_button_select_existing: "Lub wybierz istniejący rozdział" # For dynamic button text
+        new_chapter_label: "Nazwa Nowego Rozdziału"
+        new_chapter_placeholder: "np. Moduł 1: Podstawy"
+        new_chapter_hint: "Jeśli pole pozostanie puste, a rozdział nie zostanie wybrany, lekcja nie zostanie przypisana."
+        content_hint: "Użyj edytora, aby dodać tekst, obrazy, filmy i formatowanie."
+        programming_task_section_title: "Zadanie Programistyczne (Opcjonalne)"
+        add_programming_task_checkbox_label: "Dołącz zadanie programistyczne do tej lekcji"
+        submit_button: "Utwórz Lekcję"
       create:
         success: "Lekcja została utworzona."
       programming_task_form:
@@ -193,6 +182,11 @@ pl:
         few: "%{count} minuty"
         many: "%{count} minut"
         other: "%{count} minut"
+      next_lesson: "Następna Lekcja"
+      next_lesson_after_complete: "Przejdź do Następnej Lekcji"
+      lesson_completed_no_next: "Lekcja Ukończona!"
+      complete_and_next_lesson: "Ukończ i Przejdź Dalej"
+      complete_lesson_finish_course: "Ukończ Lekcję (Koniec Kursu)"
   shared:
     cancel: Anuluj
     save_changes: Zapisz Zmiany
@@ -214,3 +208,7 @@ pl:
     formats:
       long_date_with_time: "%d %B %Y, %H:%M"
       short_date_with_time: "%d %b %Y, %H:%M"
+  completed_programming_lessons:
+    create:
+      success: "Lekcja została ukończona."
+      error: "Nie udało się ukończyć lekcji."

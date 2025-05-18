@@ -25,24 +25,32 @@
               = lucide_icon 'clock-3', class: 'w-4 h-4 text-text-tertiary'
               = t("programming_course_lessons.show.duration_minutes", count: @lesson.approximate_duration_in_minutes.round)
 
-
         -# Lesson Content
         %section.bg-bg-secondary.p-6.sm:p-8.rounded-xl.shadow-lg.border.border-border-primary
           .trix-content.text-text-primary
             = @lesson.content
 
-          - if @lesson.next_lesson
-            .mt-10.pt-6.border-t.border-border-primary.flex.justify-end
-              = link_to programming_course_lesson_path(@lesson.next_lesson), class: "inline-flex items-center gap-2 text-accent-content bg-accent hover:bg-accent-hover font-medium px-5 py-2.5 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
-                = t("programming_course_lessons.show.next_lesson")
-                = lucide_icon 'arrow-right', class: 'w-4 h-4'
+          -# --- Lesson Completion / Navigation Section ---
+          .mt-10.pt-6.border-t.border-border-primary.flex.flex-col.gap-4{ class: "sm:flex-row sm:justify-end sm:items-center" }
+            - if current_user.completed_lesson?(@lesson)
+              - if @lesson.next_lesson
+                = link_to programming_course_lesson_path(@lesson.next_lesson), class: "w-full sm:w-auto inline-flex items-center justify-center gap-2 text-accent-content bg-accent hover:bg-accent-hover font-medium px-6 py-3 rounded-lg shadow-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+                  %span= t("programming_course_lessons.show.next_lesson_after_complete")
+                  = lucide_icon 'arrow-right', class: 'w-5 h-5'
+              - else
+                .w-full.sm:w-auto.inline-flex.items-center.justify-center.gap-2.text-success.font-medium.px-6.py-3.rounded-lg.ring-1.ring-inset{class: "bg-success/10 ring-success/30"}
+                  = lucide_icon 'check-circle-2', class: 'w-5 h-5'
+                  %span= t("programming_course_lessons.show.lesson_completed_no_next")
+            - else
+              = button_to completed_programming_lessons_path(completed_programming_lesson: { programming_course_lesson_id: @lesson.id }), method: :post, class: "w-full sm:w-auto inline-flex items-center justify-center gap-2 text-accent-content bg-accent hover:bg-accent-hover font-medium px-6 py-3 rounded-lg shadow-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+                %span= @lesson.next_lesson ? t("programming_course_lessons.show.complete_and_next_lesson") : t("programming_course_lessons.show.complete_lesson_finish_course")
+                = lucide_icon 'check-square', class: 'w-5 h-5'
 
       -# Right Column (Navigation Sidebar)
       .mt-8.lg:mt-0.lg:col-span-4.xl:col-span-3
         %aside.lg:sticky.lg:top-6.space-y-6
-          -# Course Navigation
           .bg-bg-secondary.p-5.rounded-xl.shadow-lg.border.border-border-primary
-            .flex.justify-between.items-center.mb-4
+            .mb-4
               %h3.text-lg.font-semibold.text-text-primary= t("programming_course_lessons.show.course_content")
               %span.text-xs.text-text-tertiary
                 = t("programming_course_lessons.show.progress_placeholder")
@@ -57,10 +65,10 @@
                     - chapter.programming_course_lessons.order(:created_at).each do |nav_lesson|
                       %li
                         = link_to programming_course_lesson_path(nav_lesson), class: "flex items-center gap-2.5 py-1.5 px-2.5 rounded-md transition-colors duration-150 #{nav_lesson == @lesson ? 'bg-accent/10 text-accent font-medium' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'}" do
-                          - if nav_lesson == @lesson
-                            = lucide_icon 'play-circle', class: 'w-4 h-4 flex-shrink-0'
+                          - if current_user.completed_lesson?(nav_lesson)
+                            = lucide_icon 'check-circle-2', class: 'w-4 h-4 flex-shrink-0 text-success'
+                          - elsif nav_lesson == @lesson
+                            = lucide_icon 'play-circle', class: 'w-4 h-4 flex-shrink-0 text-accent'
                           - else
-                            -# Placeholder for completion status icon - TODO
-                            -# %span.w-4.h-4.flex-shrink-0.border.border-text-tertiary.rounded-full
-                            = lucide_icon 'file-text', class: 'w-4 h-4 text-text-tertiary flex-shrink-0'
+                            = lucide_icon 'circle', class: 'w-4 h-4 flex-shrink-0 text-text-tertiary' # Default to an empty circle or file-text
                           %span.truncate= nav_lesson.title

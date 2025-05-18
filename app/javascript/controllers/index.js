@@ -13,19 +13,21 @@ application.register("avatar-preview", AvatarPreviewController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
+import Dropdown from "@stimulus-components/dropdown"
+application.register("dropdown", Dropdown)
+
 import HighlightCodeBlockController from "./highlight_code_block_controller"
 application.register("highlight-code-block", HighlightCodeBlockController)
 
 import InlineCodeTrixController from "./inline_code_trix_controller"
 application.register("inline-code-trix", InlineCodeTrixController)
 
+import SidebarController from "./sidebar_controller"
+application.register("sidebar", SidebarController)
+
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
-// Used in header component for avatar dropdown
-import Dropdown from "@stimulus-components/dropdown"
-application.register("dropdown", Dropdown)
+import ToggleInputController from "./toggle_input_controller"
+application.register("toggle-input", ToggleInputController)
 
-// Used in main layout with header and sidebar components
-import Sidebar from "./sidebar_controller"
-application.register("sidebar", Sidebar)
