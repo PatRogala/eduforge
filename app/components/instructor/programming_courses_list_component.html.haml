@@ -54,8 +54,10 @@
             = image_tag "default_cover_image.png", class: "w-full aspect-[16/9] object-cover"
           -# Status Badge (e.g., Published, Draft)
           .absolute.top-3.left-3
-            -# TODO: Logic for different statuses (e.g., if course.published?)
-            %span.px-2.5.py-1.rounded-full.text-xs.font-medium.text-success.ring-1.ring-inset{class: "bg-success/10 ring-success/30"}= t("instructor.programming_courses_list_component.status_published")
+            - if course.published?
+              %span.px-2.5.py-1.rounded-full.text-xs.font-medium.text-success.ring-1.ring-inset{class: "bg-success/10 ring-success/30"}= t("instructor.programming_courses_list_component.status_published")
+            - else
+              %span.px-2.5.py-1.rounded-full.text-xs.font-medium.text-warning.ring-1.ring-inset{class: "bg-warning/10 ring-warning/30"}= t("instructor.programming_courses_list_component.status_draft")
 
           -# Actions Dropdown
           .absolute.top-3.right-3{"data-controller": "dropdown"}
@@ -65,10 +67,10 @@
               = link_to instructor_programming_course_path(course), class: "group flex items-center w-full px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-accent" do
                 = lucide_icon("settings-2", class: "w-4 h-4 mr-2.5 text-text-tertiary group-hover:text-accent")
                 = t("instructor.programming_courses_list_component.manage_course")
-              -# TODO: Add Publish/Unpublish logic and button
-              %button.group.flex.items-center.w-full.px-3.py-2.text-sm.text-text-secondary.hover:bg-bg-hover.hover:text-success{disabled: true}
-                = lucide_icon("cloud-upload", class: "w-4 h-4 mr-2.5 text-text-tertiary group-hover:text-success")
-                = t("instructor.programming_courses_list_component.publish_course")
+              - unless course.published?
+                = button_to publish_instructor_programming_course_path(course), method: :post, class: "group flex items-center w-full px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-success" do
+                  = lucide_icon("cloud-upload", class: "w-4 h-4 mr-2.5 text-text-tertiary group-hover:text-success")
+                  = t("instructor.programming_courses_list_component.publish_course")
 
         .p-5.flex.flex-col.flex-grow
           %h3.text-lg.font-semibold.text-text-primary.line-clamp-2.mb-1.group-hover:text-accent.transition-colors= link_to course.title, instructor_programming_course_path(course)

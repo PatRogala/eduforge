@@ -3,6 +3,7 @@
 # Table name: programming_courses
 #
 #  id            :bigint           not null, primary key
+#  published     :boolean          default(FALSE), not null
 #  slug          :string
 #  title         :string           not null
 #  created_at    :datetime         not null
