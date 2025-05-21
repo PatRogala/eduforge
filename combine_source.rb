@@ -42,12 +42,12 @@ def process_file(file_path, output_file)
   output_file.puts "#{'=' * 80}\n"
   output_file.puts content
 rescue StandardError => e
-  puts "Error processing #{file_path}: #{e.message}"
+  Rails.logger.debug { "Error processing #{file_path}: #{e.message}" }
 end
 
 def main
   output_path = "source_code.txt"
-  puts "Combining source code files into #{output_path}..."
+  Rails.logger.debug { "Combining source code files into #{output_path}..." }
 
   File.open(output_path, "w") do |output_file|
     Dir.glob("**/*").each do |path|
@@ -55,12 +55,12 @@ def main
       next if EXCLUDED_DIRS.any? { |dir| path.include?("/#{dir}/") || path.start_with?("#{dir}/") }
       next unless SOURCE_EXTENSIONS.include?(File.extname(path).downcase)
 
-      puts "Processing: #{path}"
+      Rails.logger.debug { "Processing: #{path}" }
       process_file(path, output_file)
     end
   end
 
-  puts "Done! Source code has been combined into #{output_path}"
+  Rails.logger.debug { "Done! Source code has been combined into #{output_path}" }
 end
 
 main

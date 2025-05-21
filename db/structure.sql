@@ -332,7 +332,7 @@ CREATE TABLE public.programming_courses (
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
     slug character varying,
-    published boolean DEFAULT false
+    published boolean DEFAULT false NOT NULL
 );
 
 
