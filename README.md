@@ -4,6 +4,8 @@
 
 # ✨ EduForge - Modern E-Learning Platform ✨
 
+<img src=".github/images/cover.png" alt="EduForge Site" >
+
 **Empowering interactive and engaging online education with Ruby on Rails.**
 
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)

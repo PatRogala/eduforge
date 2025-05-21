@@ -152,6 +152,7 @@ pl:
       browse_courses_button: "Przeglądaj kursy"
   programming_courses:
     show:
+      no_cover_image: "Brak okładki kursu"
       about_this_course: "O tym kursie"
       what_will_you_learn: "Czego się nauczysz?"
       course_details: "Szczegóły kursu"
