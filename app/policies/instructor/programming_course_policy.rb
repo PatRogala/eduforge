@@ -17,10 +17,14 @@ module Instructor
       user.instructor?
     end
 
+    def publish?
+      record.instructor == user
+    end
+
     # Only allow instructor to manage courses created by themself
     class Scope < ApplicationPolicy::Scope
       def resolve
-        scope.where(instructor: user).friendly
+        scope.unscoped.where(instructor: user).friendly.order(created_at: :desc)
       end
     end
   end

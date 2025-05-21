@@ -331,7 +331,8 @@ CREATE TABLE public.programming_courses (
     instructor_id bigint NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
-    slug character varying
+    slug character varying,
+    published boolean DEFAULT false
 );
 
 
@@ -988,6 +989,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250521133200'),
 ('20250518065644'),
 ('20250516170436'),
 ('20250516162302'),

@@ -4,6 +4,7 @@
 # Table name: programming_courses
 #
 #  id            :bigint           not null, primary key
+#  published     :boolean          default(FALSE)
 #  slug          :string
 #  title         :string           not null
 #  created_at    :datetime         not null
@@ -22,6 +23,8 @@
 #
 class ProgrammingCourse < ApplicationRecord
   extend FriendlyId
+
+  default_scope { where(published: true) }
 
   belongs_to :instructor, class_name: "User"
   has_rich_text :description

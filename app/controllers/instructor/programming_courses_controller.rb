@@ -50,6 +50,17 @@ module Instructor
       end
     end
 
+    def publish
+      @course = policy_scope(ProgrammingCourse, policy_scope_class: POLICY_SCOPE_CLASS).find(params[:id])
+      authorize @course, policy_class: POLICY_CLASS
+
+      if @course.update(published: true)
+        redirect_to instructor_programming_courses_path, notice: t(".success")
+      else
+        redirect_to instructor_programming_course_path(@course), alert: t(".error")
+      end
+    end
+
     private
 
     def course_params

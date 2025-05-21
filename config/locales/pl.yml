@@ -10,6 +10,9 @@ pl:
       must_be_instructor: Musisz być instruktorem, aby wykonać tę akcję.
   instructor:
     programming_courses:
+      publish:
+        success: Kurs został opublikowany.
+        error: Nie udało się opublikować kursu.
       new:
         title: "Rozpocznij Tworzenie Nowego Kursu" # Main page title
         subtitle_html: "Nadaj swojemu kursowi chwytliwy tytuł. Możesz go później zmienić." # Subtitle

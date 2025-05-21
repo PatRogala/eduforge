@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   namespace :instructor do
     resources :courses, only: %i[new]
     resources :programming_courses, except: %i[destroy] do
+      member do
+        post :publish
+      end
       resources :lessons, controller: "programming_course_lessons", only: %i[new create edit update]
     end
   end
@@ -29,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :programming_courses, only: %i[show]
+
   resources :programming_course_enrollments, only: %i[create]
 
   resources :programming_course_lessons, only: %i[show]

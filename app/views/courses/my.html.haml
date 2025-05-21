@@ -45,6 +45,6 @@
       = lucide_icon("book-dashed", class: "w-16 h-16 text-text-tertiary mx-auto mb-5")
       %h3.text-xl.font-semibold.text-text-primary.mb-2= t("courses.my.no_courses_enrolled_title")
       %p.text-text-secondary.mb-6= t("courses.my.no_courses_enrolled_description")
-      = link_to t("courses.my.browse_courses"), courses_path, class: "inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+      = link_to courses_path, class: "inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
         = lucide_icon("search", class: "w-4 h-4 mr-2")
         = t("courses.my.browse_courses_button")
