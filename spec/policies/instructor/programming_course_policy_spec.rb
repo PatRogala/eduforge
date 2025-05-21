@@ -33,7 +33,7 @@ RSpec.describe Instructor::ProgrammingCoursePolicy, type: :policy do
     end
   end
 
-  permissions :show?, :update? do
+  permissions :show?, :publish?, :update? do
     it "denies access if user is not an instructor" do
       expect(subject).not_to permit(regular_user, course)
     end

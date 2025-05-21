@@ -6,7 +6,7 @@ module Instructor
     end
 
     def show?
-      user.instructor?
+      record.instructor == user
     end
 
     def create?
@@ -14,7 +14,7 @@ module Instructor
     end
 
     def update?
-      user.instructor?
+      record.instructor == user
     end
 
     def publish?
