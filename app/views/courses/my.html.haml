@@ -9,7 +9,10 @@
       - @courses.each do |course|
         = link_to (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course)), class: "group block bg-bg-secondary rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1.5 border border-border-primary hover:border-border-secondary" do
           .relative
-            = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
+            - if course.cover_image.attached?
+              = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
+            - else
+              = image_tag "default_cover_image.png", class: "w-full aspect-[16/9] object-cover"
             .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
               = t("courses.my.category_programming")
 

@@ -11,7 +11,10 @@
     - courses.each do |course|
       = link_to course, class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
         %div
-          = image_tag course.cover_image, class: "w-full aspect-video object-cover"
+          - if course.cover_image.attached?
+            = image_tag course.cover_image, class: "w-full aspect-video object-cover"
+          - else
+            = image_tag "default_cover_image.png", class: "w-full aspect-video object-cover"
         .p-4
           %span.inline-block.bg-red-100.text-red-800.text-xs.font-medium.px-2.5.py-0.5.rounded-full.mb-2 Programowanie
           %h3.text-lg.font-semibold.text-gray-900.line-clamp-2.group-hover:text-blue-600= course.title

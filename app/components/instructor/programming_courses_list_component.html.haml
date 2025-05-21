@@ -48,7 +48,10 @@
     - courses.each do |course|
       .bg-bg-secondary.rounded-xl.shadow-lg.overflow-hidden.border.border-border-primary.flex.flex-col.group.transition-all.duration-300.hover:shadow-2xl.hover:border-border-secondary
         .relative
-          = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
+          - if course.cover_image.attached?
+            = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
+          - else
+            = image_tag "default_cover_image.png", class: "w-full aspect-[16/9] object-cover"
           -# Status Badge (e.g., Published, Draft)
           .absolute.top-3.left-3
             -# TODO: Logic for different statuses (e.g., if course.published?)

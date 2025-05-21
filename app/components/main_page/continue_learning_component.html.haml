@@ -10,7 +10,10 @@
       -# Individual Course Card
       = link_to (course.first_lesson ? programming_course_lesson_path(course.first_lesson) : programming_course_path(course)), class: "group block bg-bg-secondary rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1.5 border border-border-primary hover:border-border-secondary" do
         .relative
-          = image_tag course.cover_image, class: "w-full object-cover aspect-[16/9]"
+          - if course.cover_image.attached?
+            = image_tag course.cover_image, class: "w-full object-cover aspect-[16/9]"
+          - else
+            = image_tag "default_cover_image.png", class: "w-full object-cover aspect-[16/9]"
           .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
             = t(".category_programming")
           .absolute.inset-0.bg-black.opacity-0.group-hover:opacity-10.transition-opacity.duration-300
