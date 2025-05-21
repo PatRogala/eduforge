@@ -288,4 +288,47 @@ RSpec.describe "Instructor::ProgrammingCourses" do
       end
     end
   end
+
+  describe "POST /instructor/programming_courses/:id/publish" do
+    context "when user is not authenticated" do
+      it "redirects to sign in page" do
+        post publish_instructor_programming_course_path(programming_course)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "when user is authenticated as instructor" do
+      before do
+        sign_in user
+      end
+
+      it "publishes the course" do
+        post publish_instructor_programming_course_path(programming_course)
+        expect(response).to redirect_to(instructor_programming_courses_path)
+      end
+
+      it "sets the course as published" do
+        post publish_instructor_programming_course_path(programming_course)
+        expect(programming_course.reload.published).to be(true)
+      end
+
+      it "does not publish another instructor's course" do
+        post publish_instructor_programming_course_path(another_course)
+        expect(response).not_to redirect_to(instructor_programming_courses_path)
+      end
+    end
+
+    context "when user is not an instructor" do
+      let(:regular_user) { create(:user) }
+
+      before do
+        sign_in regular_user
+      end
+
+      it "forbids unauthorized access" do
+        post publish_instructor_programming_course_path(programming_course)
+        expect(response).to be_forbidden
+      end
+    end
+  end
 end
