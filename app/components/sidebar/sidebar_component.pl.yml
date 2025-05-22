@@ -1,7 +1,8 @@
 pl:
-  dashboard: "Przeglądaj kursy"
+  dashboard: "Strona główna"
   created_courses: "Utwórz / Zarządzaj"
   my_courses: "Moje kursy"
+  courses: "Dostępne kursy"
 
   navigation:
     main: "Nawigacja"

@@ -14,6 +14,11 @@ module Sidebar
           title: ".dashboard",
           path: root_path,
           icon: "layout-dashboard"
+        },
+        {
+          title: ".courses",
+          path: courses_path,
+          icon: "list"
         }
       ]
 
