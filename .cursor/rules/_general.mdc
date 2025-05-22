@@ -9,7 +9,7 @@ alwaysApply: true
 
  ## Core Technologies
 
- *   **Backend:** Ruby 3.4.2, Ruby on Rails 8.0
+ *   **Backend:** Ruby 3.4.4, Ruby on Rails 8.0
  *   **Database:** PostgreSQL (Default timestamp type: `timestamptz`, Schema format: `:sql`)
  *   **Authentication:** Devise
  *   **Authorization:** Pundit
