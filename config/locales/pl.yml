@@ -131,9 +131,24 @@ pl:
 
   courses:
     index:
-      title: Odkryj nasze kursy
-      view_all: Sprawdź katalog
-      courses: kursów
+      page_title: "Katalog Kursów - EduForge"
+      header_title: "Odkryj Nasze Kursy"
+      header_subtitle: "Przeglądaj naszą ofertę kursów online i znajdź coś dla siebie, aby rozwijać swoje umiejętności."
+      category_programming: "Programowanie" # General category tag
+      free_access: "Dostęp Darmowy"
+      duration_hours:
+        one: "%{count} godz."
+        few: "%{count} godz."
+        many: "%{count} godz."
+        other: "%{count} godz."
+      lessons_count:
+        one: "%{count} lekcja"
+        few: "%{count} lekcje"
+        many: "%{count} lekcji"
+        other: "%{count} lekcji"
+      no_courses_available_title: "Obecnie Brak Dostępnych Kursów"
+      no_courses_available_description: "Pracujemy nad dodaniem nowych, ekscytujących kursów. Sprawdź ponownie później!"
+      back_to_homepage_button: "Wróć na Stronę Główną"
     my:
       my_courses: "Moje Kursy"
       category_programming: "Programowanie"

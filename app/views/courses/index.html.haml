@@ -1,23 +1,57 @@
-.py-8.px-4{ class: "md:px-6 lg:px-8" }
-  .flex.justify-between.items-center.mb-6
-    %h2.text-2xl.font-bold.text-gray-900{ class: "md:text-3xl" }= t(".title")
+- content_for :title, t("courses.index.page_title")
 
-  .grid.grid-cols-1.gap-6{ class: "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" }
+.flex.flex-col.items-center.text-center.mb-10{ class: "md:flex-row md:justify-between md:text-left md:items-center md:mb-12" }
+  %div
+    %h1.text-3xl.font-bold.text-text-primary.tracking-tight{ class: "md:text-4xl" }= t("courses.index.header_title")
+    %p.mt-2.text-text-secondary.max-w-xl{ class: "mx-auto md:mx-0 md:text-lg" }= t("courses.index.header_subtitle")
+
+- if @courses.any?
+  .grid.grid-cols-1.gap-x-6.gap-y-8{ class: "sm:grid-cols-2 lg:grid-cols-3" }
     - @courses.each do |course|
-      = link_to course, class: "block bg-white rounded-lg shadow-md overflow-hidden transition duration-200 ease-in-out group hover:shadow-xl hover:-translate-y-1" do
-        %div
-          - if course.cover_image.attached?
-            = image_tag course.cover_image, class: "w-full aspect-video object-cover"
+      = link_to programming_course_path(course), class: "group block bg-bg-secondary rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1.5 border border-border-primary hover:border-accent" do
+        .relative
+          - if course.cover_image.present?
+            = image_tag course.cover_image, class: "w-full aspect-[16/9] object-cover"
           - else
-            = image_tag "default_cover_image.png", class: "w-full aspect-video object-cover"
-        .p-4
-          %span.inline-block.bg-red-100.text-red-800.text-xs.font-medium.px-2.5.py-0.5.rounded-full.mb-2 Programming
-          %h3.text-lg.font-semibold.text-gray-900.line-clamp-2.group-hover:text-blue-600= course.title
-          .mt-3.flex.items-center.space-x-3.text-sm.text-gray-500
-            .flex.items-center
-              = lucide_icon('clock', class: "w-4 h-4 mr-1")
-              %span 60 mins
-            .flex.items-center
-              = lucide_icon('layers', class: "w-4 h-4 mr-1")
-              %span 8 Lessons
+            = image_tag "default_cover_image.png", class: "w-full object-cover aspect-[16/9]"
+          -# Category Tag
+          .absolute.top-3.left-3.text-accent.px-2.py-0.5.rounded-full.text-xs.font-medium.ring-1.ring-inset{class: "bg-accent/20 ring-accent/30"}
+            = t("courses.index.category_programming") # Assuming all are programming for now
 
+          -# Subtle overlay on hover
+          .absolute.inset-0.bg-black.opacity-0.group-hover:opacity-10.transition-opacity.duration-300
+
+          -# "View Details" indicator on hover (optional)
+          .absolute.inset-0.flex.items-center.justify-center.opacity-0.group-hover:opacity-100.transition-opacity.duration-300
+            .p-3.rounded-full.backdrop-blur-sm{class: "bg-accent/80"}
+              = lucide_icon("arrow-right-circle", class: "w-8 h-8 text-accent-content")
+
+        .p-5.flex.flex-col.flex-grow
+          %h3.text-lg.font-semibold.text-text-primary.line-clamp-2.mb-1.group-hover:text-accent.transition-colors.duration-150= course.title
+
+          %p.text-xs.text-text-tertiary.mb-3.flex.items-center.gap-1
+            = lucide_icon("user", class: "w-3.5 h-3.5 flex-shrink-0")
+            %span.truncate= course.instructor.email # Or instructor.name
+
+          -# Course Price/Access Info (instead of progress bar)
+          .mb-3.mt-auto
+            - price_display = course.try(:price).to_i > 0 ? number_to_currency(course.price) : t("courses.index.free_access")
+            %span.inline-block.bg-bg-tertiary.text-text-secondary.text-xs.font-medium.px-2.5.py-1.rounded-full.ring-1.ring-border-secondary
+              = price_display
+
+          -# Course Stats: Duration & Lessons
+          .flex.items-center.justify-between.text-xs.text-text-tertiary.border-t.border-border-primary.pt-3
+            .flex.items-center.gap-1.5
+              = lucide_icon("clock-3", class: "w-4 h-4")
+              %span= t("courses.index.duration_hours", count: course.approximate_duration_in_hours)
+            .flex.items-center.gap-1.5
+              = lucide_icon("layers-3", class: "w-4 h-4")
+              %span= t("courses.index.lessons_count", count: course.programming_course_lessons.count)
+- else
+  .text-center.py-16.bg-bg-secondary.rounded-xl.border.border-border-primary.shadow-lg
+    = lucide_icon("search-x", class: "w-16 h-16 text-accent mx-auto mb-5") # Icon for "no courses found"
+    %h3.text-xl.font-semibold.text-text-primary.mb-2= t("courses.index.no_courses_available_title")
+    %p.text-text-secondary.mb-6= t("courses.index.no_courses_available_description")
+    = link_to root_path, class: "inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-accent-content bg-accent hover:bg-accent-hover rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-bg-secondary" do
+      = lucide_icon("home", class: "w-4 h-4 mr-2")
+      = t("courses.index.back_to_homepage_button")
