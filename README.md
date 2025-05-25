@@ -54,7 +54,7 @@ EduForge is a comprehensive e-learning platform built using the power and elegan
 
 Ensure you have the following installed on your system:
 
-*   Ruby `3.4.2` (or as specified in `.ruby-version`)
+*   Ruby `3.4.4` (or as specified in `.ruby-version`)
 *   PostgreSQL (`17` or compatible)
 *   Node.js (for JavaScript runtime dependencies)
 *   Bun (for JavaScript package management and building)
