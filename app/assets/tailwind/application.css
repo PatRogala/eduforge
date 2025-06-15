@@ -4,15 +4,15 @@
   --font-sans: InterVariable, sans-serif;
 
   /* Custom Colors */
-  --color-bg-primary: #1A1B1E;    /* Deep dark - main content background */
-  --color-bg-secondary: #25262A;  /* Slightly lighter dark - sidebars, panels, cards */
-  --color-bg-tertiary: #313338;   /* Elements within panels, input fields, some hover states */
-  --color-bg-hover: #383A3F;      /* Subtle hover for list items or interactive elements */
+  --color-bg-primary: #FFFFFF;     /* Main background - white */
+  --color-bg-secondary: #F9FAFB;  /* Panels, cards, sidebars - gray-50 */
+  --color-bg-tertiary: #F3F4F6;   /* Input fields, some hover states - gray-100 */
+  --color-bg-hover: #F3F4F6;      /* Subtle hover for list items - gray-100 */
 
   /* Text */
-  --color-text-primary: #F0F2F5;   /* Main text (very light gray / off-white) */
-  --color-text-secondary: #B5BAC1; /* Muted text, placeholders, secondary info */
-  --color-text-tertiary: #80848E;  /* Even more muted, like some icons or less important text */
+  --color-text-primary: #111827;   /* Main text - gray-900 */
+  --color-text-secondary: #6B7280; /* Muted text, placeholders - gray-500 */
+  --color-text-tertiary: #9CA3AF;  /* Even more muted, icons - gray-400 */
 
   /* Accent / Brand (the blue/purpleish color) */
   --color-accent: var(--color-red-500);
@@ -20,8 +20,8 @@
   --color-accent-content: #FFFFFF;
 
   /* Borders and Dividers */
-  --color-border-primary: #3A3C41;   /* Subtle borders and dividers */
-  --color-border-secondary: #4E5058; /* Slightly more prominent borders */
+  --color-border-primary: #E5E7EB;   /* Subtle borders and dividers - gray-200 */
+  --color-border-secondary: #D1D5DB; /* Slightly more prominent borders - gray-300 */
 
   /* Interactive elements (generic, can be overridden by accent) */
   --color-interactive: #4F545C;         /* Default for non-accented interactive elements */
