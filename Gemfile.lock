@@ -103,7 +103,7 @@ GEM
       addressable
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    database_consistency (2.0.4)
+    database_consistency (2.0.6)
       activerecord (>= 3.2)
     date (3.4.1)
     debug (1.11.0)
