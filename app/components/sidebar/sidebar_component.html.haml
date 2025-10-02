@@ -1,18 +1,19 @@
-%aside.bg-bg-secondary.border-r.border-border-primary.transition-all.duration-300.overflow-hidden.min-h-screen{"data-sidebar-target": "aside"}
+-# The sidebar container is now clean white with a subtle border, matching the overall app chrome.
+%aside.bg-white.transition-all.duration-300.overflow-hidden.min-h-screen{"data-sidebar-target": "aside"}
   .h-full.flex.flex-col.py-4
-    %nav.flex-1.px-2
+    %nav.flex-1.px-4
       %ul.space-y-1
-        %li
-          %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.main")
-          - public_links.each do |link|
+        %span.px-3.my-3.text-xs.font-semibold.uppercase.text-neutral-500{"data-sidebar-target": "category"}= t(".navigation.main")
+        - public_links.each do |link|
+          %li
             = render_link(link)
         - if logged_in?
-          %li.pt-2
-            %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.personal")
-            - logged_in_links.each do |link|
-              = render_link(link)
+          %span.px-3.my-3.text-xs.font-semibold.uppercase.text-neutral-500{"data-sidebar-target": "category"}= t(".navigation.personal")
+        - logged_in_links.each do |link|
+          %li
+            = render_link(link)
         - if instructor?
-          %li.pt-2
-            %span.px-3.text-xs.font-semibold.uppercase.text-text-tertiary{"data-sidebar-target": "category"}= t(".navigation.instructor")
-            - instructor_links.each do |link|
+          %span.px-3.my-3.text-xs.font-semibold.uppercase.text-neutral-500{"data-sidebar-target": "category"}= t(".navigation.instructor")
+          - instructor_links.each do |link|
+            %li
               = render_link(link)
