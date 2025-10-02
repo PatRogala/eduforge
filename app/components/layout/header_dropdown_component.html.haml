@@ -1,17 +1,21 @@
-.absolute.right-0.mt-2.w-64.bg-bg-secondary.rounded-lg.shadow-xl.border.border-border-primary.py-2.animate-fadeIn.z-50
-  .px-4.py-3.border-b.border-border-primary
-    %p.text-sm.font-medium.text-text-primary.truncate= current_user.email
+.absolute.right-0.mt-2.w-56.bg-white.rounded-lg.shadow-lg.ring-1.ring-black.ring-opacity-5.animate-fadeIn.z-50
+  -# User Information Header
+  .px-4.py-3.border-b.border-neutral-200
+    %p.text-sm.font-semibold.text-black.truncate= current_user.email
     - roles_display = current_user.roles.map(&:name).map(&:titleize).join(', ')
     - if roles_display.present?
-      %p.text-xs.text-text-secondary.mt-1= roles_display
-  .py-1
-    = link_to edit_user_registration_path, class: "group w-full px-4 py-2 text-sm text-text-secondary hover:bg-bg-tertiary hover:text-text-primary flex items-center" do
+      %p.text-xs.text-neutral-500.mt-1= roles_display
+
+  -# Navigation Links
+  .py-2
+    = link_to edit_user_registration_path, class: "group w-full px-4 py-2 text-sm text-neutral-700 hover:text-black flex items-center" do
       %span.mr-3>
-        = lucide_icon("settings-2", class: "h-4 w-4 text-text-tertiary group-hover:text-text-secondary")
+        = lucide_icon("settings-2", class: "h-4 w-4 text-neutral-400 group-hover:text-black")
       = t(".account_settings")
-  .border-t.border-border-primary.my-1
-  .py-1
-    = button_to destroy_user_session_path, method: :delete, class: "group w-full px-4 py-2 text-sm text-notification hover:bg-red-900/20 hover:text-red-400 flex items-center cursor-pointer" do
+
+  -# Destructive Action
+  .py-2.border-t.border-neutral-100
+    = button_to destroy_user_session_path, method: :delete, class: "group w-full px-4 py-2 text-sm text-red-600 hover:text-red-900 flex items-center cursor-pointer" do
       %span.mr-3>
-        = lucide_icon("log-out", class: "h-4 w-4 text-notification group-hover:text-red-400")
+        = lucide_icon("log-out", class: "h-4 w-4 text-red-600 group-hover:text-red-900")
       = t(".log_out")
